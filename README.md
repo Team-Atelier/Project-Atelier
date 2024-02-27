@@ -1,10 +1,13 @@
 # Project-Atelier
 ---
+## Table of Contents 
+
+TO BE MADE INTO DROPDOWN
+
 ## Project Overview
 
 TO BE UPDATED: 
 
----
 
 ## Getting Started
 
@@ -13,15 +16,12 @@ TO BE UPDATED:
 ```
 npm install 
 ```
-----
 
 ## Roadmap 
 
----
 
 ## Usage
 
----
 
 ## Team Members
 
