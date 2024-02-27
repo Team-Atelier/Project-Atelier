@@ -7,8 +7,8 @@
 
 1. Project Overview
 2. Getting Started
-- Prerequsites
-- Installation
+   - Prerequsites
+   - Installation
 3. Roadmap
 4. Usage
 5. Team Members
