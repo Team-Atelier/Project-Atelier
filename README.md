@@ -7,10 +7,10 @@
 
 1. Project Overview
 2. Getting Started
-   - Prerequsites
-   - Installation
-3. Roadmap
-4. Usage
+   - [Prerequsites](https://github.com/Chic-Fil-Async/Project-Atelier/edit/main/README.md#prerequisites)
+   - [Installation](https://github.com/Chic-Fil-Async/Project-Atelier/edit/main/README.md#installation)
+3. [Roadmap](https://github.com/Chic-Fil-Async/Project-Atelier/edit/main/README.md#roadmap)
+4. [Usage](https://github.com/Chic-Fil-Async/Project-Atelier/edit/main/README.md#usage)
 5. Team Members
    
 </details>
