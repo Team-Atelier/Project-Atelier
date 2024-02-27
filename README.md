@@ -1,13 +1,30 @@
 # Project-Atelier
+---
+## Project Overview
+
+TO BE UPDATED: 
 
 ---
-## Just playing around with markdown
 
-`package.json` 
+## Getting Started
+
+### Installation instructions
 
 ```
-<h1> Bigger code block </h1>
-console.log('hello world')
+npm install 
 ```
+----
+
+## Roadmap 
+
+---
+
+## Usage
+
+---
+
+## Team Members
+
+Chris Cheng, Maysie Ocera, William Tucker
 
  
