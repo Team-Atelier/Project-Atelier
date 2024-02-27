@@ -6,7 +6,7 @@
  <summary>Table of Content</summary>
 
 1. Project Overview
-2. Getting Started
+2. [Getting Started](https://github.com/Chic-Fil-Async/Project-Atelier?tab=readme-ov-file#getting-started)
    - [Prerequsites](https://github.com/Chic-Fil-Async/Project-Atelier/blob/main/README.md#prerequisites)
    - [Installation](https://github.com/Chic-Fil-Async/Project-Atelier/blob/main/README.md#installation)
 3. [Roadmap](https://github.com/Chic-Fil-Async/Project-Atelier/edit/blob/README.md#roadmap)
