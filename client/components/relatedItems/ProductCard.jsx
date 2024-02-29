@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RelatedProductCard = () => (
+const ProductCard = () => (
   <div className="relatedProductCard" style={{border: 'solid', width: "150px"}}>
     <p>Product Category</p>
     <h3>Product Name</h3>
@@ -15,4 +15,4 @@ const RelatedProductCard = () => (
   </div>
 )
 
-export default RelatedProductCard;
+export default ProductCard;
