@@ -38,12 +38,12 @@ npm install
 ```
 3. Open two separate terminal tabs:
 
- - On one terminal tab run the command:
+ - On the first terminal tab, run the command:
 ```
 npm run server-dev
 ```
 
- - On one terminal tab run the command:
+ - On the other terminal tab, run the command:
     
 ```
  npm run client-dev
