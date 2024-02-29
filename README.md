@@ -27,13 +27,25 @@ Project Atelier serves as a sophisticated, client-oriented retail web portal des
 ## Getting Started
 
 ### Prerequisites 
+
+### Installation 
+
+1. Clone the repo.
+
+2. Install dependencies using: 
 ```
 npm install 
 ```
-### Installation 
-
-1. Clone the repo
-
+3. Open two separate terminal tabs:
+   
+4. On one terminal tab run the command:
+```
+"npm run server-dev"
+```
+5. On the second terminal the command:
+ ```
+ "npm run client-dev"
+ ```
 
 ## Roadmap 
 
