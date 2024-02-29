@@ -37,15 +37,17 @@ Project Atelier serves as a sophisticated, client-oriented retail web portal des
 npm install 
 ```
 3. Open two separate terminal tabs:
-   
-4. On one terminal tab run the command:
+
+ - On one terminal tab run the command:
 ```
 npm run server-dev
 ```
-5. On the second terminal the command:
- ```
+
+ - On one terminal tab run the command:
+    
+```
  npm run client-dev
- ```
+```
 
 ## Roadmap 
 
