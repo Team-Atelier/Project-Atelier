@@ -40,11 +40,11 @@ npm install
    
 4. On one terminal tab run the command:
 ```
-"npm run server-dev"
+npm run server-dev
 ```
 5. On the second terminal the command:
  ```
- "npm run client-dev"
+ npm run client-dev
  ```
 
 ## Roadmap 
