@@ -1,7 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const RelatedProductCard = () => (
-  <div className="relatedProductCard" style={{border: 'solid', width: "150px"}}>
+const Card = styled.div`
+  border: solid;
+  text-align: left;
+  width: 200px;
+  position: relative;
+`
+// To-do: Add a more description button name
+const ActionButton = styled.button`
+  position: absolute;
+  right: 0px;
+`
+
+const ProductCard = () => (
+  <Card>
+    <ActionButton>Action</ActionButton>
     <p>Product Category</p>
     <h3>Product Name</h3>
     <img
@@ -12,7 +26,7 @@ const RelatedProductCard = () => (
     />
     <p>Price</p>
     <p>Star Rating: </p>
-  </div>
+  </Card>
 )
 
-export default RelatedProductCard;
+export default ProductCard;
