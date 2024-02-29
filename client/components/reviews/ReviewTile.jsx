@@ -69,7 +69,7 @@ const ReviewTile = ({review})=>{
       <MainBox>
       <FlexRow>
       <div className = "left"><StarRating rating = {review.rating}/></div>
-      <Right><aside>{review.reviewer_name} (Verified Purchaser) {format(date, 'MMMM dd, y')}</aside></Right>
+      <Right><aside>(Verified Purchaser) {review.reviewer_name}  {format(date, 'MMMM dd, y')}</aside></Right>
       </FlexRow>
       <FlexRow><Title>Review title</Title></FlexRow>
       <FlexRow><b>{review.summary}</b></FlexRow>
