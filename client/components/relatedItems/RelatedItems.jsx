@@ -1,6 +1,7 @@
 import React from 'react';
 import RelatedProductsList from './RelatedProductsList.jsx'
 import YourOutfitList from './YourOutfitList.jsx'
+import ItemCarousel from './ItemCarousel.jsx'
 
 const RelatedItems = () => {
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import ProductCard from './ProductCard.jsx'
+import ProductCard from './ProductCard.jsx';
+import ItemCarousel from './ItemCarousel.jsx';
 
 const RelatedProductsList = () => (
   <div>
