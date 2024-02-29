@@ -2,6 +2,7 @@ import React from 'react';
 
 const ProductCard = () => (
   <div className="relatedProductCard" style={{border: 'solid', width: "150px"}}>
+    <button type="button">Action</button>
     <p>Product Category</p>
     <h3>Product Name</h3>
     <img
