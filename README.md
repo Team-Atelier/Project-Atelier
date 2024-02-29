@@ -19,7 +19,10 @@
 
 ## Project Overview
 
-TO BE UPDATED
+Project Atelier serves as a sophisticated, client-oriented retail web portal designed to enhance the online shopping experience. At the heart of Atelier is an array of features tailored to provide users with comprehensive product insights and interactive elements, fostering an engaging and informative shopping journey. Key features include:
+ - Product Detail Page: A central hub for product exploration, featuring a dynamic image gallery, detailed product information, a versatile style selector, and an option to add products to the shopping cart, ensuring a seamless decision-making process for the user.
+ - Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products.
+ - Related Items and Comparison: Enhancing product discovery, this module presents users with two curated sets of related products: one showcasing items similar to the currently viewed product for further exploration, and another allowing users to create and manage a custom list of favorites for easy comparison and revisit.
 
 ## Getting Started
 
