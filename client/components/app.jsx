@@ -1,7 +1,7 @@
 import React from 'react';
-import ProductDetail from './ProductDetail.jsx';
-import Reviews from './Reviews.jsx';
-import RelatedItems from './RelatedItems.jsx';
+import ProductDetail from './productDetail/ProductDetail.jsx';
+import Reviews from './reviews/Reviews.jsx';
+import RelatedItems from './relatedItems/RelatedItems.jsx';
 
 const App = () => {
   return (
