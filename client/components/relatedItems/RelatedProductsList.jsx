@@ -1,10 +1,35 @@
 import React from 'react';
-import ProductCard from './ProductCard.jsx'
+import ItemCarousel from './ItemCarousel.jsx';
+import ProductCard from './ProductCard.jsx';
 
 const RelatedProductsList = () => (
   <div>
-    {/* This will eventually be a function that renders RelatedProductCard child components based on the API call */}
-    <ProductCard />
+    <ItemCarousel>
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+    </ItemCarousel>
   </div>
 )
 

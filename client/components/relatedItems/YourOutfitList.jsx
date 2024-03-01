@@ -1,9 +1,35 @@
 import React from 'react';
-import ProductCard from './ProductCard.jsx'
+import ItemCarousel from './ItemCarousel.jsx';
+import ProductCard from './ProductCard.jsx';
 
 const YourOutfitList = () => (
   <div>
-    <ProductCard />
+    <ItemCarousel>
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+    </ItemCarousel>
   </div>
 )
 
