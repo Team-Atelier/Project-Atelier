@@ -16,6 +16,12 @@ const FlexRow = styled.section`
   justify-content: space-between;
   background: papayawhip;
 `;
+const StaticRow = styled.section`
+  white-space:pre;
+  display: flex;
+  justify-content: start;
+  background: papayawhip;
+`;
 
 const MainBox = styled.section`
   padding-left: 0em;
@@ -67,10 +73,13 @@ const ReviewTile = ({review})=>{
   return (
     <article className = "reviewTile">
       <MainBox>
+
       <FlexRow>
       <div className = "left"><StarRating rating = {review.rating}/></div>
       <Right><aside>(Verified Purchaser) {review.reviewer_name}  {format(date, 'MMMM dd, y')}</aside></Right>
       </FlexRow>
+
+
       <FlexRow><Title>Review title</Title></FlexRow>
       <FlexRow><b>{review.summary}</b></FlexRow>
       <br/>
@@ -80,8 +89,13 @@ const ReviewTile = ({review})=>{
       <br/>
       {review.response && <><FlexRow><ResponseBox>Response: <br/> {review.response}</ResponseBox></FlexRow>
       <br/></>}
-      <FlexRow>Was this review helpful? (Yes 10) | Report</FlexRow>
 
+      <FlexRow>
+      <StaticRow><div>Was this review helpful?  </div> <div><u onClick={()=>{alert('Placeholder')}}>Yes </u>({review.helpfulness})</div></StaticRow>
+      <Right>
+      <div><u onClick={()=>{alert('Placeholder')}}> Report </u></div>
+      </Right>
+      </FlexRow>
 
       </MainBox>
     </article>
