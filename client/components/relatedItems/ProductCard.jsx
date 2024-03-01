@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Card = styled.div`
   border: solid;
-  text-align: left;
-  width: 33.33333%;
+  text-align: center;
+  min-width: 20%;
   height: 100%;
   position: relative;
 `
