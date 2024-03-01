@@ -6,9 +6,11 @@ const RelatedItems = () => {
 
   return (
     <div>
+      <h2>You might like...<hr></hr></h2>
       <div className="relatedProductsList">
         <RelatedProductsList />
       </div>
+      <h2>Build an ensemble<hr></hr></h2>
       <div className="yourOutfitList">
         <YourOutfitList />
       </div>

@@ -1,4 +1,6 @@
+require('dotenv').config();
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -24,6 +26,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'index.html')
-    })
-  ]
-}
+    }),
+    new webpack.DefinePlugin({
+        'process.env.API_URL': JSON.stringify(process.env.API_URL),
+        'process.env.GITHUB_TOKEN': JSON.stringify(process.env.GITHUB_TOKEN),
+    }),
+  ],
+};
