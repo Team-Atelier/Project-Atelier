@@ -37,7 +37,6 @@ const MainBox = styled.section`
 const ResponseBox = styled.section`
   display: grid;
   padding-right: 80%;
-  max-width: 150em;
   background: grey !important;
 `;
 
