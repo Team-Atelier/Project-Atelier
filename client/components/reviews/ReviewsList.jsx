@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -12,7 +13,6 @@ overflow-y: auto;
 max-height: 500px;
 background: transparent;
 `;
-
 function ReviewsList() {
   const [relevantReviews, setRelevantReviews] = useState([]);
   const [newestReviews, setNewestReviews] = useState([]);
