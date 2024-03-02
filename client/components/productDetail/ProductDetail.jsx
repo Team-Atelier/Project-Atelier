@@ -3,6 +3,7 @@ import PhotoSection from './PhotoSection.jsx';
 import InfoSection from './InfoSection.jsx';
 import Description from './Description.jsx';
 import styled from 'styled-components';
+import axios from 'axios';
 const { useState, useEffect } = React;
 
 const ProductDetailContainer = styled.div`
@@ -20,13 +21,42 @@ const ProductSectionContainer = styled.div`
 
 const ProductDetail = () => {
 
+  const [productInformation, setProductInformation] = useState(null);
+  const [selectedStyle, setSelectedStyle] = useState(null);
+
+  const apiURL = process.env.API_URL;
+  const token = process.env.GITHUB_TOKEN;
+
+  useEffect(() => {
+    axios.get(apiURL + 'products/40351', {
+        headers: {
+          'Authorization': token
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setProductInformation(response.data);
+      })
+      .catch((err) => {
+        console.error('Error fetching data:', err);
+      });
+  }, []);
+
+  if (!productInformation) {
+    return <div>Loading...</div>;
+  }
+
+  const handleStyleSelect = (styleId) => {
+    setSelectedStyle(styleId);
+  }
+
   return (
     <ProductDetailContainer>
       <ProductSectionContainer>
-        <PhotoSection />
-        <InfoSection />
+        <PhotoSection productId={productInformation.id} selectedStyle={selectedStyle} />
+        <InfoSection productId={productInformation.id} onStyleSelect={handleStyleSelect} />
       </ProductSectionContainer>
-      <Description />
+      <Description productId={productInformation.id} />
     </ProductDetailContainer>
   )
 }
