@@ -78,7 +78,7 @@ const ItemCarousel = (props) => {
           <LeftArrow onClick={prev}>&lt;</LeftArrow>
         }
           <CarouselContentWrapper>
-            <CarouselContent style={{ transform: `translateX(-${currentIndex * 100}%)`}}>
+            <CarouselContent style={{ transform: `translateX(-${currentIndex * 20}%)`}}>
               {children}
             </CarouselContent>
           </CarouselContentWrapper>
