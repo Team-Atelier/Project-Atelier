@@ -47,7 +47,6 @@ const ProductDetail = () => {
   }
 
   const handleStyleSelect = (styleId) => {
-    console.log('styleId in main ProductDetail page before going into PhotoSection: ', styleId);
     setSelectedStyle(styleId);
   }
 
