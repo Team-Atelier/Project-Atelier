@@ -1,9 +1,11 @@
+/* eslint-disable import/extensions */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import StarRating from './starRating.jsx'
-import { format, compareAsc } from "date-fns";
+import { format, compareAsc } from 'date-fns';
+import StarRating from './StarRating.jsx';
 
-const Title = styled.h1`
+const Summary = styled.h2`
   margin: 0px;
   font-family: Helvetica, Sans-Serif;
   font-size: 1.5em;
@@ -41,7 +43,7 @@ const ResponseBox = styled.section`
 
 const Right = styled.section`
 display: inline-block;
-`
+`;
 /*
     let review = {
       "review_id": 5,
@@ -66,40 +68,65 @@ display: inline-block;
     }c
 */
 
-
-
-const ReviewTile = ({review})=>{
+function ReviewTile({ review }) {
   const date = new Date(review.date);
   return (
-    <article className = "reviewTile">
+    <article className="reviewTile">
       <MainBox>
+        <FlexRow>
+          <div className="left"><StarRating rating={review.rating} /></div>
+          <Right>
+            <aside>
+              (Verified Purchaser)
+              {review.reviewer_name}
+              {' '}
+              {format(date, 'MMMM dd, y')}
+            </aside>
+          </Right>
+        </FlexRow>
 
-      <FlexRow>
-      <div className = "left"><StarRating rating = {review.rating}/></div>
-      <Right><aside>(Verified Purchaser) {review.reviewer_name}  {format(date, 'MMMM dd, y')}</aside></Right>
-      </FlexRow>
+        <FlexRow><Summary>{review.summary}</Summary></FlexRow>
+        <br />
+        <FlexRow>{review.body}</FlexRow>
+        {review.recommend && (
+        <>
+          <br />
+          <FlexRow>✓ I recommend this product</FlexRow>
+        </>
+        )}
+        <br />
+        {review.response && (
+        <>
+          <FlexRow>
+            <ResponseBox>
+              Response:
+              <br />
+              {' '}
+              {review.response}
+            </ResponseBox>
+          </FlexRow>
+          <br />
+        </>
+        )}
 
-
-      <FlexRow><Title>Review title</Title></FlexRow>
-      <FlexRow><b>{review.summary}</b></FlexRow>
-      <br/>
-      <FlexRow>{review.body}</FlexRow>
-      {review.recommend && <><br/>
-      <FlexRow>✓ I recommend this product</FlexRow></>}
-      <br/>
-      {review.response && <><FlexRow><ResponseBox>Response: <br/> {review.response}</ResponseBox></FlexRow>
-      <br/></>}
-
-      <FlexRow>
-      <StaticRow><div>Was this review helpful?  </div> <div><u onClick={()=>{alert('Placeholder')}}>Yes </u>({review.helpfulness})</div></StaticRow>
-      <Right>
-      <div><u onClick={()=>{alert('Placeholder')}}> Report </u></div>
-      </Right>
-      </FlexRow>
-
+        <FlexRow>
+          <StaticRow>
+            <div>Was this review helpful?  </div>
+            {' '}
+            <div>
+              <u onClick={() => { alert('Placeholder'); }}>Yes </u>
+              (
+              {review.helpfulness}
+              )
+            </div>
+          </StaticRow>
+          <Right>
+            <div><u onClick={() => { alert('Placeholder'); }}> Report </u></div>
+          </Right>
+        </FlexRow>
       </MainBox>
     </article>
-  )
+  );
 }
 
 export default ReviewTile;
