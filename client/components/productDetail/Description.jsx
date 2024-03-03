@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 const { useState, useEffect } = React;
 
@@ -39,22 +40,48 @@ const HighlightItem = styled.li`
   font-size: 16px;
 `;
 
-const Description = () => {
+const Description = ({ productId }) => {
 
+  const [productDescription, setProductDescription] = useState([]);
+  const [productFeatures, setProductFeatures] = useState([]);
+
+  const apiURL = process.env.API_URL;
+  const token = process.env.GITHUB_TOKEN;
+
+  useEffect(() => {
+    axios.get(apiURL + `products/${productId}`, {
+      headers: {
+        'Authorization': token
+      }
+    })
+    .then((response) => {
+      setProductDescription(response.data);
+      setProductFeatures(response.data.features);
+    })
+    .catch((err) => {
+      console.error('Error retrieving product information:', err);
+    });
+  }, []);
 
   return (
     <DescriptionContainer>
+
       <DescriptionContent>
-        <ProductDescriptionHeader></ProductDescriptionHeader>
-        <p></p>
+        <ProductDescriptionHeader>{productDescription.slogan}</ProductDescriptionHeader>
+        <p>{productDescription.description}</p>
       </DescriptionContent>
+
       <Separator />
+
       <DescriptionContent>
-        <ProductHighlightHeader></ProductHighlightHeader>
+        <ProductHighlightHeader>Features:</ProductHighlightHeader>
         <HighlightList>
-          <HighlightItem></HighlightItem>
+          {productFeatures.map(feature => (
+            <HighlightItem key={productFeatures.indexOf(feature)}>{feature.feature}: {feature.value}</HighlightItem>
+          ))}
         </HighlightList>
       </DescriptionContent>
+
     </DescriptionContainer>
   )
 }
