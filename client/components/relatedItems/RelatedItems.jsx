@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable import/extensions */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
@@ -12,6 +14,7 @@ const RelatedItems = function RelatedItems() {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
+
   const getRelatedProductInfo = async (relatedProductIDs) => {
     const relatedProductsInfo = [];
     await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
@@ -19,7 +22,6 @@ const RelatedItems = function RelatedItems() {
     })))
       .then((results) => results.forEach((result) => {
         relatedProductsInfo.push(result.data);
-        console.log('here is what i want', relatedProductsInfo);
       }))
       .then(() => {
         setRelatedProducts(relatedProductsInfo);
@@ -48,8 +50,10 @@ const RelatedItems = function RelatedItems() {
   }, []);
 
   // FUNCTIONS FOR CREATING CARDS
+  // eslint-disable-next-line arrow-body-style
   const createRelatedProductsCard = () => {
-    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} />);
+    // eslint-disable-next-line max-len
+    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />);
   };
 
   return (
@@ -73,23 +77,3 @@ const RelatedItems = function RelatedItems() {
 };
 
 export default RelatedItems;
-
-// () => {
-//
-//     .then((productResult) => {
-//       setCurrentProduct(productResult.data);
-//       axios.get(`${apiURL}products/${productResult.data.id}/related`, {
-//         headers: { Authorization: token },
-//       })
-//         .then(async (relatedResult) => {
-//           setRelatedProductIDs(relatedResult.data);
-//           const results = await Promise.all(relatedResult.data.map((id) => {
-//             return axios.get(`${apiURL}products/${id}`, {
-//             headers: { Authorization: token },
-//           })
-//         }));
-//           results.forEach((result) => setRelatedProductsInfo(relatedProductsInfo.concat(result.data)))
-//         });
-//     })
-//     .catch((error) => console.log(error));
-// }

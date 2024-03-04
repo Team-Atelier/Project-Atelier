@@ -1,11 +1,13 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Card = styled.div`
   border: solid;
   text-align: center;
   min-width: 33.33%;
-  height: 100%;
+  min-height: 100%;
   position: relative;
 `;
 // To-do: Add a more description button name
@@ -14,19 +16,44 @@ const ActionButton = styled.button`
   right: 0px;
 `;
 
-const ProductCard = function ({category, name, price}) {
+const ProductImage = styled.img`
+  max-height: 50%;
+  max-width: 50%;
+`;
+
+// eslint-disable-next-line object-curly-newline
+const ProductCard = function ProductCard({ category, name, price, id }) {
+  const apiURL = process.env.API_URL;
+  const token = process.env.GITHUB_TOKEN;
+  const [productPhoto, setProductPhoto] = useState('');
+
+  // FUNCTION FOR RENDERING PHOTOS
+  useEffect(() => {
+    if (id !== undefined) {
+      axios.get(`${apiURL}products/${id}/styles`, {
+        headers: { Authorization: token },
+      })
+        .then((results) => {
+          const styles = results.data.results;
+          setProductPhoto(styles[0].photos[0].url);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [id]);
+
   return (
     <Card>
       <ActionButton>Action</ActionButton>
       <p>{category}</p>
       <h3>{name}</h3>
-      <img
-        src="https://images.unsplash.com/photo-1628148061873-13b9340f763b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        width="100px"
-        height="160px"
-        alt="close up of very bushy sheep face"
+      <ProductImage
+        src={productPhoto}
+        alt=""
       />
-      <p>${price}</p>
+      <p>
+        $
+        {price}
+      </p>
       <p>Star Rating: </p>
     </Card>
   );

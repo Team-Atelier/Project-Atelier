@@ -1,7 +1,9 @@
+/* eslint-disable import/extensions */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ItemCarousel from './ItemCarousel.jsx';
 
-const RelatedProductsList = function ({createRelatedProductsCard}) {
+function RelatedProductsList({ createRelatedProductsCard }) {
   return (
     <div>
       <ItemCarousel>
@@ -9,6 +11,6 @@ const RelatedProductsList = function ({createRelatedProductsCard}) {
       </ItemCarousel>
     </div>
   );
-};
+}
 
 export default RelatedProductsList;
