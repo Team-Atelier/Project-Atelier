@@ -15,10 +15,10 @@ const CarouselWrapper = styled.div`
 `;
 const CarouselContentWrapper = styled.div`
   overflow: hidden;
-  width: 100%
-  height:100%
+  width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
 `;
 const CarouselContent = styled.div`
@@ -26,6 +26,7 @@ const CarouselContent = styled.div`
   transition: all 250ms linear;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 100%;
 `;
 const Arrow = styled.button`
   position: absolute;
@@ -44,7 +45,7 @@ const RightArrow = styled(Arrow)`
   right: 24px;
 `;
 
-// Carousel Component
+// Carousel
 const ItemCarousel = function (props) {
   const {children} = props;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -74,7 +75,7 @@ const ItemCarousel = function (props) {
           && <LeftArrow onClick={prev}>&lt;</LeftArrow>
         }
         <CarouselContentWrapper>
-          <CarouselContent style={{ transform: `translateX(-${currentIndex * 20}%)` }}>
+          <CarouselContent style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}>
               {children}
           </CarouselContent>
         </CarouselContentWrapper>

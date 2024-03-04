@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import RelatedProductsList from './RelatedProductsList.jsx'
-import YourOutfitList from './YourOutfitList.jsx'
+import RelatedProductsList from './RelatedProductsList.jsx';
+import YourOutfitList from './YourOutfitList.jsx';
+import ProductCard from './ProductCard.jsx';
 
 const RelatedItems = function RelatedItems() {
   const apiURL = process.env.API_URL;
@@ -46,6 +47,11 @@ const RelatedItems = function RelatedItems() {
     getCurrentProduct();
   }, []);
 
+  // FUNCTIONS FOR CREATING CARDS
+  const createRelatedProductsCard = () => {
+    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} />);
+  };
+
   return (
     <div>
       <h2>
@@ -53,7 +59,7 @@ const RelatedItems = function RelatedItems() {
         <hr />
       </h2>
       <div className="relatedProductsList">
-        <RelatedProductsList />
+        <RelatedProductsList createRelatedProductsCard={createRelatedProductsCard} />
       </div>
       <h2>
         Build an ensemble
