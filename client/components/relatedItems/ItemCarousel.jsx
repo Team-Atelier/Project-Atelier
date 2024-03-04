@@ -44,7 +44,7 @@ const RightArrow = styled(Arrow)`
   right: 24px;
 `;
 
-// Carousel
+// Carousel Component
 const ItemCarousel = function (props) {
   const {children} = props;
   const [currentIndex, setCurrentIndex] = useState(0);
