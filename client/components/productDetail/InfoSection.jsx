@@ -101,16 +101,6 @@ const CartContainer = styled.div`
   width: 200px;
 `;
 
-// const CartContent = styled.div`
-//   position: relative;
-
-//   z-index: 1;
-//   margin-top: 0px;
-//   margin-left: 10px;
-//   width: 200px;
-//   float: left;
-// `;
-
 const AddButton = styled.button`
   position: relative;
   width: 200px;
