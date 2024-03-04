@@ -14,6 +14,7 @@ const RelatedItems = function RelatedItems() {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
+
   const getRelatedProductInfo = async (relatedProductIDs) => {
     const relatedProductsInfo = [];
     await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
@@ -52,7 +53,7 @@ const RelatedItems = function RelatedItems() {
   // eslint-disable-next-line arrow-body-style
   const createRelatedProductsCard = () => {
     // eslint-disable-next-line max-len
-    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} />);
+    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />);
   };
 
   return (

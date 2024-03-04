@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Card = styled.div`
   border: solid;
@@ -15,17 +16,39 @@ const ActionButton = styled.button`
   right: 0px;
 `;
 
-function ProductCard({ category, name, price }) {
+// eslint-disable-next-line object-curly-newline
+const ProductCard = function ProductCard({ category, name, price, id }) {
+  const apiURL = process.env.API_URL;
+  const token = process.env.GITHUB_TOKEN;
+  const [productPhoto, setProductPhoto] = useState('');
+
+  // FUNCTION FOR RENDERING PHOTOS
+  useEffect(() => {
+    if (id !== undefined) {
+      axios.get(`${apiURL}products/${id}/styles`, {
+        headers: { Authorization: token },
+      })
+        .then((results) => {
+          console.log(id, results.data.results);
+          const styles = results.data.results;
+          for (let i = 0; i < styles.length; i += 1) {
+            if (styles[i]['default?']) {
+              setProductPhoto(styles[i].photos[0].url);
+            }
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [id]);
+
   return (
     <Card>
       <ActionButton>Action</ActionButton>
       <p>{category}</p>
       <h3>{name}</h3>
       <img
-        src="https://images.unsplash.com/photo-1628148061873-13b9340f763b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        width="100px"
-        height="160px"
-        alt="close up of very bushy sheep face"
+        src={productPhoto}
+        alt=""
       />
       <p>
         $
@@ -34,6 +57,6 @@ function ProductCard({ category, name, price }) {
       <p>Star Rating: </p>
     </Card>
   );
-}
+};
 
 export default ProductCard;
