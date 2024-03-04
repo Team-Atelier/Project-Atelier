@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';

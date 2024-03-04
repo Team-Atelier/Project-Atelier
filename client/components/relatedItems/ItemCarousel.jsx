@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -47,23 +48,23 @@ const RightArrow = styled(Arrow)`
 
 // Carousel
 const ItemCarousel = function (props) {
-  const {children} = props;
+  const { children } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
 
   useEffect(() => {
-    setLength(children.length)
+    setLength(children.length);
   }, [children]);
 
   const next = () => {
     if (currentIndex < (length - 1)) {
-      setCurrentIndex(prevState => prevState + 1);
+      setCurrentIndex((prevState) => prevState + 1);
     }
   };
 
   const prev = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(prevState => prevState - 1);
+      setCurrentIndex((prevState) => prevState - 1);
     }
   };
 
@@ -76,7 +77,7 @@ const ItemCarousel = function (props) {
         }
         <CarouselContentWrapper>
           <CarouselContent style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}>
-              {children}
+            {children}
           </CarouselContent>
         </CarouselContentWrapper>
         {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -14,7 +15,7 @@ const ActionButton = styled.button`
   right: 0px;
 `;
 
-const ProductCard = function ({category, name, price}) {
+function ProductCard({ category, name, price }) {
   return (
     <Card>
       <ActionButton>Action</ActionButton>
@@ -26,10 +27,13 @@ const ProductCard = function ({category, name, price}) {
         height="160px"
         alt="close up of very bushy sheep face"
       />
-      <p>${price}</p>
+      <p>
+        $
+        {price}
+      </p>
       <p>Star Rating: </p>
     </Card>
   );
-};
+}
 
 export default ProductCard;
