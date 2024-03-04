@@ -7,13 +7,18 @@ const Card = styled.div`
   border: solid;
   text-align: center;
   min-width: 33.33%;
-  height: 100%;
+  min-height: 100%;
   position: relative;
 `;
 // To-do: Add a more description button name
 const ActionButton = styled.button`
   position: absolute;
   right: 0px;
+`;
+
+const ProductImage = styled.img`
+  max-height: 50%;
+  max-width: 50%;
 `;
 
 // eslint-disable-next-line object-curly-newline
@@ -29,13 +34,8 @@ const ProductCard = function ProductCard({ category, name, price, id }) {
         headers: { Authorization: token },
       })
         .then((results) => {
-          console.log(id, results.data.results);
           const styles = results.data.results;
-          for (let i = 0; i < styles.length; i += 1) {
-            if (styles[i]['default?']) {
-              setProductPhoto(styles[i].photos[0].url);
-            }
-          }
+          setProductPhoto(styles[0].photos[0].url);
         })
         .catch((err) => console.log(err));
     }
@@ -46,7 +46,7 @@ const ProductCard = function ProductCard({ category, name, price, id }) {
       <ActionButton>Action</ActionButton>
       <p>{category}</p>
       <h3>{name}</h3>
-      <img
+      <ProductImage
         src={productPhoto}
         alt=""
       />
