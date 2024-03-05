@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+
 const { useState, useEffect } = React;
 
 const DescriptionContainer = styled.div`
@@ -40,8 +42,8 @@ const HighlightItem = styled.li`
   font-size: 16px;
 `;
 
-const Description = ({ productId }) => {
-
+// eslint-disable-next-line react/prop-types
+function Description({ productId }) {
   const [productDescription, setProductDescription] = useState([]);
   const [productFeatures, setProductFeatures] = useState([]);
 
@@ -49,18 +51,18 @@ const Description = ({ productId }) => {
   const token = process.env.GITHUB_TOKEN;
 
   useEffect(() => {
-    axios.get(apiURL + `products/${productId}`, {
+    axios.get(`${apiURL}products/${productId}`, {
       headers: {
-        'Authorization': token
-      }
+        Authorization: token,
+      },
     })
-    .then((response) => {
-      setProductDescription(response.data);
-      setProductFeatures(response.data.features);
-    })
-    .catch((err) => {
-      console.error('Error retrieving product information:', err);
-    });
+      .then((response) => {
+        setProductDescription(response.data);
+        setProductFeatures(response.data.features);
+      })
+      .catch((err) => {
+        console.error('Error retrieving product information:', err);
+      });
   }, []);
 
   return (
@@ -76,14 +78,19 @@ const Description = ({ productId }) => {
       <DescriptionContent>
         <ProductHighlightHeader>Features:</ProductHighlightHeader>
         <HighlightList>
-          {productFeatures.map(feature => (
-            <HighlightItem key={productFeatures.indexOf(feature)}>{feature.feature}: {feature.value}</HighlightItem>
+          {productFeatures.map((feature) => (
+            <HighlightItem key={productFeatures.indexOf(feature)}>
+              {feature.feature}
+              :
+              {' '}
+              {feature.value}
+            </HighlightItem>
           ))}
         </HighlightList>
       </DescriptionContent>
 
     </DescriptionContainer>
-  )
+  );
 }
 
 export default Description;
