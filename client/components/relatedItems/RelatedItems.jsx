@@ -14,18 +14,21 @@ const RelatedItems = function RelatedItems() {
 
   // FUNCTIONS FOR INITIAL RENDERING
 
-  const getRelatedProductInfo = async (relatedProductIDs) => {
-    const results = await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
+  const getProductInfo = async (ProductIDs, list) => {
+    const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
     })));
-    setRelatedProducts(results.map((product) => product.data));
+    const typeOfList = list;
+    if (typeOfList === 'relatedProducts') {
+      setRelatedProducts(results.map((product) => product.data));
+    }
   };
 
   const getRelatedProducts = (productData) => {
     axios.get(`${apiURL}products/${productData.id}/related`, {
       headers: { Authorization: token },
     })
-      .then((results) => getRelatedProductInfo(results.data))
+      .then((results) => getProductInfo(results.data, 'relatedProducts'))
       .catch((err) => console.log(err));
   };
 
