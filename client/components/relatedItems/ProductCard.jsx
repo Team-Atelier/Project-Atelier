@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
+/* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { FiPlus } from 'react-icons/fi';
-import { IconContext } from 'react-icons';
+import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const Card = styled.div`
   border: solid;
@@ -24,7 +25,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-const ProductCard = function ProductCard({ category, name, price, id, isOutfitList }) {
+const ProductCard = function ProductCard({ category, name, price, id, isOutfitList, setOutfitList, outfitList, thisProductID }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -47,12 +48,7 @@ const ProductCard = function ProductCard({ category, name, price, id, isOutfitLi
     <Card>
       {isOutfitList
         ? (
-          <div>
-            <h3>Add to Outfit</h3>
-            <IconContext.Provider value={{size: "7em"}}>
-              <FiPlus />
-            </IconContext.Provider>
-          </div>
+          <AddToOutfitCard setOutfitList={setOutfitList} outfitList={outfitList} thisProductID={thisProductID} />
         ) : (
           <>
             <ActionButton>Action</ActionButton>

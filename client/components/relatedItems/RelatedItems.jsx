@@ -53,7 +53,7 @@ const RelatedItems = function RelatedItems() {
         Build an ensemble
       </h2>
       <div className="yourOutfitList">
-        <YourOutfitList />
+        <YourOutfitList thisProductID={productID} />
       </div>
     </div>
   );
