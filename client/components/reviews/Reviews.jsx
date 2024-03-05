@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
-import AddReview from './AddReviews/AddReviews.jsx';
+import AddReviews from './AddReviews/AddReviews.jsx';
 
 const FlexRow = styled.section`
   display: flex;
@@ -18,7 +18,7 @@ const ReviewListContainer = styled.section`
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
   const handleNewReviewChange = (e, name, value) => {
-    if (e.target.name === 'images') {
+    if (e && e.target.name === 'images') {
       const currentFiles = newReviewData[e.target.name] || [];
       const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
       const nextReviewData = {
@@ -29,6 +29,7 @@ function Reviews() {
       setNewReviewData(nextReviewData);
       console.log('image');
     } else if (e === null) {
+      console.log('goes here');
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
@@ -74,7 +75,7 @@ function Reviews() {
           <ReviewsList />
         </ReviewListContainer>
       </FlexRow>
-      <AddReview newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} resetImages={resetImages} />
+      <AddReviews newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} resetImages={resetImages} />
     </>
   );
 }
