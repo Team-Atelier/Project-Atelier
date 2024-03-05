@@ -35,7 +35,7 @@ const Arrow = styled.button`
   top: 50%;
   width: 48px;
   height: 48px;
-  border-radius: 24px;
+  border-radius: 50%;
   background-color: white;
   border: 1px solid #ddd;
 `;

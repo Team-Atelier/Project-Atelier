@@ -60,14 +60,12 @@ const RelatedItems = function RelatedItems() {
     <div>
       <h2>
         You might like...
-        <hr />
       </h2>
       <div className="relatedProductsList">
         <RelatedProductsList createRelatedProductsCard={createRelatedProductsCard} />
       </div>
       <h2>
         Build an ensemble
-        <hr />
       </h2>
       <div className="yourOutfitList">
         <YourOutfitList />

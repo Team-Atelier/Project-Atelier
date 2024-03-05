@@ -5,11 +5,9 @@ import ItemCarousel from './ItemCarousel.jsx';
 
 function RelatedProductsList({ createRelatedProductsCard }) {
   return (
-    <div>
-      <ItemCarousel>
-        {createRelatedProductsCard()}
-      </ItemCarousel>
-    </div>
+    <ItemCarousel>
+      {createRelatedProductsCard()}
+    </ItemCarousel>
   );
 }
 
