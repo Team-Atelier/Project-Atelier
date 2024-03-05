@@ -16,17 +16,10 @@ const RelatedItems = function RelatedItems() {
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getRelatedProductInfo = async (relatedProductIDs) => {
-    const relatedProductsInfo = [];
-    await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
+    const results = await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
-    })))
-      .then((results) => results.forEach((result) => {
-        relatedProductsInfo.push(result.data);
-      }))
-      .then(() => {
-        setRelatedProducts(relatedProductsInfo);
-      })
-      .catch((err) => console.log(err));
+    })));
+    setRelatedProducts(results.map((product) => product.data));
   };
 
   const getRelatedProducts = (productData) => {
