@@ -18,10 +18,17 @@ const ReviewListContainer = styled.section`
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
   const handleNewReviewChange = (e, name, value) => {
-    console.log('works');
-    console.log(name);
-    console.log(value);
-    if (e === null) {
+    if (e.target.name === 'images') {
+      const currentFiles = newReviewData[e.target.name] || [];
+      const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
+      const nextReviewData = {
+        ...newReviewData,
+        [e.target.name]: nextFiles,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+      console.log('image');
+    } else if (e === null) {
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
@@ -37,6 +44,19 @@ function Reviews() {
       setNewReviewData(nextReviewData);
     }
   };
+
+  const resetImages = () => {
+    newReviewData.images.forEach((item) => {
+      URL.revokeObjectURL(item);
+    });
+    const nextData = {
+      ...newReviewData,
+      images: Array(0),
+    };
+    console.log(nextData);
+    setNewReviewData(nextData);
+  };
+
   const handleRatingClick = (reviewRating) => {
     const nextReviewData = {
       ...newReviewData,
@@ -54,7 +74,7 @@ function Reviews() {
           <ReviewsList />
         </ReviewListContainer>
       </FlexRow>
-      <AddReview newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
+      <AddReview newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} resetImages={resetImages} />
     </>
   );
 }

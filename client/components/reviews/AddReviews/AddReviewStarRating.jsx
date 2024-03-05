@@ -67,7 +67,6 @@ const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, handleHover
     setHoverRating(ratings);
   };
   return (
-
     <>
       {ratingBlurb === 1 && <div>Poor</div>}
       {ratingBlurb === 2 && <div>Fair</div>}
