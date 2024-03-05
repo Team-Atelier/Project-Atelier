@@ -146,6 +146,7 @@ function PhotoSection({ productId, selectedStyle }) {
     if (styleIndex !== -1) {
       setSelectedStyleIndex(styleIndex);
       setSelectedPhotos(styles[styleIndex]?.photos);
+      setSelectedMainPhotoIndex(selectedMainPhotoIndex);
     }
   }, [selectedStyle, styles]);
 

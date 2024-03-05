@@ -48,6 +48,7 @@ const ThumbnailContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  width: 330px;
 `;
 
 const SelectedStyle = styled.div`
@@ -108,6 +109,11 @@ const AddButton = styled.button`
   padding: 8px;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  margin-bottom: 5px;
+`;
+
 // eslint-disable-next-line react/prop-types
 function InfoSection({ productId, onStyleSelect }) {
   const [infoSectionProduct, setInfoSectionProduct] = useState([]);
@@ -118,6 +124,8 @@ function InfoSection({ productId, onStyleSelect }) {
   const [salePrice, setSalePrice] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [sizeDropdownOpen, setSizeDropdownOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
@@ -192,6 +200,11 @@ function InfoSection({ productId, onStyleSelect }) {
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
     setSelectedQuantity(1);
+    setSizeDropdownOpen(false);
+    setErrorMessage('');
+    if (quantityOptions.length === 0) {
+      setSelectedSize('OUT OF STOCK');
+    }
   };
 
   const handleQuantitySelect = (quantity) => {
@@ -199,6 +212,12 @@ function InfoSection({ productId, onStyleSelect }) {
   };
 
   const handleAddCart = () => {
+    if (selectedSize === '') {
+      // open dropdown
+      setErrorMessage('Please select size');
+      setSizeDropdownOpen(true);
+      return;
+    }
     setSelectedSize('');
   };
 
@@ -257,8 +276,14 @@ function InfoSection({ productId, onStyleSelect }) {
 
       <DropdownContainer>
         <SelectSizeContent>
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-          <Select value={selectedSize || ''} onChange={(e) => handleSizeSelect(e.target.value)}>
+          <Select
+            value={selectedSize || ''}
+            onChange={(e) => handleSizeSelect(e.target.value)}
+            onFocus={() => setErrorMessage('')}
+            open={sizeDropdownOpen}
+          >
             <option value="">Select Size:</option>
             {sizeOptions.length > 0 ? (
               sizeOptions.map((size) => (
@@ -285,9 +310,11 @@ function InfoSection({ productId, onStyleSelect }) {
       </DropdownContainer>
 
       <CartContainer>
-        <AddButton onClick={handleAddCart}>
-          Add To Cart
-        </AddButton>
+        {quantityOptions.length !== 0 && (
+          <AddButton onClick={handleAddCart}>
+            Add To Cart
+          </AddButton>
+        )}
       </CartContainer>
 
     </InfoSectionContainer>
