@@ -16,10 +16,10 @@ const RatingCard = styled.section`
   max-height: 200px;
 `;
 
-function RatingBreakdown({ ratings }) {
+function RatingBreakdown({ratings}) {
   return (
     <RatingCard>
-      Ratings and reviews: This is a test;
+      Ratings and reviews:
       <RatingRow>
         5 stars
         <PartiallyFilledBar percentage={0} />
