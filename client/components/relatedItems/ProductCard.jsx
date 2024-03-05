@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { FiPlus } from 'react-icons/fi';
+import { IconContext } from 'react-icons';
 
 const Card = styled.div`
   border: solid;
@@ -47,7 +49,9 @@ const ProductCard = function ProductCard({ category, name, price, id, isOutfitLi
         ? (
           <div>
             <h3>Add to Outfit</h3>
-            <p> + </p>
+            <IconContext.Provider value={{size: "7em"}}>
+              <FiPlus />
+            </IconContext.Provider>
           </div>
         ) : (
           <>
