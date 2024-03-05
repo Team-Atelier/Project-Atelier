@@ -17,12 +17,32 @@ const ReviewListContainer = styled.section`
 
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
-
-  const handleNewReviewChange = (e) => {
+  const handleNewReviewChange = (e, name, value) => {
+    console.log('works');
+    console.log(name);
+    console.log(value);
+    if (e === null) {
+      const nextReviewData = {
+        ...newReviewData,
+        [name]: value,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+    } else {
+      const nextReviewData = {
+        ...newReviewData,
+        [e.target.name]: e.target.value,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+    }
+  };
+  const handleRatingClick = (reviewRating) => {
     const nextReviewData = {
       ...newReviewData,
-      [e.target.name]: e.target.value,
+      reviewRating,
     };
+    console.log(nextReviewData);
     setNewReviewData(nextReviewData);
   };
 
