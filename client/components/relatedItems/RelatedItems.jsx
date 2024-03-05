@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
-import ProductCard from './ProductCard.jsx';
 
 const RelatedItems = function RelatedItems() {
   const apiURL = process.env.API_URL;
@@ -42,20 +41,13 @@ const RelatedItems = function RelatedItems() {
     getCurrentProduct();
   }, []);
 
-  // FUNCTIONS FOR CREATING CARDS
-  // eslint-disable-next-line arrow-body-style
-  const createRelatedProductsCard = () => {
-    // eslint-disable-next-line max-len
-    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />);
-  };
-
   return (
     <div>
       <h2>
         You might like...
       </h2>
       <div className="relatedProductsList">
-        <RelatedProductsList createRelatedProductsCard={createRelatedProductsCard} />
+        <RelatedProductsList relatedProducts={relatedProducts} />
       </div>
       <h2>
         Build an ensemble
