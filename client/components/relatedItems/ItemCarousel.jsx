@@ -24,7 +24,7 @@ const CarouselContentWrapper = styled.div`
 `;
 const CarouselContent = styled.div`
   display: flex;
-  transition: all 250ms linear;
+  transition: all 150ms linear;
   -ms-overflow-style: none;
   scrollbar-width: none;
   width: 100%;
