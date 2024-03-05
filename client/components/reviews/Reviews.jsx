@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
-import AddReview from './AddReviews/AddReviews.jsx';
+import AddReviews from './AddReviews/AddReviews.jsx';
 
 const FlexRow = styled.section`
   display: flex;
@@ -17,12 +17,53 @@ const ReviewListContainer = styled.section`
 
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
+  const handleNewReviewChange = (e, name, value) => {
+    if (e && e.target.name === 'images') {
+      const currentFiles = newReviewData[e.target.name] || [];
+      const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
+      const nextReviewData = {
+        ...newReviewData,
+        [e.target.name]: nextFiles,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+      console.log('image');
+    } else if (e === null) {
+      console.log('goes here');
+      const nextReviewData = {
+        ...newReviewData,
+        [name]: value,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+    } else {
+      const nextReviewData = {
+        ...newReviewData,
+        [e.target.name]: e.target.value,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
+    }
+  };
 
-  const handleNewReviewChange = (e) => {
+  const resetImages = () => {
+    newReviewData.images.forEach((item) => {
+      URL.revokeObjectURL(item);
+    });
+    const nextData = {
+      ...newReviewData,
+      images: Array(0),
+    };
+    console.log(nextData);
+    setNewReviewData(nextData);
+  };
+
+  const handleRatingClick = (reviewRating) => {
     const nextReviewData = {
       ...newReviewData,
-      [e.target.name]: e.target.value,
+      reviewRating,
     };
+    console.log(nextReviewData);
     setNewReviewData(nextReviewData);
   };
 
@@ -34,7 +75,7 @@ function Reviews() {
           <ReviewsList />
         </ReviewListContainer>
       </FlexRow>
-      <AddReview newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
+      <AddReviews newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} resetImages={resetImages} />
     </>
   );
 }
