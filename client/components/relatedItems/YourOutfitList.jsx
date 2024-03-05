@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';
 
-const YourOutfitList = function () {
-  const [isOutfitList, setIsOutfitList] = useState(true);
+const YourOutfitList = function YourOutfitList() {
+  const [isOutfitList] = useState(true);
 
   return (
     <div>
