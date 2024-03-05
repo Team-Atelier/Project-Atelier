@@ -30,7 +30,7 @@ const MainImage = styled.img`
 `;
 
 const ThumbnailContainerWrapper = styled.div`
-  position: relative;
+  position: absolute;
   flex: 0 0 100px;
   overflow-y: auto;
   display: flex;
@@ -39,6 +39,7 @@ const ThumbnailContainerWrapper = styled.div`
   max-height: 400px;
   margin-top: auto;
   margin-bottom: auto;
+  left: 10px;
 `;
 
 const ThumbnailContainer = styled.div`
@@ -81,7 +82,7 @@ const ScrollButtonBottom = styled.button`
 
 const LeftArrow = styled.span`
   position: absolute;
-  left: 10px;
+  left: 100px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -97,6 +98,23 @@ const RightArrow = styled.span`
   font-size: 24px;
 `;
 
+const ExpandedPhotoContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+`;
+
+const ExpandedMainImage = styled.img`
+  width: 100%;
+  height: 100%;
+  objectFit: contain;
+  cursor: pointer;
+`;
+
 function PhotoSection({ productId, selectedStyle }) {
   const [styles, setStyles] = useState([]);
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
@@ -104,6 +122,7 @@ function PhotoSection({ productId, selectedStyle }) {
   const [selectedMainPhotoIndex, setSelectedMainPhotoIndex] = useState(0);
   const thumbnailContainerRef = useRef(null);
   const [startIdx, setStartIdx] = useState(0);
+  const [expandedView, setExpandedView] = useState(false);
 
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
@@ -160,31 +179,49 @@ function PhotoSection({ productId, selectedStyle }) {
     }
   };
 
+  const handleMainImageClick = () => {
+    setExpandedView(!expandedView);
+  };
+
   return (
     <PhotoSectionContainer>
-
-      <ThumbnailContainerWrapper ref={thumbnailContainerRef}>
-        <ScrollButtonTop onClick={() => handleThumbnailScroll('up')}>
-          ^
-        </ScrollButtonTop>
-        <ThumbnailContainer>
-          {selectedPhotos.slice(startIdx, startIdx + 7).map((photo, index) => (
-            <Thumbnail key={index} src={photo.thumbnail_url} alt={`Thumbnail ${index}`} selected={index + startIdx === selectedMainPhotoIndex} onClick={() => handleThumbnailClick(index + startIdx)} />
-          ))}
-        </ThumbnailContainer>
-        <ScrollButtonBottom onClick={() => handleThumbnailScroll('down')}>
-          v
-        </ScrollButtonBottom>
-      </ThumbnailContainerWrapper>
+      {expandedView && (
+        <ExpandedPhotoContainer onClick={() => setExpandedView(false)}>
+          <ExpandedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Main" />
+        </ExpandedPhotoContainer>
+      )}
 
       <MainPhotoContainer>
-        <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0}>
-          &#8592;
-        </LeftArrow>
-        <MainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Main" />
-        <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
-          &#8594;
-        </RightArrow>
+        <ThumbnailContainerWrapper ref={thumbnailContainerRef}>
+          <ScrollButtonTop onClick={() => handleThumbnailScroll('up')}>
+            ^
+          </ScrollButtonTop>
+          <ThumbnailContainer>
+            {selectedPhotos.slice(startIdx, startIdx + 7).map((photo, index) => (
+              <Thumbnail key={index} src={photo.thumbnail_url} alt={`Thumbnail ${index}`} selected={index + startIdx === selectedMainPhotoIndex} onClick={() => handleThumbnailClick(index + startIdx)} />
+            ))}
+          </ThumbnailContainer>
+          <ScrollButtonBottom onClick={() => handleThumbnailScroll('down')}>
+            v
+          </ScrollButtonBottom>
+        </ThumbnailContainerWrapper>
+
+        {selectedMainPhotoIndex !== 0 && (
+          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0}>
+            &#8592;
+          </LeftArrow>
+        )}
+        <MainImage
+          src={selectedPhotos[selectedMainPhotoIndex]?.url}
+          alt="Main"
+          onClick={handleMainImageClick}
+          style={{ cursor: 'zoom-in' }}
+        />
+        {selectedMainPhotoIndex !== selectedPhotos.length - 1 && (
+          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
+            &#8594;
+          </RightArrow>
+        )}
       </MainPhotoContainer>
 
     </PhotoSectionContainer>
