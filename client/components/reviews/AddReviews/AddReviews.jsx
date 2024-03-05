@@ -10,6 +10,23 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
   return (
     <>
       <div>
+        Nickname:
+        <br />
+        <input name="username" maxLength="60" value={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
+        <br />
+        For privacy reasons, do not use your full name or email address
+        {newReviewData.summary ? `${(30 - (newReviewData.summary.length))} characters remaining` : ''}
+      </div>
+      <br />
+      <div>
+        Email:
+        <br />
+        <input name="email" maxLength="60" value={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
+        <br />
+        For authentication reasons, you will not be emailed
+      </div>
+      <br />
+      <div>
         Your rating:
         <br />
         <AddReviewStarRating
@@ -17,19 +34,20 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
           handleNewReviewChange={handleNewReviewChange}
         />
       </div>
+      <br />
       <div>
         Do you recommend this product?
         <br />
-        <label htmlFor="myRadio">
+        <label>
           <input type="radio" name="recommend" value={true} checked={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
           Yes
         </label>
-        <label htmlFor="myRadio">
+        <label>
           <input type="radio" name="recommend" value={false} checked={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
           No
         </label>
       </div>
-
+      <br />
       <div>
         Review summary:
         <br />
@@ -37,7 +55,7 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
         <br />
         {newReviewData.summary ? `${(60 - (newReviewData.summary.length))} characters remaining` : ''}
       </div>
-
+      <br />
       <div>
         Your honest review:
         <br />
@@ -48,6 +66,7 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
         <br />
         {newReviewData.body ? `${(1000 - (newReviewData.body.length))} characters remaining` : ''}
       </div>
+      <br />
       <div>
         <ExperienceTable
           newReviewData={newReviewData}
