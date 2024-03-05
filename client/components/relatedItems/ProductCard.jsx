@@ -4,7 +4,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import AddToOutfitCard from './AddToOutfitCard.jsx';
 
 const Card = styled.div`
   border: solid;
@@ -25,7 +24,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-const ProductCard = function ProductCard({ category, name, price, id, isOutfitList, setOutfitList, outfitList, thisProductID }) {
+export default function ProductCard({ category, name, price, id }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -46,27 +45,18 @@ const ProductCard = function ProductCard({ category, name, price, id, isOutfitLi
 
   return (
     <Card>
-      {isOutfitList
-        ? (
-          <AddToOutfitCard setOutfitList={setOutfitList} outfitList={outfitList} thisProductID={thisProductID} />
-        ) : (
-          <>
-            <ActionButton>Action</ActionButton>
-            <p>{category}</p>
-            <h3>{name}</h3>
-            <ProductImage
-              src={productPhoto}
-              alt=""
-            />
-            <p>
-              $
-              {price}
-            </p>
-            <p>Star Rating: </p>
-          </>
-        )}
+      <ActionButton>Action</ActionButton>
+      <p>{category}</p>
+      <h3>{name}</h3>
+      <ProductImage
+        src={productPhoto}
+        alt=""
+      />
+      <p>
+        $
+        {price}
+      </p>
+      <p>Star Rating: </p>
     </Card>
   );
-};
-
-export default ProductCard;
+}

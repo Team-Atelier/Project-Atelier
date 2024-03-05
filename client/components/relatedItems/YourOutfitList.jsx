@@ -3,10 +3,9 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import ItemCarousel from './ItemCarousel.jsx';
-import ProductCard from './ProductCard.jsx';
+import AddToOutfitCard from './AddToOutfitCard.jsx';
 
-const YourOutfitList = function YourOutfitList({ thisProductID }) {
-  const [isOutfitList] = useState(true);
+export default function YourOutfitList({ thisProductID }) {
   const [outfitList, setOutfitList] = useState([]);
 
   useEffect(() => {
@@ -16,10 +15,8 @@ const YourOutfitList = function YourOutfitList({ thisProductID }) {
   return (
     <div>
       <ItemCarousel>
-        <ProductCard isOutfitList={isOutfitList} setOutfitList={setOutfitList} outfitList={outfitList} thisProductID={thisProductID} />
+        <AddToOutfitCard outfitList={outfitList} setOutfitList={setOutfitList} thisProductID={thisProductID} />
       </ItemCarousel>
     </div>
   );
-};
-
-export default YourOutfitList;
+}

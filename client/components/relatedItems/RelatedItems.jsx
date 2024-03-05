@@ -5,7 +5,7 @@ import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
 
-const RelatedItems = function RelatedItems() {
+export default function RelatedItems() {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
@@ -60,6 +60,4 @@ const RelatedItems = function RelatedItems() {
       </div>
     </div>
   );
-};
-
-export default RelatedItems;
+}

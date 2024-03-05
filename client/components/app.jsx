@@ -10,8 +10,8 @@ const App = () => {
         <h1>Project Atelier</h1>
       </div>
         <ProductDetail />
-        <Reviews />
         <RelatedItems />
+        <Reviews />
     </>
   )
 }

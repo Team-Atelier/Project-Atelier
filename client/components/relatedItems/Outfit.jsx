@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 
-const Outfit = function Outfit() {
-
+export default function Outfit() {
   const [outfit, setOutfit] = useState([]);
 
   useEffect(() => {
@@ -9,11 +9,9 @@ const Outfit = function Outfit() {
     if (userOutfit) {
       setOutfit(userOutfit);
     }
-  })
+  });
 
   return (
-    
-  )
-};
-
-export default Outfit;
+    <div />
+  );
+}
