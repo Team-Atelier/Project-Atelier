@@ -22,7 +22,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-const ProductCard = function ProductCard({ category, name, price, id }) {
+const ProductCard = function ProductCard({ category, name, price, id, isOutfitList }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -43,18 +43,28 @@ const ProductCard = function ProductCard({ category, name, price, id }) {
 
   return (
     <Card>
-      <ActionButton>Action</ActionButton>
-      <p>{category}</p>
-      <h3>{name}</h3>
-      <ProductImage
-        src={productPhoto}
-        alt=""
-      />
-      <p>
-        $
-        {price}
-      </p>
-      <p>Star Rating: </p>
+      {isOutfitList
+        ? (
+          <div>
+            <h3>Add to Outfit</h3>
+            <p> + </p>
+          </div>
+        ) : (
+          <>
+            <ActionButton>Action</ActionButton>
+            <p>{category}</p>
+            <h3>{name}</h3>
+            <ProductImage
+              src={productPhoto}
+              alt=""
+            />
+            <p>
+              $
+              {price}
+            </p>
+            <p>Star Rating: </p>
+          </>
+        )}
     </Card>
   );
 };

@@ -24,7 +24,7 @@ const CarouselContentWrapper = styled.div`
 `;
 const CarouselContent = styled.div`
   display: flex;
-  transition: all 250ms linear;
+  transition: all 150ms linear;
   -ms-overflow-style: none;
   scrollbar-width: none;
   width: 100%;
@@ -35,7 +35,7 @@ const Arrow = styled.button`
   top: 50%;
   width: 48px;
   height: 48px;
-  border-radius: 24px;
+  border-radius: 50%;
   background-color: white;
   border: 1px solid #ddd;
 `;

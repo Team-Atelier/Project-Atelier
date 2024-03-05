@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
-import ProductCard from './ProductCard.jsx';
 
 const RelatedItems = function RelatedItems() {
   const apiURL = process.env.API_URL;
@@ -16,17 +15,10 @@ const RelatedItems = function RelatedItems() {
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getRelatedProductInfo = async (relatedProductIDs) => {
-    const relatedProductsInfo = [];
-    await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
+    const results = await Promise.all(relatedProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
-    })))
-      .then((results) => results.forEach((result) => {
-        relatedProductsInfo.push(result.data);
-      }))
-      .then(() => {
-        setRelatedProducts(relatedProductsInfo);
-      })
-      .catch((err) => console.log(err));
+    })));
+    setRelatedProducts(results.map((product) => product.data));
   };
 
   const getRelatedProducts = (productData) => {
@@ -49,25 +41,16 @@ const RelatedItems = function RelatedItems() {
     getCurrentProduct();
   }, []);
 
-  // FUNCTIONS FOR CREATING CARDS
-  // eslint-disable-next-line arrow-body-style
-  const createRelatedProductsCard = () => {
-    // eslint-disable-next-line max-len
-    return relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />);
-  };
-
   return (
     <div>
       <h2>
         You might like...
-        <hr />
       </h2>
       <div className="relatedProductsList">
-        <RelatedProductsList createRelatedProductsCard={createRelatedProductsCard} />
+        <RelatedProductsList relatedProducts={relatedProducts} />
       </div>
       <h2>
         Build an ensemble
-        <hr />
       </h2>
       <div className="yourOutfitList">
         <YourOutfitList />
