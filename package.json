@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon --watch server server/server.js",
-    "coverage": "jest --env=jsdom --coverage"
+    "coverage": "jest --env=jsdom --coverage",
+    "coverage:single": "jest --env=jsdom --coverage client/components/productDetail/Spec/ProductDetail.test.jsx"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,9 @@
   "devDependencies": {
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.23.3",
+    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
+    "axios-mock-adapter": "^1.22.0",
     "babel-loader": "^9.1.3",
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8.57.0",
