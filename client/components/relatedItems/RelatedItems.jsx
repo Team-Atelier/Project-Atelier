@@ -10,7 +10,7 @@ export default function RelatedItems() {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
-  const productID = 40345;
+  const productID = 40348;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
@@ -75,7 +75,7 @@ export default function RelatedItems() {
         <RelatedProductsList relatedProducts={relatedProducts} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} outfitInfo={outfitInfo} />
       </div>
     </div>
   );
