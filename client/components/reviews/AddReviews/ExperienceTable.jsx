@@ -9,7 +9,7 @@ function ExperienceTable({ newReviewData, handleNewReviewChange }) {
       </caption>
       <thead>
         <tr>
-          <th scope="col">0</th>
+          <th scope="col">Characteristic</th>
           <th scope="col">1</th>
           <th scope="col">2</th>
           <th scope="col">3</th>

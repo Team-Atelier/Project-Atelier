@@ -3,7 +3,7 @@ import ProductDetail from './productDetail/ProductDetail.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 
-const App = () => {
+function App() {
   return (
     <>
       <div>
@@ -13,7 +13,7 @@ const App = () => {
         <RelatedItems />
         <Reviews />
     </>
-  )
+  );
 }
 
 export default App;

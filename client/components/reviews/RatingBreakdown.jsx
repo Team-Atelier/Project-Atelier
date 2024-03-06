@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import PartiallyFilledBar from './PartiallyFilledBar.jsx';
+import StarRating from './StarRating.jsx';
+import CharacteristicRating from './CharacteristicRating.jsx';
 
 const RatingRow = styled.section`
   display: flex;
@@ -16,10 +18,15 @@ const RatingCard = styled.section`
   max-height: 200px;
 `;
 
-function RatingBreakdown({ ratings }) {
+function RatingBreakdown({ metadata }) {
   return (
+
     <RatingCard>
-      Ratings and reviews: This is a test;
+      <div>
+        Rating: 3.5
+        <StarRating rating={3.5} />
+      </div>
+      Ratings and reviews:
       <RatingRow>
         5 stars
         <PartiallyFilledBar percentage={0} />
@@ -40,6 +47,7 @@ function RatingBreakdown({ ratings }) {
         1 stars
         <PartiallyFilledBar percentage={100} />
       </RatingRow>
+      <CharacteristicRating />
     </RatingCard>
 
   );

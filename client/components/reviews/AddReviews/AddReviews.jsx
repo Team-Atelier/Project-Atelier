@@ -99,9 +99,7 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
           )}
           {newReviewData.images && newReviewData.images.map((image) => <img src={image} alt="user content" />)}
         </label>
-
       </div>
-
     </>
   );
 }
