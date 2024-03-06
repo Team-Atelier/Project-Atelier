@@ -55,7 +55,8 @@ function ImageModal({ src }) {
     <ModalBackground id="fullReviewImage" className="modal">
 
       <ModalWindow>
-      <CloseButton className="close" onClick={() => { modal.style.display = 'none'; }}>CLOSE (&times;)</CloseButton>
+      <CloseButton className="close" onClick={() => { modal.style.display = 'none'; }}>
+        CLOSE (&times;)</CloseButton>
       <ModalContent className="modal-content">
         <ModalImage src={src} />
       </ModalContent>
@@ -64,8 +65,6 @@ function ImageModal({ src }) {
     </ModalBackground>
   );
 }
-
-
 
 function ReviewsList({productId}) {
   const [relevantReviews, setRelevantReviews] = useState([]);
@@ -137,15 +136,15 @@ function ReviewsList({productId}) {
       <ReviewBox>
         {currentSort === 'relevant' && relevantReviews
           .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item} modalImg={modalImg} handleModalImgChange={handleModalImgChange}/>)}
+          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange}/>)}
 
         {currentSort === 'helpful' && helpfulReviews
           .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item}  modalImg={modalImg} handleModalImgChange={handleModalImgChange}/>)}
+          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange}/>)}
 
         {currentSort === 'newest' && newestReviews
           .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item}  modalImg={modalImg} handleModalImgChange={handleModalImgChange}/>)}
+          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange}/>)}
       </ReviewBox>
       <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
 

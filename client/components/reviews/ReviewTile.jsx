@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import format from 'date-fns';
+import {format} from 'date-fns';
 import StarRating from './StarRating.jsx';
 
 const Summary = styled.h2`
@@ -63,61 +63,9 @@ const ResponseBox = styled.section`
 const Right = styled.section`
 display: inline-block;
 `;
-/*
-const Modal = styled.div`
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-`;
-const ModalContent = styled.div`
-background-color:
-margin: 15% auto;
-padding: 20px;
-border: 1px solid #888;
-width: 80%;
-`;
-const ModalImage = styled.img`
-width:  600px;
-height: 600px;
-object-fit: cover;
-padding: 5px
-`;
-*/
-/*
-    let review = {
-      "review_id": 5,
-      "rating": 3,
-      "summary": "I'm enjoying wearing these shades",
-      "recommend": false,
-      "response": null,
-      "body": "Comfortable and practical.",
-      "date": "2019-04-14T00:00:00.000Z",
-      "reviewer_name": "shortandsweeet",
-      "helpfulness": 5,
-      "photos": [{
-          "id": 1,
-          "url": "urlplaceholder/review_5_photo_number_1.jpg"
-        },
-        {
-          "id": 2,
-          "url": "urlplaceholder/review_5_photo_number_2.jpg"
-        },
-        // ...
-      ]
-    }c
-*/
 
-function ReviewTile({ review , modalImg, handleModalImgChange}) {
-  const modal = document.getElementById('fullReviewImage');
+function ReviewTile({ review , handleModalImgChange}) {
   const date = new Date(review.date);
-
   return (
     <article className="reviewTile">
       <MainBox>
@@ -132,7 +80,6 @@ function ReviewTile({ review , modalImg, handleModalImgChange}) {
             </aside>
           </Right>
         </FlexRow>
-
         <FlexRow><Summary>{review.summary}</Summary></FlexRow>
         <br />
         <ReviewBody>{review.body}</ReviewBody>
@@ -170,7 +117,6 @@ function ReviewTile({ review , modalImg, handleModalImgChange}) {
           <br />
         </>
         )}
-
         <FlexRow>
           <StaticRow>
             <div>Was this review helpful?  </div>
@@ -190,5 +136,4 @@ function ReviewTile({ review , modalImg, handleModalImgChange}) {
     </article>
   );
 }
-
 export default ReviewTile;
