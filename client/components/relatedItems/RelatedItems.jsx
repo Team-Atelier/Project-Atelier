@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import React, { useEffect, useState } from 'react';
@@ -11,6 +12,8 @@ export default function RelatedItems() {
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
   const productID = 40345;
   const [relatedProducts, setRelatedProducts] = useState([]);
+  const [storedOutfit, setStoredOutfit] = useState([]);
+  const [outfitInfo, setOutfitInfo] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
 
@@ -21,6 +24,9 @@ export default function RelatedItems() {
     const typeOfList = list;
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
+    }
+    if (typeOfList === 'yourOutfit') {
+      setOutfitInfo(results.map((product) => product.data));
     }
   };
 
@@ -40,9 +46,28 @@ export default function RelatedItems() {
       .catch((err) => console.log(err));
   };
 
+  const addToOutfit = async (ID) => {
+    const outfits = await JSON.parse(localStorage.getItem('outfit'));
+    if (!outfits.includes(ID)) {
+      localStorage.setItem('outfit', JSON.stringify(outfits.concat(ID)));
+      setStoredOutfit(outfits.concat(ID));
+    }
+  };
+
   useEffect(() => {
     getCurrentProduct();
   }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem('outfit') === null) {
+      localStorage.setItem('outfit', JSON.stringify(storedOutfit));
+    } else {
+      const storage = JSON.parse(localStorage.getItem('outfit'));
+      if (storage) {
+        getProductInfo(storage, 'yourOutfit');
+      }
+    }
+  }, [storedOutfit]);
 
   return (
     <div>
@@ -50,7 +75,7 @@ export default function RelatedItems() {
         <RelatedProductsList relatedProducts={relatedProducts} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} />
       </div>
     </div>
   );

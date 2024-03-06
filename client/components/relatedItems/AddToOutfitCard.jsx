@@ -14,15 +14,9 @@ const OutfitCard = styled.div`
   position: relative;
 `;
 
-export default function AddToOutfitCard({ setOutfitList, outfitList, thisProductID }) {
-  const addToOutfit = () => {
-    if (!outfitList.includes(thisProductID)) {
-      setOutfitList(outfitList.concat(thisProductID));
-    }
-  };
-
+export default function AddToOutfitCard({ thisProductID, addToOutfit }) {
   return (
-    <OutfitCard onClick={addToOutfit} onKeyPress={addToOutfit} role="button" tabIndex="0">
+    <OutfitCard onClick={() => addToOutfit(thisProductID)} role="button" tabIndex="0">
       <h3>Add to Outfit</h3>
       <IconContext.Provider value={{ size: '7em' }}>
         <FiPlus />

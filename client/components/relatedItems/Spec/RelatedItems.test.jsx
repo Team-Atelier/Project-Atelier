@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import RelatedItems from '../RelatedItems.jsx';
