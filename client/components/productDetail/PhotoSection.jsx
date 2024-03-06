@@ -110,10 +110,12 @@ const ExpandedPhotoContainer = styled.div`
   z-index: 5555;
 `;
 
-const ExpandedMainImage = styled.img`
+const ExpandedMainImage = styled.div`
   width: 100%;
   height: 100%;
-  objectFit: contain;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: crosshair;
 `;
 
@@ -133,7 +135,6 @@ const ZoomedMainImage = styled.img`
   objectFit: contain;
   transform: scale(2.5);
   cursor: vertical-text;
-  transition: transform 0.3s ease;
 `;
 
 const ZoomedThumbnailContainerWrapper = styled.div`
@@ -234,6 +235,39 @@ function PhotoSection({ productId, selectedStyle }) {
     setZoomed(true);
   };
 
+  const handleMouseMove = (event) => {
+    const container = document.getElementById('zoomedContainer');
+    const zoomedImage = document.getElementById('zoomedMainImage');
+
+    // Calculate relative position of the mouse within container
+    const rect = container.getBoundingClientRect();
+    const offsetX = event.clientX - rect.left;
+    const offsetY = event.clientY - rect.top;
+
+    // Calculate ratio of mouse position to container size
+    const ratioX = offsetX / rect.width;
+    const ratioY = offsetY / rect.height;
+
+    const imgWidth = zoomedImage.offsetWidth;
+    const imgHeight = zoomedImage.offsetHeight;
+    const newX = -((imgWidth * ratioX) - (rect.width / 2));
+    const newY = -((imgHeight * ratioY) - (rect.height / 2));
+
+    zoomedImage.style.transform = `scale(2.5) translate(${newX}px, ${newY}px)`;
+  };
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (expandedView && event.key === 'Escape') {
+        setExpandedView(false);
+      }
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => {
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [expandedView]);
+
   return (
     <PhotoSectionContainer>
       {expandedView && (
@@ -259,7 +293,11 @@ function PhotoSection({ productId, selectedStyle }) {
           </LeftArrow>
           )}
 
-          <ExpandedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Main" onClick={handleZoomImageClick} />
+          <ExpandedMainImage
+            style={{ backgroundImage: `url(${selectedPhotos[selectedMainPhotoIndex]?.url})` }}
+            alt="Main"
+            onClick={handleZoomImageClick}
+          />
 
           {selectedMainPhotoIndex !== selectedPhotos.length - 1 && (
           <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
@@ -270,8 +308,13 @@ function PhotoSection({ productId, selectedStyle }) {
       )}
 
       {zoomed && (
-        <ZoomedContainer onClick={() => setZoomed(false)}>
-          <ZoomedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Zoomed" />
+        <ZoomedContainer id="zoomedContainer" onClick={() => setZoomed(false)}>
+          <ZoomedMainImage
+            id="zoomedMainImage"
+            src={selectedPhotos[selectedMainPhotoIndex]?.url}
+            alt="Zoomed"
+            onMouseMove={handleMouseMove}
+          />
         </ZoomedContainer>
       )}
 
