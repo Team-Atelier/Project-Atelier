@@ -5,12 +5,15 @@ import React from 'react';
 import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';
 
-function RelatedProductsList({ relatedProducts }) {
+export default function RelatedProductsList({ relatedProducts }) {
   return (
-    <ItemCarousel>
-      {relatedProducts ? relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />) : null}
-    </ItemCarousel>
+    <>
+      <h2>
+        You might like...
+      </h2>
+      <ItemCarousel>
+        {relatedProducts ? relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />) : null}
+      </ItemCarousel>
+    </>
   );
 }
-
-export default RelatedProductsList;

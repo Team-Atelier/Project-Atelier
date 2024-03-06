@@ -47,7 +47,7 @@ const RightArrow = styled(Arrow)`
 `;
 
 // Carousel
-const ItemCarousel = function (props) {
+export default function ItemCarousel(props) {
   const { children } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState(children.length);
@@ -87,6 +87,4 @@ const ItemCarousel = function (props) {
       </CarouselWrapper>
     </CarouselContainer>
   );
-};
-
-export default ItemCarousel;
+}

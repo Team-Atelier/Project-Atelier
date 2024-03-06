@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -22,7 +24,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-const ProductCard = function ProductCard({ category, name, price, id, isOutfitList }) {
+export default function ProductCard({ category, name, price, id }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -43,30 +45,18 @@ const ProductCard = function ProductCard({ category, name, price, id, isOutfitLi
 
   return (
     <Card>
-      {isOutfitList
-        ? (
-          <div>
-            <h3>Add to Outfit</h3>
-            <p> + </p>
-          </div>
-        ) : (
-          <>
-            <ActionButton>Action</ActionButton>
-            <p>{category}</p>
-            <h3>{name}</h3>
-            <ProductImage
-              src={productPhoto}
-              alt=""
-            />
-            <p>
-              $
-              {price}
-            </p>
-            <p>Star Rating: </p>
-          </>
-        )}
+      <ActionButton>Action</ActionButton>
+      <p>{category}</p>
+      <h3>{name}</h3>
+      <ProductImage
+        src={productPhoto}
+        alt=""
+      />
+      <p>
+        $
+        {price}
+      </p>
+      <p>Star Rating: </p>
     </Card>
   );
-};
-
-export default ProductCard;
+}

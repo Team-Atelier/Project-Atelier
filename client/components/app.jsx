@@ -9,9 +9,9 @@ function App() {
       <div>
         <h1>Project Atelier</h1>
       </div>
-      <div><ProductDetail /></div>
-      <div><RelatedItems /></div>
-      <div><Reviews /></div>
+        <ProductDetail />
+        <RelatedItems />
+        <Reviews />
     </>
   );
 }
