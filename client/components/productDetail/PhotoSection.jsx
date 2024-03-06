@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
@@ -5,6 +6,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FaImage } from 'react-icons/fa';
 
 const { useState, useEffect, useRef } = React;
 
@@ -86,7 +88,7 @@ const LeftArrow = styled.span`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 24px;
+  font-size: 50px;
 `;
 
 const RightArrow = styled.span`
@@ -95,7 +97,7 @@ const RightArrow = styled.span`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 24px;
+  font-size: 50px;
 `;
 
 const ExpandedPhotoContainer = styled.div`
@@ -105,14 +107,57 @@ const ExpandedPhotoContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 5555;
 `;
 
 const ExpandedMainImage = styled.img`
   width: 100%;
   height: 100%;
   objectFit: contain;
+  cursor: crosshair;
+`;
+
+const ZoomedContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+`;
+
+const ZoomedMainImage = styled.img`
+  width: 100%;
+  height: 100%;
+  objectFit: contain;
+  transform: scale(2.5);
+  cursor: vertical-text;
+  transition: transform 0.3s ease;
+`;
+
+const ZoomedThumbnailContainerWrapper = styled.div`
+  position: absolute;
+  flex: 0 0 100px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 400px;
+  margin-top: auto;
+  margin-bottom: auto;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #ccc;
+`;
+
+const ThumbnailIcon = styled(FaImage)`
+  font-size: 20px;
   cursor: pointer;
+  margin: 0 5px;
+  color: ${({ selected }) => (selected ? 'blue' : 'black')};
 `;
 
 function PhotoSection({ productId, selectedStyle }) {
@@ -123,6 +168,7 @@ function PhotoSection({ productId, selectedStyle }) {
   const thumbnailContainerRef = useRef(null);
   const [startIdx, setStartIdx] = useState(0);
   const [expandedView, setExpandedView] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
 
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
@@ -184,12 +230,49 @@ function PhotoSection({ productId, selectedStyle }) {
     setExpandedView(!expandedView);
   };
 
+  const handleZoomImageClick = () => {
+    setZoomed(true);
+  };
+
   return (
     <PhotoSectionContainer>
       {expandedView && (
-        <ExpandedPhotoContainer onClick={() => setExpandedView(false)}>
-          <ExpandedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Main" />
+        <ExpandedPhotoContainer>
+
+          <ZoomedThumbnailContainerWrapper ref={thumbnailContainerRef}>
+            <ScrollButtonTop onClick={() => handleThumbnailScroll('up')}>
+              ^
+            </ScrollButtonTop>
+            <ThumbnailContainer>
+              {selectedPhotos.slice(startIdx, startIdx + 7).map((_, index) => (
+                <ThumbnailIcon key={index} alt={`Thumbnail ${index}`} selected={index + startIdx === selectedMainPhotoIndex} onClick={() => handleThumbnailClick(index + startIdx)} />
+              ))}
+            </ThumbnailContainer>
+            <ScrollButtonBottom onClick={() => handleThumbnailScroll('down')}>
+              v
+            </ScrollButtonBottom>
+          </ZoomedThumbnailContainerWrapper>
+
+          {selectedMainPhotoIndex !== 0 && (
+          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0}>
+            &#8592;
+          </LeftArrow>
+          )}
+
+          <ExpandedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Main" onClick={handleZoomImageClick} />
+
+          {selectedMainPhotoIndex !== selectedPhotos.length - 1 && (
+          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
+            &#8594;
+          </RightArrow>
+          )}
         </ExpandedPhotoContainer>
+      )}
+
+      {zoomed && (
+        <ZoomedContainer onClick={() => setZoomed(false)}>
+          <ZoomedMainImage src={selectedPhotos[selectedMainPhotoIndex]?.url} alt="Zoomed" />
+        </ZoomedContainer>
       )}
 
       <MainPhotoContainer>
