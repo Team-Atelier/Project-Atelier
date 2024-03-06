@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { format, compareAsc } from 'date-fns';
+import format from 'date-fns';
 import StarRating from './StarRating.jsx';
 
 const Summary = styled.h2`
