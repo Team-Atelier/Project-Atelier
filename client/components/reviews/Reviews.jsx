@@ -12,9 +12,11 @@ const token = process.env.GITHUB_TOKEN;
 const FlexRow = styled.section`
   display: flex;
   justify-content: space-between;
+  height: auto;
 `;
 const ReviewListContainer = styled.section`
   display: grid;
+  min-height: 541px;
   width: 60%
 `;
 
@@ -24,17 +26,21 @@ const getMetadata = async () => {
     params: {
       product_id: 40348,
     },
-  });
+  }).catch((err) => console.log(err));
   return data;
 };
 
 function Reviews() {
+  const [newReviewData, setNewReviewData] = useState({});
+  const [metadata, setMetadata] = useState();
   useEffect(() => {
     getMetadata()
-      .then((res) => { console.log('M', res); });
+      .then((res) => {
+        setMetadata(res.data);
+        console.log('thete', res);
+      });
   }, []);
 
-  const [newReviewData, setNewReviewData] = useState({});
   const handleNewReviewChange = (e, name, value) => {
     if (e && e.target.name === 'images') {
       const currentFiles = newReviewData[e.target.name] || [];
@@ -79,16 +85,18 @@ function Reviews() {
   return (
     <>
       <FlexRow>
-        <RatingBreakdown />
+        <RatingBreakdown metadata={metadata} />
         <ReviewListContainer>
           <ReviewsList />
         </ReviewListContainer>
       </FlexRow>
-      <AddReviews
-        newReviewData={newReviewData}
-        handleNewReviewChange={handleNewReviewChange}
-        resetImages={resetImages}
-      />
+      <div>
+        <AddReviews
+          newReviewData={newReviewData}
+          handleNewReviewChange={handleNewReviewChange}
+          resetImages={resetImages}
+        />
+      </div>
     </>
   );
 }

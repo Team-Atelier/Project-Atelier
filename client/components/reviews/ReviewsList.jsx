@@ -10,7 +10,7 @@ const token = process.env.GITHUB_TOKEN;
 
 const ReviewBox = styled.div`
 overflow-y: auto;
-max-height: 500px;
+max-height: 541px;
 background: transparent;
 `;
 function ReviewsList() {
