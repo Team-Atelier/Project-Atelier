@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { BsStarFill } from 'react-icons/bs';
+import { TfiClose } from 'react-icons/tfi';
 
 const Card = styled.div`
   border: solid;
@@ -25,7 +26,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-export default function ProductCard({ category, name, price, id }) {
+export default function ProductCard({ category, name, price, id, relatedProduct }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -46,7 +47,7 @@ export default function ProductCard({ category, name, price, id }) {
 
   return (
     <Card>
-      <ActionButton><BsStarFill /></ActionButton>
+      {relatedProduct ? <ActionButton><BsStarFill /></ActionButton> : <ActionButton><TfiClose /></ActionButton> }
       <p>{category}</p>
       <h3>{name}</h3>
       <ProductImage
