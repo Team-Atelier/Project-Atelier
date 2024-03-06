@@ -36,7 +36,6 @@ function ProductDetail() {
       },
     })
       .then((response) => {
-        console.log(response.data);
         setProductInformation(response.data);
       })
       .catch((err) => {
