@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { BsStarFill } from 'react-icons/bs';
 
 const Card = styled.div`
   border: solid;
@@ -45,7 +46,7 @@ export default function ProductCard({ category, name, price, id }) {
 
   return (
     <Card>
-      <ActionButton>Action</ActionButton>
+      <ActionButton><BsStarFill /></ActionButton>
       <p>{category}</p>
       <h3>{name}</h3>
       <ProductImage
