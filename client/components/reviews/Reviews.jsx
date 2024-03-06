@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -9,7 +11,7 @@ import AddReviews from './AddReviews/AddReviews.jsx';
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 const productId = 40346;
-
+// og: 40346
 const FlexRow = styled.section`
   display: flex;
   justify-content: space-between;
@@ -34,6 +36,7 @@ const getMetadata = async () => {
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
   const [metadata, setMetadata] = useState();
+
   useEffect(() => {
     getMetadata()
       .then((res) => {
@@ -82,7 +85,6 @@ function Reviews() {
     console.log(nextData);
     setNewReviewData(nextData);
   };
-
   return (
     <>
       <FlexRow>
