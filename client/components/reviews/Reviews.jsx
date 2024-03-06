@@ -41,7 +41,6 @@ function Reviews() {
     getMetadata()
       .then((res) => {
         setMetadata(res.data);
-        console.log('thete', res);
       });
   }, []);
 
