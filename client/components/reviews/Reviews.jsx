@@ -8,6 +8,7 @@ import AddReviews from './AddReviews/AddReviews.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
+const productId = 40346;
 
 const FlexRow = styled.section`
   display: flex;
@@ -24,7 +25,7 @@ const getMetadata = async () => {
   const data = await axios.get(`${url}reviews/meta`, {
     headers: { Authorization: token },
     params: {
-      product_id: 40348,
+      product_id: productId,
     },
   }).catch((err) => console.log(err));
   return data;
@@ -87,7 +88,7 @@ function Reviews() {
       <FlexRow>
         <RatingBreakdown metadata={metadata} />
         <ReviewListContainer>
-          <ReviewsList />
+          <ReviewsList productId={productId} />
         </ReviewListContainer>
       </FlexRow>
       <div>

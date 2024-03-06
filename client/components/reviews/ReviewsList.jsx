@@ -13,7 +13,7 @@ overflow-y: auto;
 max-height: 541px;
 background: transparent;
 `;
-function ReviewsList() {
+function ReviewsList({productId}) {
   const [relevantReviews, setRelevantReviews] = useState([]);
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
@@ -24,7 +24,7 @@ function ReviewsList() {
     const data = await axios.get(`${url}reviews/meta`, {
       headers: { Authorization: token },
       params: {
-        product_id: 40348,
+        product_id: productId,
       },
     });
     const result = Object.values(data.data.ratings).map((item) => Number(item));
@@ -35,7 +35,7 @@ function ReviewsList() {
   const getReviews = (count = 100, sort = 'relevant') => axios.get(`${url}reviews`, {
     headers: { Authorization: token },
     params: {
-      product_id: 40348,
+      product_id: productId,
       count,
       sort,
     },
