@@ -6,6 +6,9 @@ import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
 
+const url = process.env.API_URL;
+const token = process.env.GITHUB_TOKEN;
+
 const FlexRow = styled.section`
   display: flex;
   justify-content: space-between;
@@ -15,7 +18,22 @@ const ReviewListContainer = styled.section`
   width: 60%
 `;
 
+const getMetadata = async () => {
+  const data = await axios.get(`${url}reviews/meta`, {
+    headers: { Authorization: token },
+    params: {
+      product_id: 40348,
+    },
+  });
+  return data;
+};
+
 function Reviews() {
+  useEffect(() => {
+    getMetadata()
+      .then((res) => { console.log('M', res); });
+  }, []);
+
   const [newReviewData, setNewReviewData] = useState({});
   const handleNewReviewChange = (e, name, value) => {
     if (e && e.target.name === 'images') {
@@ -58,15 +76,6 @@ function Reviews() {
     setNewReviewData(nextData);
   };
 
-  const handleRatingClick = (reviewRating) => {
-    const nextReviewData = {
-      ...newReviewData,
-      reviewRating,
-    };
-    console.log(nextReviewData);
-    setNewReviewData(nextReviewData);
-  };
-
   return (
     <>
       <FlexRow>
@@ -75,7 +84,11 @@ function Reviews() {
           <ReviewsList />
         </ReviewListContainer>
       </FlexRow>
-      <AddReviews newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} resetImages={resetImages} />
+      <AddReviews
+        newReviewData={newReviewData}
+        handleNewReviewChange={handleNewReviewChange}
+        resetImages={resetImages}
+      />
     </>
   );
 }

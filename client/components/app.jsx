@@ -3,17 +3,17 @@ import ProductDetail from './productDetail/ProductDetail.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 
-const App = () => {
+function App() {
   return (
     <>
       <div>
         <h1>Project Atelier</h1>
       </div>
-        <ProductDetail />
-        <Reviews />
-        <RelatedItems />
+      <div><ProductDetail /></div>
+      <div><RelatedItems /></div>
+      <div><Reviews /></div>
     </>
-  )
+  );
 }
 
 export default App;

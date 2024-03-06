@@ -16,13 +16,13 @@ const Summary = styled.h2`
 const FlexRow = styled.section`
   display: flex;
   justify-content: space-between;
-  background: papayawhip;
+  background: white;
 `;
 const StaticRow = styled.section`
   white-space:pre;
   display: flex;
   justify-content: start;
-  background: papayawhip;
+  background: white;
 `;
 
 const MainBox = styled.section`
@@ -30,8 +30,8 @@ const MainBox = styled.section`
   padding-right: 0em;
   margin-left: 0em;
   margin-right: 0em;
-  background: papayawhip;
-  border-bottom: .25rem solid
+  background: white;
+  border-bottom: .125rem solid
 `;
 
 const ResponseBox = styled.section`
