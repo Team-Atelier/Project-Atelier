@@ -46,15 +46,9 @@ export default function RelatedItems() {
 
   return (
     <div>
-      <h2>
-        You might like...
-      </h2>
       <div className="relatedProductsList">
         <RelatedProductsList relatedProducts={relatedProducts} />
       </div>
-      <h2>
-        Build an ensemble
-      </h2>
       <div className="yourOutfitList">
         <YourOutfitList thisProductID={productID} />
       </div>

@@ -13,10 +13,13 @@ export default function YourOutfitList({ thisProductID }) {
   }, [outfitList]);
 
   return (
-    <div>
+    <>
+      <h2>
+        Build an ensemble
+      </h2>
       <ItemCarousel>
         <AddToOutfitCard outfitList={outfitList} setOutfitList={setOutfitList} thisProductID={thisProductID} />
       </ItemCarousel>
-    </div>
+    </>
   );
 }
