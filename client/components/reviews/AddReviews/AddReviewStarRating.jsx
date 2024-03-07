@@ -44,7 +44,7 @@ const Star = ({
       {solid && (
       <span
         className="fa fa-star"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
 
@@ -53,7 +53,7 @@ const Star = ({
       {!solid && (
       <span
         className="fa fa-star-o"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
       />

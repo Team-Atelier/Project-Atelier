@@ -81,7 +81,7 @@ function AddReviews({
         <br />
         <textarea name="body" maxLength="1000" value={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
         <br />
-        {newReviewData.body && newReviewData.body.length >= 50 ? 'Minimim reached' : ''}
+        {newReviewData.body && newReviewData.body.length >= 50 ? 'Minimum reached' : ''}
         {newReviewData.body && newReviewData.body.length < 50 ? `${50 - newReviewData.body.length} characters needed until 50 character minimum reached` : ''}
         <br />
         {newReviewData.body ? `${(1000 - (newReviewData.body.length))} characters remaining` : ''}
