@@ -13,65 +13,13 @@ overflow-y: auto;
 max-height: 541px;
 background: transparent;
 `;
-const ModalOverlay = styled.div`
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-`;
+
 const ModalImage = styled.img`
 width:  600px;
 height: 600px;
 object-fit: cover;
 padding: 0px
 `;
-/*
-const ModalWindow = styled.div`
-  position: fixed;
-  left: 25%;
-  top: 6.25%;
-`;
-const ModalContent = styled.div`
-background-color:
-margin: 15% auto;
-padding: 0px;
-border: 5px solid white;
-`;
-const ModalImage = styled.img`
-width:  600px;
-height: 600px;
-object-fit: cover;
-padding: 0px
-`;
-const CloseButton = styled.span`
-background-color: white;
-padding: 20px;
-padding-top: 5px;
-`;
-
-function ImageModal({ src }) {
-  const modal = document.getElementById('fullReviewImage');
-  return (
-    <ModalOverlay id="fullReviewImage" className="modal">
-      <ModalWindow>
-        <CloseButton onClick={() => { modal.style.display = 'none'; }}>
-          CLOSE (&times;)
-        </CloseButton>
-        <ModalContent>
-          <ModalImage src={src} />
-        </ModalContent>
-      </ModalWindow>
-    </ModalOverlay>
-  );
-}
-
-*/
 
 function ImageModal({ src }) {
   return (
@@ -149,24 +97,7 @@ function ReviewsList({ productId, ratingFilter }) {
     modal.style.display = 'block';
     setModalImg(e.target.src);
   };
-  // ratingFilter
 
-  /*
-  const FormatReviews = ({ reviewsArray }) => {
-    const allDeselected = Object.values(ratingFilter).every((value)=>(value === false))
-    return (reviewsArray
-      .toSpliced(visibleReviews, relevantReviews.length)
-      .map((item) => (
-        <ReviewTile
-          key={item.review_id}
-          review={item}
-          handleModalImgChange={handleModalImgChange}
-          handleAPIClick={handleAPIClick}
-        />
-      ));
-    )
-  };
-*/
   const FormatReviews = ({ reviewsArray }) => {
     const allDeselected = Object.values(ratingFilter).every((value) => (value === false));
     return (reviewsArray.reduce((filteredList, review) => {
