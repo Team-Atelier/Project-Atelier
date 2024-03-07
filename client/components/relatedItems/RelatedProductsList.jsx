@@ -7,10 +7,13 @@ import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';
 import CompareProductsModal from './CompareProductsModal.jsx';
 
-export default function RelatedProductsList({ relatedProducts }) {
+export default function RelatedProductsList({ relatedProducts, thisProduct }) {
   const [showModal, setShowModal] = useState(false);
-  const handleModalOpen = () => {
+  const [comparisonProduct, setComparisonProduct] = useState({});
+
+  const handleModalOpen = (productInfo) => {
     setShowModal(!showModal);
+    setComparisonProduct(productInfo);
   };
 
   const handleModalClose = () => {
@@ -21,9 +24,9 @@ export default function RelatedProductsList({ relatedProducts }) {
       <h2>
         You might like...
       </h2>
-      {showModal ? <CompareProductsModal handleModalClose={handleModalClose} /> : null}
+      {showModal ? <CompareProductsModal handleModalClose={handleModalClose} comparisonProduct={comparisonProduct} thisProduct={thisProduct} /> : null}
       <ItemCarousel>
-        {relatedProducts ? relatedProducts.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} relatedProduct={true} handleModalOpen={handleModalOpen} />) : null}
+        {relatedProducts ? relatedProducts.map((product) => <ProductCard comparisonProduct={product} category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} relatedProduct={true} handleModalOpen={handleModalOpen} />) : null}
       </ItemCarousel>
     </>
   );

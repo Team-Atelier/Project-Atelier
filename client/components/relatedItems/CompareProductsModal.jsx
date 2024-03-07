@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
@@ -27,7 +27,28 @@ const Close = styled.button`
   font-weight: bold;
 `;
 
-export default function CompareProductsModal({ handleModalClose }) {
+export default function CompareProductsModal({ handleModalClose, thisProduct, comparisonProduct }) {
+  const [features, setFeatures] = useState([]);
+
+  console.log('features', Object.entries(features));
+
+  useEffect(() => {
+    const combinedFeatures = {};
+    const productFeatureList = thisProduct.features;
+    const compareFeatureList = comparisonProduct.features;
+    for (let i = 0; i < productFeatureList.length; i += 1) {
+      combinedFeatures[productFeatureList[i].feature] = [productFeatureList[i].value, null];
+    }
+    for (let j = 0; j < compareFeatureList.length; j += 1) {
+      if (combinedFeatures[compareFeatureList[j].feature]) {
+        combinedFeatures[compareFeatureList[j].feature][1] = compareFeatureList[j].value;
+      } else {
+        combinedFeatures[compareFeatureList[j].feature] = [null, compareFeatureList[j].value];
+      }
+    }
+    setFeatures(Object.entries(combinedFeatures));
+  }, [thisProduct, comparisonProduct]);
+
   return (
     <Modal id="modal">
       <ModalContent>
@@ -37,9 +58,29 @@ export default function CompareProductsModal({ handleModalClose }) {
           </Close>
           <h1>Compare</h1>
         </header>
-        <div>
-          <p>Product Comparison</p>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>{thisProduct.name}</th>
+              <th aria-label="empty" />
+              <th>{comparisonProduct.name}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{thisProduct.category}</td>
+              <td>Category</td>
+              <td>{comparisonProduct.category}</td>
+            </tr>
+            {features ? features.map((feature) => (
+              <tr>
+                <td>{feature[1][0]}</td>
+                <td>{feature[0]}</td>
+                <td>{feature[1][1]}</td>
+              </tr>
+            )) : null }
+          </tbody>
+        </table>
       </ModalContent>
     </Modal>
   );

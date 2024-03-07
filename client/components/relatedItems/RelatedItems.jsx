@@ -14,6 +14,7 @@ export default function RelatedItems() {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
+  const [thisProduct, setThisProduct] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
 
@@ -26,6 +27,9 @@ export default function RelatedItems() {
     }
     if (typeOfList === 'yourOutfit') {
       setOutfitInfo(results.map((product) => product.data));
+    }
+    if (typeOfList === 'thisProduct') {
+      setThisProduct(results.map((product => product.data)));
     }
   };
 
@@ -55,6 +59,7 @@ export default function RelatedItems() {
 
   useEffect(() => {
     getCurrentProduct();
+    getProductInfo([productID], 'thisProduct');
   }, []);
 
   useEffect(() => {
@@ -71,7 +76,7 @@ export default function RelatedItems() {
   return (
     <div>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} />
       </div>
       <div className="yourOutfitList">
         <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} outfitInfo={outfitInfo} />
