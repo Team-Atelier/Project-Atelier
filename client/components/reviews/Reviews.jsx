@@ -70,19 +70,29 @@ function Reviews() {
       });
   }, []);
 
-  const handleNewReviewChange = (e, name, value) => {
-    if (e && e.target.name === 'images') {
-      const currentFiles = newReviewData[e.target.name] || [];
-      const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
+  const handleNewReviewChange = (e, name, value, id) => {
+    if (e && e.target?.className === 'reviewimg') {
+      const currentFiles = newReviewData.photos || [];
+      const nextFiles = [...currentFiles, e.target.imgurl.value];
       const nextReviewData = {
         ...newReviewData,
-        [e.target.name]: nextFiles,
+        photos: nextFiles,
       };
       console.log(nextReviewData);
       setNewReviewData(nextReviewData);
-      console.log('image');
+    } else if (e && e.target?.className === 'charSelect') {
+      const nextCharacteristic = {
+        ...newReviewData.characteristics,
+        [id]: e.target.value,
+        [e.target.name]: e.target.value,
+      };
+      const nextReviewData = {
+        ...newReviewData,
+        characteristics: nextCharacteristic,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
     } else if (e === null) {
-      console.log('goes here');
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
@@ -100,12 +110,9 @@ function Reviews() {
   };
 
   const resetImages = () => {
-    newReviewData.images.forEach((item) => {
-      URL.revokeObjectURL(item);
-    });
     const nextData = {
       ...newReviewData,
-      images: Array(0),
+      photos: Array(0),
     };
     console.log(nextData);
     setNewReviewData(nextData);
@@ -128,6 +135,7 @@ function Reviews() {
       <div>
         <AddReviews
           newReviewData={newReviewData}
+          metadata={metadata}
           handleNewReviewChange={handleNewReviewChange}
           resetImages={resetImages}
         />

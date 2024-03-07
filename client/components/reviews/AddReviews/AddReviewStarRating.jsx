@@ -22,6 +22,7 @@ const Star = ({
   solid, rating, handleClick, handleHover, newReviewData,
 }) => {
   const clicked = (review) => {
+    console.log('review', review); console.log('rate', rating);
     handleClick(null, review, rating);
   };
   const handleMouseEnter = () => {
@@ -43,7 +44,7 @@ const Star = ({
       {solid && (
       <span
         className="fa fa-star"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
 
@@ -52,7 +53,7 @@ const Star = ({
       {!solid && (
       <span
         className="fa fa-star-o"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
       />
