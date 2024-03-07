@@ -10,7 +10,7 @@ import AddReviews from './AddReviews/AddReviews.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
-const productId = 40348;
+const productId = 40346;
 // og: 40346
 const FlexRow = styled.section`
   display: flex;
@@ -44,7 +44,17 @@ function Reviews() {
     1: false,
   });
 
-  const handleRatingFilterClick = (star) => {
+  const handleRatingFilterClick = (star, reset = false) => {
+    if (reset) {
+      setRatingFilter({
+        5: false,
+        4: false,
+        3: false,
+        2: false,
+        1: false,
+      });
+      return;
+    }
     const nextRatingFilter = {
       ...ratingFilter,
       [star]: !ratingFilter[star],
@@ -105,6 +115,7 @@ function Reviews() {
       <FlexRow>
         <RatingBreakdown
           metadata={metadata}
+          ratingFilter={ratingFilter}
           handleRatingFilterClick={handleRatingFilterClick}
         />
         <ReviewListContainer>

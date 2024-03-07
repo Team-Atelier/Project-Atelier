@@ -76,8 +76,8 @@ const computeAverage = (ratings) => {
 
 function RatingRowElement({
   parentID, star, rate, handleRatingFilterClick, metadata,
+  ratingFilter,
 }) {
-  const [selected, setSelected] = useState(false);
   const highlightColor = 'lightgreen';
   const selectedColor = 'green';
 
@@ -85,15 +85,14 @@ function RatingRowElement({
     <RatingRow
       id={parentID}
       onClick={(e) => {
-        setSelected(!selected);
         handleRatingFilterClick(star);
-        if (!selected) { document.getElementById(parentID).style.background = selectedColor; } else { document.getElementById(parentID).style.background = highlightColor; }
+        if (!ratingFilter[star]) { document.getElementById(parentID).style.background = selectedColor; } else { document.getElementById(parentID).style.background = highlightColor; }
       }}
       onMouseEnter={(e) => {
-        if (!selected) { document.getElementById(parentID).style.background = highlightColor; }
+        if (!ratingFilter[star]) { document.getElementById(parentID).style.background = highlightColor; }
       }}
       onMouseLeave={(e) => {
-        !selected
+        !ratingFilter[star]
           ? document.getElementById(parentID).style.background = 'transparent'
           : document.getElementById(parentID).style.background = selectedColor;
       }}
@@ -110,17 +109,44 @@ function RatingRowElement({
   );
 }
 
-function RatingBreakdown({ metadata, handleRatingFilterClick, children }) {
+function RatingBreakdown({ metadata, handleRatingFilterClick, ratingFilter }) {
   const rec = Number(metadata?.recommended?.true);
   const noRec = Number(metadata?.recommended?.false);
   const percentRecommend = 100 * (rec / (rec + noRec));
   const rate = metadata?.ratings && scaleRatings(metadata.ratings);
   let average = metadata?.ratings && computeAverage(rate);
   average = Math.round(average * 10) / 10;
+  const filteringEnabled = Object.values(ratingFilter).some((filter) => (filter === true));
   return (
 
     <RatingCard>
-      Ratings and reviews:
+      <h2>Ratings Breakdown:</h2>
+      {filteringEnabled && `Review filtering enabled. Showing
+      ${
+        Object.keys(ratingFilter).reduce((ratingList, rating) => {
+          if (ratingFilter[rating]) {
+            return [...ratingList, rating];
+          }
+          return [...ratingList];
+        }, []).join(', ')
+      }
+      star ratings.`}
+
+      {filteringEnabled && (
+      <button
+        type="button"
+        onClick={() => {
+          handleRatingFilterClick(null, true);
+          document.getElementById('one-star').style.background = 'transparent';
+          document.getElementById('two-star').style.background = 'transparent';
+          document.getElementById('three-star').style.background = 'transparent';
+          document.getElementById('four-star').style.background = 'transparent';
+          document.getElementById('five-star').style.background = 'transparent';
+        }}
+      >
+        Reset filter
+      </button>
+      )}
       <div>
         Rating:
         {' '}
@@ -132,11 +158,11 @@ function RatingBreakdown({ metadata, handleRatingFilterClick, children }) {
         % of reviewers recommend this product
       </div>
 
-      <RatingRowElement parentID="five-star" star={5} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} />
-      <RatingRowElement parentID="four-star" star={4} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} />
-      <RatingRowElement parentID="three-star" star={3} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} />
-      <RatingRowElement parentID="two-star" star={2} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} />
-      <RatingRowElement parentID="one-star" star={1} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} />
+      <RatingRowElement parentID="five-star" star={5} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} ratingFilter={ratingFilter} />
+      <RatingRowElement parentID="four-star" star={4} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} ratingFilter={ratingFilter} />
+      <RatingRowElement parentID="three-star" star={3} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} ratingFilter={ratingFilter} />
+      <RatingRowElement parentID="two-star" star={2} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} ratingFilter={ratingFilter} />
+      <RatingRowElement parentID="one-star" star={1} rate={rate} handleRatingFilterClick={handleRatingFilterClick} metadata={metadata} ratingFilter={ratingFilter} />
 
       {metadata?.characteristics && Object.keys(metadata?.characteristics).map((key) => (
         <CharacteristicRating
