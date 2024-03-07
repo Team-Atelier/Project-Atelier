@@ -71,17 +71,15 @@ function Reviews() {
   }, []);
 
   const handleNewReviewChange = (e, name, value, id) => {
-    debugger;
-    if (e && e.target?.name === 'images') {
-      const currentFiles = newReviewData[e.target.name] || [];
-      const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
+    if (e && e.target?.className === 'reviewimg') {
+      const currentFiles = newReviewData.photos || [];
+      const nextFiles = [...currentFiles, e.target.imgurl.value];
       const nextReviewData = {
         ...newReviewData,
-        [e.target.name]: nextFiles,
+        photos: nextFiles,
       };
       console.log(nextReviewData);
       setNewReviewData(nextReviewData);
-      console.log('image');
     } else if (e && e.target?.className === 'charSelect') {
       const nextCharacteristic = {
         ...newReviewData.characteristics,
@@ -112,12 +110,9 @@ function Reviews() {
   };
 
   const resetImages = () => {
-    newReviewData.images.forEach((item) => {
-      URL.revokeObjectURL(item);
-    });
     const nextData = {
       ...newReviewData,
-      images: Array(0),
+      photos: Array(0),
     };
     console.log(nextData);
     setNewReviewData(nextData);

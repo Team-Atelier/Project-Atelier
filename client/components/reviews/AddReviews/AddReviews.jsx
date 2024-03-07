@@ -24,7 +24,9 @@ const Image = styled.img`
   padding: 5px
 `;
 
-function AddReviews({ newReviewData, metadata, handleNewReviewChange, resetImages }) {
+function AddReviews({
+  newReviewData, metadata, handleNewReviewChange, resetImages,
+}) {
   return (
     <>
       <div>
@@ -98,29 +100,42 @@ function AddReviews({ newReviewData, metadata, handleNewReviewChange, resetImage
           Upload images of product: (Max 5 images.)
           <br />
           {
-          (!newReviewData.images || newReviewData.images.length < 2)
+          (!newReviewData.photos || newReviewData.photos.length < 5)
           && (
-            <input id="upload" name="images" type="file" accept="image/*" value={newReviewData.name} onChange={(e) => { handleNewReviewChange(e); }} />
+            <form
+              className="reviewimg"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleNewReviewChange(e);
+              }}
+            >
+              <label htmlFor="imgurl">Input image url: </label>
+              <input id="imgurl" name="images" type="url" />
+              <button type="submit"> Insert image</button>
+            </form>
           )
           }
-          {(newReviewData.images && newReviewData.images.length > 0)
+          {(newReviewData.photos && newReviewData.photos.length > 0)
           && (
           <button
             type="button"
-            htmlFor="upload"
+            htmlFor="url"
             onClick={(e) => {
               e.preventDefault();
               resetImages();
             }}
           >
-            reset
+            Reset
           </button>
           )}
           <ImageRow>
-            {newReviewData.images && newReviewData.images.map((image) => <Image src={image} alt="user content" />)}
+            {newReviewData.photos && newReviewData.photos.map((imageURL) => <Image src={imageURL} alt="user content" />)}
           </ImageRow>
         </label>
       </div>
+      <button type="button">
+        Submit review
+      </button>
     </>
   );
 }

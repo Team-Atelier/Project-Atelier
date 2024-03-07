@@ -32,17 +32,14 @@ function ExperienceTable({ newReviewData, handleNewReviewChange, metadata }) {
           (characteristic) => {
             const desc = descriptions[characteristic.toLowerCase()] || [1, 2, 3, 4, 5];
             return (
-              <>
-                <button onClick={() => {console.log(characteristics[characteristic].id)}}> Test </button>
-                <ExperienceTableRow
-                  key={characteristics[characteristic].id}
-                  id={characteristics[characteristic].id}
-                  name={characteristic}
-                  descriptions={desc}
-                  newReviewData={newReviewData}
-                  handleNewReviewChange={handleNewReviewChange}
-                />
-              </>
+              <ExperienceTableRow
+                key={characteristics[characteristic].id}
+                id={characteristics[characteristic].id}
+                name={characteristic}
+                descriptions={desc}
+                newReviewData={newReviewData}
+                handleNewReviewChange={handleNewReviewChange}
+              />
             );
           },
         )}
