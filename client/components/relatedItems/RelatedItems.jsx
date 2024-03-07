@@ -17,11 +17,10 @@ export default function RelatedItems() {
 
   // FUNCTIONS FOR INITIAL RENDERING
 
-  const getProductInfo = async (ProductIDs, list) => {
+  const getProductInfo = async (ProductIDs, typeOfList) => {
     const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
     })));
-    const typeOfList = list;
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
     }

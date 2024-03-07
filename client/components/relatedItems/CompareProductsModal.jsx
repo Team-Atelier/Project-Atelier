@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
-  display: none;
+  display: block;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -11,7 +11,6 @@ const Modal = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4)
 `;
 const ModalContent = styled.div`
@@ -26,7 +25,7 @@ const Close = styled.button`
   float: right;
   font-size: 28px;
   font-weight: bold;
-`
+`;
 
 export default function CompareProductsModal({ handleModalClose }) {
   return (
@@ -36,7 +35,7 @@ export default function CompareProductsModal({ handleModalClose }) {
           <Close type="button" onClick={handleModalClose}>
             &times;
           </Close>
-          <h1>Compare Products</h1>
+          <h1>Compare</h1>
         </header>
         <div>
           <p>Product Comparison</p>
