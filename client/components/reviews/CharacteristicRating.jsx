@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 85%;
 `;
 const BottomRow = styled(Container)`
   align-items: center;
