@@ -51,32 +51,34 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   }, [id]);
 
   return (
-    <Card onClick={() => handleProductChange(id)}>
+    <Card>
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
-      <p>{category}</p>
-      <h3>{name}</h3>
-      <ProductImage
-        src={productPhoto}
-        alt=""
-      />
-      {salePrice ? (
-        <>
-          <p style={{ color: 'red' }}>
-            $
-            {salePrice}
-          </p>
-          <s>
+      <div onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0}>
+        <p>{category}</p>
+        <h3>{name}</h3>
+        <ProductImage
+          src={productPhoto}
+          alt=""
+        />
+        {salePrice ? (
+          <>
+            <p style={{ color: 'red' }}>
+              $
+              {salePrice}
+            </p>
+            <s>
+              $
+              {originalPrice}
+            </s>
+          </>
+        ) : (
+          <p>
             $
             {originalPrice}
-          </s>
-        </>
-      ) : (
-        <p>
-          $
-          {originalPrice}
-        </p>
-      )}
-      <p>Star Rating: </p>
+          </p>
+        )}
+        <p>Star Rating: </p>
+      </div>
     </Card>
   );
 }
