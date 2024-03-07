@@ -129,10 +129,12 @@ const ZoomedContainer = styled.div`
   z-index: 9999;
 `;
 
-const ZoomedMainImage = styled.img`
+const ZoomedMainImage = styled.div`
   width: 100%;
   height: 100%;
-  objectFit: contain;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   transform: scale(2.5);
   cursor: vertical-text;
 `;
@@ -311,7 +313,7 @@ function PhotoSection({ productId, selectedStyle }) {
         <ZoomedContainer id="zoomedContainer" onClick={() => setZoomed(false)}>
           <ZoomedMainImage
             id="zoomedMainImage"
-            src={selectedPhotos[selectedMainPhotoIndex]?.url}
+            style={{ backgroundImage: `url(${selectedPhotos[selectedMainPhotoIndex]?.url})` }}
             alt="Zoomed"
             onMouseMove={handleMouseMove}
           />
