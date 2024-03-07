@@ -184,7 +184,9 @@ function ReviewsList({ productId, ratingFilter }) {
         return [...filteredList, nextReview];
       }
       return [...filteredList];
-    }, []));
+    }, [])
+      .toSpliced(visibleReviews, relevantReviews.length)
+    );
   };
   const setSort = (e) => {
     setVisibleReviews(2);
