@@ -37,6 +37,7 @@ function ReviewsList({ productId, ratingFilter }) {
   // Increases as "show more reviews clicked"
   const [visibleReviews, setVisibleReviews] = useState(2);
   const [modalImg, setModalImg] = useState();
+  const [markedAsHelpful, setMarkedAsHelpful] = useState({});
 
   const getNumberOfReviews = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
@@ -85,10 +86,18 @@ function ReviewsList({ productId, ratingFilter }) {
         headers: { Authorization: token },
       });
       await refresh();
+      if (e.target.value === 'helpful') {
+        const nextMarkedAsHelpful = {
+          ...markedAsHelpful,
+          [reviewID]: true,
+        };
+        console.log(nextMarkedAsHelpful);
+        setMarkedAsHelpful(nextMarkedAsHelpful);
+        return nextMarkedAsHelpful;
+      }
     } catch (err) {
       return err;
     }
-
     return response;
   };
 
@@ -98,7 +107,7 @@ function ReviewsList({ productId, ratingFilter }) {
     setModalImg(e.target.src);
   };
 
-  const FormatReviews = ({ reviewsArray }) => {
+  const FormatReviews = ({ reviewsArray, markedAsHelpful }) => {
     const allDeselected = Object.values(ratingFilter).every((value) => (value === false));
     return (reviewsArray.reduce((filteredList, review) => {
       if (ratingFilter?.[review.rating] || allDeselected) {
@@ -108,6 +117,7 @@ function ReviewsList({ productId, ratingFilter }) {
             review={review}
             handleModalImgChange={handleModalImgChange}
             handleAPIClick={handleAPIClick}
+            markedAsHelpful={markedAsHelpful}
           />
         );
         return [...filteredList, nextReview];
@@ -138,9 +148,12 @@ function ReviewsList({ productId, ratingFilter }) {
         </select>
       </div>
       <ReviewBox>
-        {currentSort === 'relevant' && <FormatReviews reviewsArray={relevantReviews} />}
-        {currentSort === 'helpful' && <FormatReviews reviewsArray={helpfulReviews} />}
-        {currentSort === 'newest' && <FormatReviews reviewsArray={newestReviews} />}
+        {currentSort === 'relevant'
+        && <FormatReviews reviewsArray={relevantReviews} markedAsHelpful={markedAsHelpful} />}
+        {currentSort === 'helpful'
+        && <FormatReviews reviewsArray={helpfulReviews} markedAsHelpful={markedAsHelpful} />}
+        {currentSort === 'newest'
+        && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
       </ReviewBox>
       <div>
         <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
