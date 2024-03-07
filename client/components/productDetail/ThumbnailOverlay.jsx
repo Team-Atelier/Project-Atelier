@@ -13,6 +13,7 @@ const ThumbnailContainer = styled.div`
 const Thumbnail = styled.img`
   width: 75px;
   height: 75px;
+  cursor: pointer;
   object-fit: cover;
 `;
 
