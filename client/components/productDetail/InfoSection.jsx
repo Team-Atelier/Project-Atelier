@@ -149,7 +149,6 @@ function InfoSection({ productId, onStyleSelect }) {
           },
         })
           .then((response) => {
-            console.log('infoSection response data: ', response.data.results);
             setProductStyle(response.data.results);
             if (response.data.results.length > 0) {
               onStyleSelect(response.data.results[0].style_id);
@@ -184,7 +183,6 @@ function InfoSection({ productId, onStyleSelect }) {
   const sizeOptions = Object.values(productStyle.find((style) => style.style_id === selectedStyleId)?.skus || {})
     ?.filter((sku) => sku.quantity > 0)
     ?.map((sku) => sku.size) || [];
-  console.log('sizeOptions: ', sizeOptions);
 
   const maxQuantity = selectedSize
     ? Math.min(
@@ -195,7 +193,6 @@ function InfoSection({ productId, onStyleSelect }) {
     : 0;
 
   const quantityOptions = selectedSize ? Array.from({ length: maxQuantity }, (_, index) => index + 1) : ['-'];
-  console.log('quantityOptions: ', quantityOptions);
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
