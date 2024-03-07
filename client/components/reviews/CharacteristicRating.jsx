@@ -1,11 +1,18 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 85%;
 `;
+const BottomRow = styled(Container)`
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -15px;
+`
 
 const Triangle = styled.span`
   border-bottom: 12px solid #000000;
@@ -33,13 +40,34 @@ const Line = styled.div`
   background: grey;
 `;
 
-function CharacteristicRating({characteristic, rating}) {
+function CharacteristicRating({ characteristic, rating }) {
+  const descriptions = {
+    size: ['Too small', 'Perfect', 'Too wide'],
+    width: ['Too narrow', 'Perfect', 'Too wide'],
+    comfort: ['Uncomfortable', 'Ok', 'Perfect'],
+    quality: ['Poor', 'What I expected', 'Perfect'],
+    length: ['Runs tight', 'Perfect', 'Runs long'],
+    fit: ['Runs tight', 'Perfect', 'Runs long'],
+  };
+  const key = characteristic.toLowerCase();
+  console.log(key);
   return (
-    <div>{characteristic}
+    <div>
+      {characteristic}
       <Container>
-        <section>Cold</section>
-        <section>Warm</section>
-        <section>Hot</section>
+        {key
+          ? (
+            <>
+              <section>{descriptions[key][0]}</section>
+              <section>{descriptions[key][2]}</section>
+            </>
+          )
+          : (
+            <>
+              <section>1</section>
+              <section>3</section>
+            </>
+          )}
       </Container>
       <Container>
         <Line width={20} />
@@ -49,6 +77,15 @@ function CharacteristicRating({characteristic, rating}) {
       <Container>
         <Triangle rating={rating * 20} />
       </Container>
+      <BottomRow>
+        {key
+          ? (
+            <section>{descriptions[key][1]}</section>
+          )
+          : (
+            <section>2</section>
+          )}
+      </BottomRow>
     </div>
 
   );

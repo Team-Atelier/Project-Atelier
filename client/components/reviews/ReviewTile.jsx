@@ -4,7 +4,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
-import axios from 'axios';
 import StarRating from './StarRating.jsx';
 
 const Summary = styled.h2`
@@ -152,7 +151,6 @@ function ReviewTile({ review, handleModalImgChange, handleAPIClick }) {
             (
             {review.helpfulness}
             )
-
           </StaticRow>
           <Right>
             <div>

@@ -10,7 +10,7 @@ import AddReviews from './AddReviews/AddReviews.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
-const productId = 40348;
+const productId = 40346;
 // og: 40346
 const FlexRow = styled.section`
   display: flex;
@@ -36,6 +36,32 @@ const getMetadata = async () => {
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
   const [metadata, setMetadata] = useState();
+  const [ratingFilter, setRatingFilter] = useState({
+    5: false,
+    4: false,
+    3: false,
+    2: false,
+    1: false,
+  });
+
+  const handleRatingFilterClick = (star, reset = false) => {
+    if (reset) {
+      setRatingFilter({
+        5: false,
+        4: false,
+        3: false,
+        2: false,
+        1: false,
+      });
+      return;
+    }
+    const nextRatingFilter = {
+      ...ratingFilter,
+      [star]: !ratingFilter[star],
+    };
+    console.log(nextRatingFilter);
+    setRatingFilter(nextRatingFilter);
+  };
 
   useEffect(() => {
     getMetadata()
@@ -87,9 +113,16 @@ function Reviews() {
   return (
     <>
       <FlexRow>
-        <RatingBreakdown metadata={metadata} />
+        <RatingBreakdown
+          metadata={metadata}
+          ratingFilter={ratingFilter}
+          handleRatingFilterClick={handleRatingFilterClick}
+        />
         <ReviewListContainer>
-          <ReviewsList productId={productId} />
+          <ReviewsList
+            productId={productId}
+            ratingFilter={ratingFilter}
+          />
         </ReviewListContainer>
       </FlexRow>
       <div>
