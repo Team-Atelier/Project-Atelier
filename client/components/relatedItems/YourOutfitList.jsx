@@ -7,17 +7,19 @@ import AddToOutfitCard from './AddToOutfitCard.jsx';
 import ProductCard from './ProductCard.jsx';
 
 export default function YourOutfitList({
-  thisProductID, addToOutfit, storedOutfit, outfitInfo,
+  thisProductID, addToOutfit, storedOutfit, outfitInfo, removeFromOutfit,
 }) {
+  const outfitList = true;
+
   return (
     <>
       <h2>
         Build an ensemble
       </h2>
-      <ItemCarousel>
+      <ItemCarousel outfitList={outfitList}>
         <AddToOutfitCard addToOutfit={addToOutfit} thisProductID={thisProductID} />
         {storedOutfit
-          ? outfitInfo.map((product) => <ProductCard category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} />) : null}
+          ? outfitInfo.map((product) => <ProductCard category={product.category} name={product.name} key={product.id} id={product.id} removeFromOutfit={removeFromOutfit} />) : null}
       </ItemCarousel>
     </>
   );
