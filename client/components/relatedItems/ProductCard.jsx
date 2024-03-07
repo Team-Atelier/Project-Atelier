@@ -26,11 +26,15 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-export default function ProductCard({ category, name, price, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit }) {
+export default function ProductCard({ category, name, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
+  const [originalPrice, setOriginalPrice] = useState('');
+  const [salePrice, setSalePrice] = useState('');
+  console.log('salePrice', salePrice);
 
+  console.log('salePrice', salePrice);
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
     if (id !== undefined) {
@@ -39,7 +43,10 @@ export default function ProductCard({ category, name, price, id, relatedProduct,
       })
         .then((results) => {
           const styles = results.data.results;
-          setProductPhoto(styles[0].photos[0].url);
+          const defaultStyle = styles.filter((product) => product['default?'] === true)[0] || styles[0];
+          setProductPhoto(defaultStyle.photos[0].url);
+          setSalePrice(defaultStyle.sale_price);
+          setOriginalPrice(defaultStyle.original_price);
         })
         .catch((err) => console.log(err));
     }
@@ -54,10 +61,23 @@ export default function ProductCard({ category, name, price, id, relatedProduct,
         src={productPhoto}
         alt=""
       />
-      <p>
-        $
-        {price}
-      </p>
+      {salePrice ? (
+        <>
+          <p style={{ color: 'red' }}>
+            $
+            {salePrice}
+          </p>
+          <s>
+            $
+            {originalPrice}
+          </s>
+        </>
+      ) : (
+        <p>
+          $
+          {originalPrice}
+        </p>
+      )}
       <p>Star Rating: </p>
     </Card>
   );
