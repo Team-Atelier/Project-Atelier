@@ -5,7 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ThumbnailOverlay from './ThumbnailOverlay.jsx';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const InfoSectionContainer = styled.div`
   width: 40%;
@@ -124,8 +124,8 @@ function InfoSection({ productId, onStyleSelect }) {
   const [salePrice, setSalePrice] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const [sizeDropdownOpen, setSizeDropdownOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const sizeDropdownRef = useRef(null);
 
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
@@ -197,7 +197,6 @@ function InfoSection({ productId, onStyleSelect }) {
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
     setSelectedQuantity(1);
-    setSizeDropdownOpen(false);
     setErrorMessage('');
     if (quantityOptions.length === 0) {
       setSelectedSize('OUT OF STOCK');
@@ -212,10 +211,11 @@ function InfoSection({ productId, onStyleSelect }) {
     if (selectedSize === '') {
       // open dropdown
       setErrorMessage('Please select size');
-      setSizeDropdownOpen(true);
-      return;
+      sizeDropdownRef.current.focus();
+    } else {
+      console.log(`Adding to cart Size: ${selectedSize} Quantity: ${selectedQuantity}`);
+      setSelectedSize('');
     }
-    setSelectedSize('');
   };
 
   return (
@@ -276,10 +276,9 @@ function InfoSection({ productId, onStyleSelect }) {
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
           <Select
+            ref={sizeDropdownRef}
             value={selectedSize || ''}
             onChange={(e) => handleSizeSelect(e.target.value)}
-            onFocus={() => setErrorMessage('')}
-            open={sizeDropdownOpen}
           >
             <option value="">Select Size:</option>
             {sizeOptions.length > 0 ? (
