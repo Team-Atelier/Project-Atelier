@@ -29,7 +29,7 @@ export default function RelatedItems() {
       setOutfitInfo(results.map((product) => product.data));
     }
     if (typeOfList === 'thisProduct') {
-      setThisProduct(results.map((product => product.data)));
+      setThisProduct(results.map((product) => product.data));
     }
   };
 
