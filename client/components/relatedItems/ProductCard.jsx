@@ -26,7 +26,7 @@ const ProductImage = styled.img`
 `;
 
 // eslint-disable-next-line object-curly-newline
-export default function ProductCard({ category, name, price, id, relatedProduct, handleModalOpen, comparisonProduct }) {
+export default function ProductCard({ category, name, price, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
@@ -47,7 +47,7 @@ export default function ProductCard({ category, name, price, id, relatedProduct,
 
   return (
     <Card>
-      {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton><TfiClose /></ActionButton> }
+      {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
       <p>{category}</p>
       <h3>{name}</h3>
       <ProductImage

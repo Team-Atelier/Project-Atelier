@@ -49,14 +49,22 @@ export default function RelatedItems() {
       .catch((err) => console.log(err));
   };
 
-  const addToOutfit = async (ID) => {
-    const outfits = await JSON.parse(localStorage.getItem('outfit'));
+  // ADDING AND REMOVING FROM OUTFITS
+  const outfits = JSON.parse(localStorage.getItem('outfit'));
+
+  const addToOutfit = (ID) => {
     if (!outfits.includes(ID)) {
       localStorage.setItem('outfit', JSON.stringify(outfits.concat(ID)));
       setStoredOutfit(outfits.concat(ID));
     }
   };
+  const removeFromOutfit = (ID) => {
+    const productRemoved = outfits.filter((outfitIDs) => outfitIDs !== ID);
+    localStorage.setItem('outfit', JSON.stringify(productRemoved));
+    setStoredOutfit(productRemoved);
+  };
 
+  // USE EFFECTS
   useEffect(() => {
     getCurrentProduct();
     getProductInfo([productID], 'thisProduct');
@@ -79,7 +87,7 @@ export default function RelatedItems() {
         <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} outfitInfo={outfitInfo} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} />
       </div>
     </div>
   );
