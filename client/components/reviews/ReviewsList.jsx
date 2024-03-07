@@ -86,10 +86,8 @@ function ReviewsList({ productId, ratingFilter }) {
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
   const [currentSort, setCurrentSort] = useState('relevant');
-
   // Increases as "show more reviews clicked"
   const [visibleReviews, setVisibleReviews] = useState(2);
-
   const [modalImg, setModalImg] = useState();
 
   const getNumberOfReviews = async () => {

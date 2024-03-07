@@ -3,8 +3,26 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import styled from 'styled-components';
 import ExperienceTable from './ExperienceTable.jsx';
 import AddReviewStarRating from './AddReviewStarRating.jsx';
+
+const FlexRow = styled.div`
+  word-wrap: break-word;
+  display: flex;
+  justify-content: space-between;
+  background: white;
+`;
+const ImageRow = styled(FlexRow)`
+justify-content: left;
+`;
+
+const Image = styled.img`
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+  padding: 5px
+`;
 
 function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
   return (
@@ -97,7 +115,9 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
             reset
           </button>
           )}
-          {newReviewData.images && newReviewData.images.map((image) => <img src={image} alt="user content" />)}
+          <ImageRow>
+            {newReviewData.images && newReviewData.images.map((image) => <Image src={image} alt="user content" />)}
+          </ImageRow>
         </label>
       </div>
     </>

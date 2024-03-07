@@ -1,10 +1,9 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
-import ReviewsList from './ReviewsList.jsx';
 import PartiallyFilledBar from './PartiallyFilledBar.jsx';
 import StarRating from './StarRating.jsx';
 import CharacteristicRating from './CharacteristicRating.jsx';
@@ -84,14 +83,14 @@ function RatingRowElement({
   return (
     <RatingRow
       id={parentID}
-      onClick={(e) => {
+      onClick={() => {
         handleRatingFilterClick(star);
         if (!ratingFilter[star]) { document.getElementById(parentID).style.background = selectedColor; } else { document.getElementById(parentID).style.background = highlightColor; }
       }}
-      onMouseEnter={(e) => {
+      onMouseEnter={() => {
         if (!ratingFilter[star]) { document.getElementById(parentID).style.background = highlightColor; }
       }}
-      onMouseLeave={(e) => {
+      onMouseLeave={() => {
         !ratingFilter[star]
           ? document.getElementById(parentID).style.background = 'transparent'
           : document.getElementById(parentID).style.background = selectedColor;
