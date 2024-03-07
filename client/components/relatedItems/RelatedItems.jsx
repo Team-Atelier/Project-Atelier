@@ -10,23 +10,26 @@ export default function RelatedItems() {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
-  const productID = 40348;
+  const productID = 41045;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
+  const [thisProduct, setThisProduct] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
 
-  const getProductInfo = async (ProductIDs, list) => {
+  const getProductInfo = async (ProductIDs, typeOfList) => {
     const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
     })));
-    const typeOfList = list;
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
     }
     if (typeOfList === 'yourOutfit') {
       setOutfitInfo(results.map((product) => product.data));
+    }
+    if (typeOfList === 'thisProduct') {
+      setThisProduct(results.map((product) => product.data));
     }
   };
 
@@ -46,16 +49,25 @@ export default function RelatedItems() {
       .catch((err) => console.log(err));
   };
 
-  const addToOutfit = async (ID) => {
-    const outfits = await JSON.parse(localStorage.getItem('outfit'));
+  // ADDING AND REMOVING FROM OUTFITS
+  const outfits = JSON.parse(localStorage.getItem('outfit'));
+
+  const addToOutfit = (ID) => {
     if (!outfits.includes(ID)) {
       localStorage.setItem('outfit', JSON.stringify(outfits.concat(ID)));
       setStoredOutfit(outfits.concat(ID));
     }
   };
+  const removeFromOutfit = (ID) => {
+    const productRemoved = outfits.filter((outfitIDs) => outfitIDs !== ID);
+    localStorage.setItem('outfit', JSON.stringify(productRemoved));
+    setStoredOutfit(productRemoved);
+  };
 
+  // USE EFFECTS
   useEffect(() => {
     getCurrentProduct();
+    getProductInfo([productID], 'thisProduct');
   }, []);
 
   useEffect(() => {
@@ -72,10 +84,10 @@ export default function RelatedItems() {
   return (
     <div>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} outfitInfo={outfitInfo} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} />
       </div>
     </div>
   );
