@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FaCheck } from 'react-icons/fa';
 
 const { useState, useEffect } = React;
 
@@ -34,12 +36,18 @@ const Separator = styled.div`
 `;
 
 const HighlightList = styled.ul`
-  list-style-type: disc;
+  list-style-type: none;
   padding-left: 20px;
 `;
 
 const HighlightItem = styled.li`
   font-size: 16px;
+  display: flex;
+  align-items: center;
+`;
+
+const DotIcon = styled(FaCheck)`
+  margin-right; 20px;
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -80,6 +88,7 @@ function Description({ productId }) {
         <HighlightList>
           {productFeatures.map((feature) => (
             <HighlightItem key={productFeatures.indexOf(feature)}>
+              <DotIcon />
               {feature.feature}
               :
               {' '}
