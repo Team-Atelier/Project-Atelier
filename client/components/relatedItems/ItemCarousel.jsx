@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -50,10 +51,11 @@ const RightArrow = styled(Arrow)`
 export default function ItemCarousel(props) {
   const { children } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [length, setLength] = useState(children.length);
+  const [length, setLength] = useState(0);
 
   useEffect(() => {
-    setLength(children.length);
+    props.outfitList ? setLength(children[1].length + 1)
+      : setLength(children.length);
   }, [children]);
 
   const next = () => {
@@ -81,7 +83,7 @@ export default function ItemCarousel(props) {
           </CarouselContent>
         </CarouselContentWrapper>
         {
-          currentIndex < (length - 1)
+          currentIndex < (length - 3)
           && <RightArrow onClick={next}>&gt;</RightArrow>
         }
       </CarouselWrapper>

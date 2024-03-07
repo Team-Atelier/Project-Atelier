@@ -10,7 +10,7 @@ export default function RelatedItems() {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
-  const productID = 41044;
+  const productID = 41045;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
@@ -24,7 +24,6 @@ export default function RelatedItems() {
     })));
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
-      console.log(results.map((product) => product.data));
     }
     if (typeOfList === 'yourOutfit') {
       setOutfitInfo(results.map((product) => product.data));

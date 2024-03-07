@@ -32,9 +32,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
-  console.log('salePrice', salePrice);
 
-  console.log('salePrice', salePrice);
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
     if (id !== undefined) {
