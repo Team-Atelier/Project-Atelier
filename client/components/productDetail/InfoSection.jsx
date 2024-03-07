@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FaFacebookSquare, FaPinterestSquare } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 import ThumbnailOverlay from './ThumbnailOverlay.jsx';
 
 const { useState, useEffect, useRef } = React;
@@ -62,7 +65,7 @@ const DropdownContainer = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-bottom: 10px;
-  justify-content: space-between;
+  width: 100%;
 `;
 
 const SelectSizeContent = styled.div`
@@ -70,9 +73,8 @@ const SelectSizeContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  margin-left: 10px;
-  width: 200px;
-  float: left;
+  width: 175px;
+  margin-right: 25px;
 `;
 
 const SelectQuantityContent = styled.div`
@@ -80,15 +82,19 @@ const SelectQuantityContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  margin-left: 10px;
-  width: 45%;
-  float: right;
+  width: 175px;
 `;
 
 const Select = styled.select`
-  width: 200px;
+  width: 175px;
+  cursor: pointer;
   font-size: 16px;
   padding: 8px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 `;
 
 const CartContainer = styled.div`
@@ -96,22 +102,105 @@ const CartContainer = styled.div`
   display: flex;
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   align-items: center;
-  margin-top: 30px;
   margin-bottom: 10px;
   justify-content: space-between;
-  width: 200px;
+  width: 100%;
 `;
 
 const AddButton = styled.button`
   position: relative;
-  width: 200px;
+  cursor: pointer;
+  width: 100%;
   font-size: 16px;
   padding: 8px;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: blue;
+  }
 `;
 
 const ErrorMessage = styled.div`
   color: red;
   margin-bottom: 5px;
+`;
+
+const SocialMedia = styled.div`
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const FacebookIcon = styled(FaFacebookSquare)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const FacebookButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
+  background-color: #316ff6;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #5A7FC9;
+  }
+`;
+
+const TwitterIcon = styled(FaSquareXTwitter)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const TwitterButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
+  background-color: #14171A;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #605857;
+  }
+`;
+
+const PinterestIcon = styled(FaPinterestSquare)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const PinterestButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  color: white;
+  background-color: #E60023;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #FF3347;
+  }
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -312,6 +401,21 @@ function InfoSection({ productId, onStyleSelect }) {
           </AddButton>
         )}
       </CartContainer>
+
+      <SocialMedia>
+        <FacebookButton type="button" aria-label="Facebook Share">
+          <FacebookIcon />
+          Facebook
+        </FacebookButton>
+        <TwitterButton type="button" aria-label="Twitter Share">
+          <TwitterIcon />
+          Twitter
+        </TwitterButton>
+        <PinterestButton type="button" aria-label="Pinterest Share">
+          <PinterestIcon />
+          Pinterest
+        </PinterestButton>
+      </SocialMedia>
 
     </InfoSectionContainer>
   );
