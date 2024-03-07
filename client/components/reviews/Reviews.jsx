@@ -36,6 +36,22 @@ const getMetadata = async () => {
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
   const [metadata, setMetadata] = useState();
+  const [ratingFilter, setRatingFilter] = useState({
+    5: false,
+    4: false,
+    3: false,
+    2: false,
+    1: false,
+  });
+
+  const handleRatingFilterClick = (star) => {
+    const nextRatingFilter = {
+      ...ratingFilter,
+      [star]: !ratingFilter[star],
+    };
+    console.log(nextRatingFilter);
+    setRatingFilter(nextRatingFilter);
+  };
 
   useEffect(() => {
     getMetadata()
@@ -87,9 +103,15 @@ function Reviews() {
   return (
     <>
       <FlexRow>
-        <RatingBreakdown metadata={metadata} />
+        <RatingBreakdown
+          metadata={metadata}
+          handleRatingFilterClick={handleRatingFilterClick}
+        />
         <ReviewListContainer>
-          <ReviewsList productId={productId} />
+          <ReviewsList
+            productId={productId}
+            ratingFilter={ratingFilter}
+          />
         </ReviewListContainer>
       </FlexRow>
       <div>

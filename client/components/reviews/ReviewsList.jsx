@@ -81,11 +81,13 @@ function ImageModal({ src }) {
   );
 }
 
-function ReviewsList({ productId }) {
+function ReviewsList({ productId, ratingFilter }) {
   const [relevantReviews, setRelevantReviews] = useState([]);
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
   const [currentSort, setCurrentSort] = useState('relevant');
+
+  // Increases as "show more reviews clicked"
   const [visibleReviews, setVisibleReviews] = useState(2);
 
   const [modalImg, setModalImg] = useState();
@@ -149,19 +151,41 @@ function ReviewsList({ productId }) {
     modal.style.display = 'block';
     setModalImg(e.target.src);
   };
+  // ratingFilter
 
-  const FormatReviews = ({ reviewsArray }) => (reviewsArray
-    .toSpliced(visibleReviews, relevantReviews.length)
-    .map((item) => (
-      <ReviewTile
-        key={item.review_id}
-        review={item}
-        handleModalImgChange={handleModalImgChange}
-        handleAPIClick={handleAPIClick}
-      />
-    ))
-  );
-
+  /*
+  const FormatReviews = ({ reviewsArray }) => {
+    const allDeselected = Object.values(ratingFilter).every((value)=>(value === false))
+    return (reviewsArray
+      .toSpliced(visibleReviews, relevantReviews.length)
+      .map((item) => (
+        <ReviewTile
+          key={item.review_id}
+          review={item}
+          handleModalImgChange={handleModalImgChange}
+          handleAPIClick={handleAPIClick}
+        />
+      ));
+    )
+  };
+*/
+  const FormatReviews = ({ reviewsArray }) => {
+    const allDeselected = Object.values(ratingFilter).every((value) => (value === false));
+    return (reviewsArray.reduce((filteredList, review) => {
+      if (ratingFilter?.[review.rating] || allDeselected) {
+        const nextReview = (
+          <ReviewTile
+            key={review.review_id}
+            review={review}
+            handleModalImgChange={handleModalImgChange}
+            handleAPIClick={handleAPIClick}
+          />
+        );
+        return [...filteredList, nextReview];
+      }
+      return [...filteredList];
+    }, []));
+  };
   const setSort = (e) => {
     setVisibleReviews(2);
     const method = e.target.value;

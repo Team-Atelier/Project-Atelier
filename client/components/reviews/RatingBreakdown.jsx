@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
@@ -73,13 +74,45 @@ const computeAverage = (ratings) => {
   return result;
 };
 
-function RatingBreakdown({ metadata }) {
+function RatingRowElement({
+  parentID, star, rate, handleRatingFilterClick,
+}) {
+  const [selected, setSelected] = useState(false);
+  const highlightColor = 'lightgreen';
+  const selectedColor = 'green';
+  return (
+    <RatingRow
+      id={parentID}
+      onClick={(e) => {
+        setSelected(!selected);
+        handleRatingFilterClick(star);
+        if (!selected) { document.getElementById(parentID).style.background = selectedColor; } else { document.getElementById(parentID).style.background = highlightColor; }
+      }}
+      onMouseEnter={(e) => {
+        if (!selected) { document.getElementById(parentID).style.background = highlightColor; }
+      }}
+      onMouseLeave={(e) => {
+        !selected
+          ? e.target.style.background = 'transparent'
+          : document.getElementById(parentID).style.background = selectedColor;
+      }}
+    >
+      {star}
+      {' '}
+      star
+      <PartiallyFilledBar percentage={rate?.[star] * 100 || 100} />
+    </RatingRow>
+  );
+}
+
+function RatingBreakdown({ metadata, handleRatingFilterClick, children }) {
   const rec = Number(metadata?.recommended?.true);
   const noRec = Number(metadata?.recommended?.false);
   const percentRecommend = 100 * (rec / (rec + noRec));
   const rate = metadata?.ratings && scaleRatings(metadata.ratings);
   let average = metadata?.ratings && computeAverage(rate);
   average = Math.round(average * 10) / 10;
+
   return (
 
     <RatingCard>
@@ -94,26 +127,13 @@ function RatingBreakdown({ metadata }) {
         {Math.round(percentRecommend)}
         % of reviewers recommend this product
       </div>
-      <RatingRow>
-        5 stars
-        <PartiallyFilledBar percentage={rate?.[5] * 100 || 100} />
-      </RatingRow>
-      <RatingRow>
-        4 stars
-        <PartiallyFilledBar percentage={rate?.[4] * 100 || 100} />
-      </RatingRow>
-      <RatingRow>
-        3 stars
-        <PartiallyFilledBar percentage={rate?.[3] * 100 || 100} />
-      </RatingRow>
-      <RatingRow>
-        2 stars
-        <PartiallyFilledBar percentage={rate?.[2] * 100 || 100} />
-      </RatingRow>
-      <RatingRow>
-        1 stars
-        <PartiallyFilledBar percentage={rate?.[1] * 100 || 100} />
-      </RatingRow>
+
+      <RatingRowElement parentID="five-star" star={5} rate={rate} handleRatingFilterClick={handleRatingFilterClick} />
+      <RatingRowElement parentID="four-star" star={4} rate={rate} handleRatingFilterClick={handleRatingFilterClick} />
+      <RatingRowElement parentID="three-star" star={3} rate={rate} handleRatingFilterClick={handleRatingFilterClick} />
+      <RatingRowElement parentID="two-star" star={2} rate={rate} handleRatingFilterClick={handleRatingFilterClick} />
+      <RatingRowElement parentID="one-star" star={1} rate={rate} handleRatingFilterClick={handleRatingFilterClick} />
+
       {metadata?.characteristics && Object.keys(metadata?.characteristics).map((key) => (
         <CharacteristicRating
           key={metadata.characteristics[key].id}
