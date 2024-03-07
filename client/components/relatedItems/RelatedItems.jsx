@@ -10,7 +10,7 @@ export default function RelatedItems() {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
-  const productID = 41045;
+  const [productID, setProductID] = useState(40346);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
@@ -64,11 +64,17 @@ export default function RelatedItems() {
     setStoredOutfit(productRemoved);
   };
 
+  // HANDLE PRODUCT CHANGE
+  const handleProductChange = (newID) => {
+    setProductID(newID);
+    console.log(newID);
+  };
+
   // USE EFFECTS
   useEffect(() => {
     getCurrentProduct();
     getProductInfo([productID], 'thisProduct');
-  }, []);
+  }, [productID]);
 
   useEffect(() => {
     if (localStorage.getItem('outfit') === null) {
@@ -84,10 +90,10 @@ export default function RelatedItems() {
   return (
     <div>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} />
       </div>
     </div>
   );
