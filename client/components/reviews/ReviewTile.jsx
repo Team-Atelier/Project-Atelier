@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
+import axios from 'axios';
 import StarRating from './StarRating.jsx';
 
 const Summary = styled.h2`
@@ -64,7 +66,8 @@ const Right = styled.section`
 display: inline-block;
 `;
 
-function ReviewTile({ review , handleModalImgChange}) {
+function ReviewTile({ review, handleModalImgChange, handleAPIClick }) {
+  const [showFullReview, setShowFullReview] = useState(false);
   const date = new Date(review.date);
   return (
     <article className="reviewTile">
@@ -82,7 +85,25 @@ function ReviewTile({ review , handleModalImgChange}) {
         </FlexRow>
         <FlexRow><Summary>{review.summary}</Summary></FlexRow>
         <br />
-        <ReviewBody>{review.body}</ReviewBody>
+        <ReviewBody>
+          {review.body.length <= 250 && !showFullReview
+            ? `${review.body.substring(0, 250)}`
+            : (!showFullReview && `${review.body.substring(0, 250)}...`)}
+          {showFullReview && review.body}
+          {review.body.length > 250 && (
+          <button
+            type="button"
+            onClick={(e) => {
+              setShowFullReview(!showFullReview);
+              if (showFullReview) { e.target.innerText = 'Show full review'; } else { e.target.innerText = 'Show less'; }
+            }}
+          >
+            Show full review
+          </button>
+
+          )}
+
+        </ReviewBody>
         {review.recommend && (
         <>
           <br />
@@ -121,15 +142,28 @@ function ReviewTile({ review , handleModalImgChange}) {
           <StaticRow>
             <div>Was this review helpful?  </div>
             {' '}
-            <div>
-              <u onClick={() => { alert('Placeholder'); }}>Yes </u>
-              (
-              {review.helpfulness}
-              )
-            </div>
+            <button
+              type="button"
+              value="helpful"
+              onClick={(e) => { handleAPIClick(e, review.review_id); }}
+            >
+              Yes
+            </button>
+            (
+            {review.helpfulness}
+            )
+
           </StaticRow>
           <Right>
-            <div><u onClick={() => { alert('Placeholder'); }}> Report </u></div>
+            <div>
+              <button
+                type="button"
+                value="report"
+                onClick={(e) => { handleAPIClick(e, review.review_id); }}
+              >
+                Report
+              </button>
+            </div>
           </Right>
         </FlexRow>
       </MainBox>

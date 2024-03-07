@@ -90,11 +90,6 @@ function ReviewsList({ productId }) {
 
   const [modalImg, setModalImg] = useState();
 
-  const handleModalImgChange = (e) => {
-    const modal = document.getElementById('fullReviewImage');
-    modal.style.display = 'block';
-    setModalImg(e.target.src);
-  };
   const getNumberOfReviews = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
       headers: { Authorization: token },
@@ -116,7 +111,7 @@ function ReviewsList({ productId }) {
     },
   });
 
-  useEffect(() => {
+  const refresh = async () => {
     getNumberOfReviews()
       .then((numReviews) => Promise.all([getReviews(numReviews, 'relevant'), getReviews(numReviews, 'helpful'), getReviews(numReviews, 'newest')]))
       .then((data) => {
@@ -125,7 +120,47 @@ function ReviewsList({ productId }) {
         setNewestReviews(newest.data.results);
         setHelpfulReviews(helpful.data.results);
       });
+  };
+
+  useEffect(() => {
+    refresh();
   }, []);
+
+  const handleAPIClick = async (e, reviewID) => {
+    if (e.target.value !== 'helpful' && e.target.value !== 'report') {
+      throw new Error('Unknown API call');
+    }
+
+    let response;
+    try {
+      response = await axios.put(`${url}reviews/${reviewID}/${e.target.value}`, {}, {
+        headers: { Authorization: token },
+      });
+      await refresh();
+    } catch (err) {
+      return err;
+    }
+
+    return response;
+  };
+
+  const handleModalImgChange = (e) => {
+    const modal = document.getElementById('fullReviewImage');
+    modal.style.display = 'block';
+    setModalImg(e.target.src);
+  };
+
+  const FormatReviews = ({ reviewsArray }) => (reviewsArray
+    .toSpliced(visibleReviews, relevantReviews.length)
+    .map((item) => (
+      <ReviewTile
+        key={item.review_id}
+        review={item}
+        handleModalImgChange={handleModalImgChange}
+        handleAPIClick={handleAPIClick}
+      />
+    ))
+  );
 
   const setSort = (e) => {
     setVisibleReviews(2);
@@ -148,20 +183,14 @@ function ReviewsList({ productId }) {
         </select>
       </div>
       <ReviewBox>
-        {currentSort === 'relevant' && relevantReviews
-          .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange} />)}
-
-        {currentSort === 'helpful' && helpfulReviews
-          .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange} />)}
-
-        {currentSort === 'newest' && newestReviews
-          .toSpliced(visibleReviews, relevantReviews.length)
-          .map((item) => <ReviewTile key={item.review_id} review={item} handleModalImgChange={handleModalImgChange} />)}
+        {currentSort === 'relevant' && <FormatReviews reviewsArray={relevantReviews} />}
+        {currentSort === 'helpful' && <FormatReviews reviewsArray={helpfulReviews} />}
+        {currentSort === 'newest' && <FormatReviews reviewsArray={newestReviews} />}
       </ReviewBox>
-      <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
-
+      <div>
+        <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
+        <button type="button" onClick={(e) => { alert('placeholder'); }}>Add review</button>
+      </div>
     </>
   );
 }
