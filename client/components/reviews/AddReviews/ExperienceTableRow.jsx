@@ -2,19 +2,19 @@
 import React from 'react';
 
 function ExperienceTableRow({
-  name, descriptions, newReviewData, handleNewReviewChange,
+  name, descriptions, newReviewData, handleNewReviewChange, id,
 }) {
-  const change = (e) => {
-    handleNewReviewChange(e);
+  const change = (e, id) => {
+    handleNewReviewChange(e, null, null, id);
   };
   return (
     <tr>
       <td>{name}</td>
       { descriptions.map((des, index) => (
-        <td key={index}>
+        <td key={id}>
           <label htmlFor={name.toLowerCase()}>
             {des}
-            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e); }} checked={newReviewData.name} />
+            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e, id); }} checked={newReviewData.name} />
           </label>
         </td>
       ))}

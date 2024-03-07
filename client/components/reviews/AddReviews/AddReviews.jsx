@@ -24,7 +24,7 @@ const Image = styled.img`
   padding: 5px
 `;
 
-function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
+function AddReviews({ newReviewData, metadata, handleNewReviewChange, resetImages }) {
   return (
     <>
       <div>
@@ -89,6 +89,7 @@ function AddReviews({ newReviewData, handleNewReviewChange, resetImages }) {
         <ExperienceTable
           newReviewData={newReviewData}
           handleNewReviewChange={handleNewReviewChange}
+          metadata={metadata}
         />
       </div>
       <br />

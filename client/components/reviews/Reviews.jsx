@@ -70,8 +70,9 @@ function Reviews() {
       });
   }, []);
 
-  const handleNewReviewChange = (e, name, value) => {
-    if (e && e.target.name === 'images') {
+  const handleNewReviewChange = (e, name, value, id) => {
+    debugger;
+    if (e && e.target?.name === 'images') {
       const currentFiles = newReviewData[e.target.name] || [];
       const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
       const nextReviewData = {
@@ -81,8 +82,19 @@ function Reviews() {
       console.log(nextReviewData);
       setNewReviewData(nextReviewData);
       console.log('image');
+    } else if (e && e.target?.className === 'charSelect') {
+      const nextCharacteristic = {
+        ...newReviewData.characteristics,
+        [id]: e.target.value,
+        [e.target.name]: e.target.value,
+      };
+      const nextReviewData = {
+        ...newReviewData,
+        characteristics: nextCharacteristic,
+      };
+      console.log(nextReviewData);
+      setNewReviewData(nextReviewData);
     } else if (e === null) {
-      console.log('goes here');
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
@@ -128,6 +140,7 @@ function Reviews() {
       <div>
         <AddReviews
           newReviewData={newReviewData}
+          metadata={metadata}
           handleNewReviewChange={handleNewReviewChange}
           resetImages={resetImages}
         />

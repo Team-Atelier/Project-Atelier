@@ -22,6 +22,7 @@ const Star = ({
   solid, rating, handleClick, handleHover, newReviewData,
 }) => {
   const clicked = (review) => {
+    console.log('review', review); console.log('rate', rating);
     handleClick(null, review, rating);
   };
   const handleMouseEnter = () => {
