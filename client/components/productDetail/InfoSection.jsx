@@ -65,7 +65,7 @@ const DropdownContainer = styled.div`
   align-items: center;
   margin-top: 30px;
   margin-bottom: 10px;
-  justify-content: space-between;
+  width: 100%;
 `;
 
 const SelectSizeContent = styled.div`
@@ -73,8 +73,8 @@ const SelectSizeContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  width: 200px;
-  float: left;
+  width: 175px;
+  margin-right: 25px;
 `;
 
 const SelectQuantityContent = styled.div`
@@ -82,15 +82,19 @@ const SelectQuantityContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  width: 45%;
-  float: right;
+  width: 175px;
 `;
 
 const Select = styled.select`
-  width: 200px;
+  width: 175px;
   cursor: pointer;
   font-size: 16px;
   padding: 8px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: black;
+    color: white;
+  }
 `;
 
 const CartContainer = styled.div`
@@ -100,15 +104,22 @@ const CartContainer = styled.div`
   align-items: center;
   margin-bottom: 10px;
   justify-content: space-between;
-  width: 200px;
+  width: 100%;
 `;
 
 const AddButton = styled.button`
   position: relative;
   cursor: pointer;
-  width: 200px;
+  width: 100%;
   font-size: 16px;
   padding: 8px;
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: blue;
+  }
 `;
 
 const ErrorMessage = styled.div`
@@ -120,6 +131,8 @@ const SocialMedia = styled.div`
   font-size: 24px;
   display: flex;
   align-items: center;
+  width: 100%;
+  justify-content: space-between;
 `;
 
 const FacebookIcon = styled(FaFacebookSquare)`
@@ -179,7 +192,6 @@ const PinterestButton = styled.button`
   align-items: center;
   border: none;
   font-size: 16px;
-  margin-right: 10px;
   color: white;
   background-color: #E60023;
   border-radius: 10px;
