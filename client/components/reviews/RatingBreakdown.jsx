@@ -80,20 +80,21 @@ function RatingRowElement({
   const [selected, setSelected] = useState(false);
   const highlightColor = 'lightgreen';
   const selectedColor = 'green';
+
   return (
     <RatingRow
       id={parentID}
-      onClick={() => {
+      onClick={(e) => {
         setSelected(!selected);
         handleRatingFilterClick(star);
         if (!selected) { document.getElementById(parentID).style.background = selectedColor; } else { document.getElementById(parentID).style.background = highlightColor; }
       }}
-      onMouseEnter={() => {
+      onMouseEnter={(e) => {
         if (!selected) { document.getElementById(parentID).style.background = highlightColor; }
       }}
-      onMouseLeave={() => {
+      onMouseLeave={(e) => {
         !selected
-          ? document.getElementById(parentID).target.style.background = 'transparent'
+          ? document.getElementById(parentID).style.background = 'transparent'
           : document.getElementById(parentID).style.background = selectedColor;
       }}
     >
