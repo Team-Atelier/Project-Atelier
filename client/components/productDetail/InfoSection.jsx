@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { FaFacebookSquare, FaPinterestSquare } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 import ThumbnailOverlay from './ThumbnailOverlay.jsx';
 
 const { useState, useEffect, useRef } = React;
@@ -70,7 +73,6 @@ const SelectSizeContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  margin-left: 10px;
   width: 200px;
   float: left;
 `;
@@ -80,13 +82,13 @@ const SelectQuantityContent = styled.div`
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
   margin-top: 0px;
-  margin-left: 10px;
   width: 45%;
   float: right;
 `;
 
 const Select = styled.select`
   width: 200px;
+  cursor: pointer;
   font-size: 16px;
   padding: 8px;
 `;
@@ -96,7 +98,6 @@ const CartContainer = styled.div`
   display: flex;
   box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   align-items: center;
-  margin-top: 30px;
   margin-bottom: 10px;
   justify-content: space-between;
   width: 200px;
@@ -104,6 +105,7 @@ const CartContainer = styled.div`
 
 const AddButton = styled.button`
   position: relative;
+  cursor: pointer;
   width: 200px;
   font-size: 16px;
   padding: 8px;
@@ -112,6 +114,81 @@ const AddButton = styled.button`
 const ErrorMessage = styled.div`
   color: red;
   margin-bottom: 5px;
+`;
+
+const SocialMedia = styled.div`
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+`;
+
+const FacebookIcon = styled(FaFacebookSquare)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const FacebookButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
+  background-color: #316ff6;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #5A7FC9;
+  }
+`;
+
+const TwitterIcon = styled(FaSquareXTwitter)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const TwitterButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
+  background-color: #14171A;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #605857;
+  }
+`;
+
+const PinterestIcon = styled(FaPinterestSquare)`
+  margin-right: 10px;
+  color: white;
+`;
+
+const PinterestButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  border: none;
+  font-size: 16px;
+  margin-right: 10px;
+  color: white;
+  background-color: #E60023;
+  border-radius: 10px;
+  padding: 5px 5px;
+  width: 110px;
+  transition: background-color 0.7s;
+  &:hover {
+    background-color: #FF3347;
+  }
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -312,6 +389,21 @@ function InfoSection({ productId, onStyleSelect }) {
           </AddButton>
         )}
       </CartContainer>
+
+      <SocialMedia>
+        <FacebookButton type="button" aria-label="Facebook Share">
+          <FacebookIcon />
+          Facebook
+        </FacebookButton>
+        <TwitterButton type="button" aria-label="Twitter Share">
+          <TwitterIcon />
+          Twitter
+        </TwitterButton>
+        <PinterestButton type="button" aria-label="Pinterest Share">
+          <PinterestIcon />
+          Pinterest
+        </PinterestButton>
+      </SocialMedia>
 
     </InfoSectionContainer>
   );
