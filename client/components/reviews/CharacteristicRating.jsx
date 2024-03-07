@@ -42,7 +42,7 @@ const Line = styled.div`
 
 function CharacteristicRating({ characteristic, rating }) {
   const descriptions = {
-    size: ['Too small', 'Perfect', 'A size too wide'],
+    size: ['Too small', 'Perfect', 'Too wide'],
     width: ['Too narrow', 'Perfect', 'Too wide'],
     comfort: ['Uncomfortable', 'Ok', 'Perfect'],
     quality: ['Poor', 'What I expected', 'Perfect'],
