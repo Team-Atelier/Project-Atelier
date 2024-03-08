@@ -23,9 +23,8 @@ width: 100%;
 height: 100%;
 z-index: 1;
 `;
-const StarPosition2 = styled.div`
+const MakeAbsolute = styled.div`
 position: absolute;
-
 `;
 
 const Container = styled.div`
@@ -55,11 +54,11 @@ const Star = ({ cropAmt }) => (
           <span className="fa fa-star-o" />
         </StarPosition>
 
-        <StarPosition2>
+        <MakeAbsolute>
           <StarPosition>
             <span className="fa fa-star filled" />
           </StarPosition>
-        </StarPosition2>
+        </MakeAbsolute>
 
       </Container>
     </StarStyle>
