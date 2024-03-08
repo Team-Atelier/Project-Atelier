@@ -9,10 +9,11 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
 import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
-const url = process.env.API_URL;
-const token = process.env.GITHUB_TOKEN;
-const productId = 40346;
+//const url = process.env.API_URL;
+//const token = process.env.GITHUB_TOKEN;
+//const productId = 40346;
 // og: 40346
+
 const FlexRow = styled.section`
   display: flex;
   justify-content: space-between;
@@ -24,6 +25,7 @@ const ReviewListContainer = styled.section`
   width: 60%
 `;
 
+/*
 const getMetadata = async () => {
   const data = await axios.get(`${url}reviews/meta`, {
     headers: { Authorization: token },
@@ -32,7 +34,7 @@ const getMetadata = async () => {
     },
   }).catch((err) => console.log(err));
   return data;
-};
+};*/
 
 const ReviewFormStyle = styled.div`
 background-color: white;
@@ -57,9 +59,9 @@ function ReviewModal({
   );
 }
 
-function Reviews() {
+function Reviews({metadata}) {
   const [newReviewData, setNewReviewData] = useState({});
-  const [metadata, setMetadata] = useState();
+ // const [metadata, setMetadata] = useState();
   const [ratingFilter, setRatingFilter] = useState({
     5: false,
     4: false,
@@ -86,14 +88,14 @@ function Reviews() {
     console.log(nextRatingFilter);
     setRatingFilter(nextRatingFilter);
   };
-
+/*
   useEffect(() => {
     getMetadata()
       .then((res) => {
         setMetadata(res.data);
       });
   }, []);
-
+*/
   const handleNewReviewChange = (e, name, value, id) => {
     if (e && e.target?.className === 'reviewimg') {
       const currentFiles = newReviewData.photos || [];
@@ -147,7 +149,8 @@ function Reviews() {
         />
         <ReviewListContainer>
           <ReviewsList
-            productId={productId}
+            metadata={metadata}
+            productId={metadata?.product_id}
             ratingFilter={ratingFilter}
           />
         </ReviewListContainer>
@@ -168,18 +171,6 @@ function Reviews() {
       >
         Add review
       </button>
-      {
-        /*
-      <div>
-        <AddReviews
-          newReviewData={newReviewData}
-          metadata={metadata}
-          handleNewReviewChange={handleNewReviewChange}
-          resetImages={resetImages}
-        />
-      </div>
-      */
-    }
     </>
   );
 }
