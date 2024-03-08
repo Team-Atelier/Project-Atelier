@@ -32,6 +32,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [ratings, setRatings] = useState({});
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -50,33 +52,44 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
     }
   }, [id]);
 
+  useEffect(() => {
+    axios.get(`${apiURL}reviews/meta?product_id=${id}`, {
+      headers: { Authorization: token },
+    })
+      .then((results) => {
+        setRatings(results.data.ratings);
+      });
+  }, [id]);
+
   return (
-    <Card onClick={() => handleProductChange(id)}>
+    <Card>
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
-      <p>{category}</p>
-      <h3>{name}</h3>
-      <ProductImage
-        src={productPhoto}
-        alt=""
-      />
-      {salePrice ? (
-        <>
-          <p style={{ color: 'red' }}>
-            $
-            {salePrice}
-          </p>
-          <s>
+      <div onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0}>
+        <p>{category}</p>
+        <h3>{name}</h3>
+        <ProductImage
+          src={productPhoto}
+          alt=""
+        />
+        {salePrice ? (
+          <>
+            <p style={{ color: 'red' }}>
+              $
+              {salePrice}
+            </p>
+            <s>
+              $
+              {originalPrice}
+            </s>
+          </>
+        ) : (
+          <p>
             $
             {originalPrice}
-          </s>
-        </>
-      ) : (
-        <p>
-          $
-          {originalPrice}
-        </p>
-      )}
-      <p>Star Rating: </p>
+          </p>
+        )}
+        <p>Star Rating: </p>
+      </div>
     </Card>
   );
 }
