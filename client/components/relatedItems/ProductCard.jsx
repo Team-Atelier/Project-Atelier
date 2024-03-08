@@ -32,6 +32,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
+  const [ratings, setRatings] = useState({})
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -48,6 +49,15 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
         })
         .catch((err) => console.log(err));
     }
+  }, [id]);
+
+  useEffect(() => {
+    axios.get(`${apiURL}reviews/meta?product_id=${id}`, {
+      headers: { Authorization: token },
+    })
+      .then((results) => {
+        setRatings(results.data.ratings);
+      });
   }, [id]);
 
   return (
