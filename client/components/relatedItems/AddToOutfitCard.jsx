@@ -12,6 +12,7 @@ const OutfitCard = styled.div`
   min-width: 33.33%;
   min-height: 100%;
   position: relative;
+  cursor: pointer;
 `;
 
 export default function AddToOutfitCard({ thisProductID, addToOutfit }) {

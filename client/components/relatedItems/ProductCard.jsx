@@ -13,11 +13,13 @@ const Card = styled.div`
   min-width: 33.33%;
   min-height: 100%;
   position: relative;
+  cursor: pointer;
 `;
 // To-do: Add a more description button name
 const ActionButton = styled.button`
   position: absolute;
   right: 0px;
+  cursor: pointer; 
 `;
 
 const ProductImage = styled.img`

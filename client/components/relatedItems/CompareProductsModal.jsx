@@ -13,6 +13,7 @@ const Modal = styled.div`
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4)
+  border: 1px solid #888;
 `;
 const ModalContent = styled.div`
   background-color: #fefefe;

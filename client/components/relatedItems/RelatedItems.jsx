@@ -5,6 +5,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
+import styled from 'styled-components';
+
+const RelatedItemsDiv = styled.div`
+  font-family: mate;
+`;
 
 export default function RelatedItems() {
   const apiURL = process.env.API_URL;
@@ -89,13 +94,13 @@ export default function RelatedItems() {
   }, [storedOutfit]);
 
   return (
-    <div>
+    <RelatedItemsDiv>
       <div className="relatedProductsList">
         <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} />
       </div>
       <div className="yourOutfitList">
         <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} />
       </div>
-    </div>
+    </RelatedItemsDiv>
   );
 }
