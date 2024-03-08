@@ -8,14 +8,17 @@ import styled from 'styled-components';
 const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
+  height: 62vh;
   display: flex;
   flex-direction: column;
 `;
+
 const CarouselWrapper = styled.div`
   display: flex;
-  width: 100%
+  width: 100%;
   position: relative;
 `;
+
 const CarouselContentWrapper = styled.div`
   overflow: hidden;
   width: 100%;
@@ -27,9 +30,9 @@ const CarouselContentWrapper = styled.div`
 const CarouselContent = styled.div`
   display: flex;
   transition: all 150ms linear;
-  -ms-overflow-style: none;
   scrollbar-width: none;
   width: 100%;
+  height: 100%
 `;
 const Arrow = styled.button`
   position: absolute;
@@ -79,12 +82,12 @@ export default function ItemCarousel(props) {
           && <LeftArrow onClick={prev}>&lt;</LeftArrow>
         }
         <CarouselContentWrapper>
-          <CarouselContent style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}>
+          <CarouselContent style={{ transform: `translateX(-${currentIndex * 20}%)` }}>
             {children}
           </CarouselContent>
         </CarouselContentWrapper>
         {
-          currentIndex < (length - 3)
+          currentIndex < (length - 5)
           && <RightArrow onClick={next}>&gt;</RightArrow>
         }
       </CarouselWrapper>

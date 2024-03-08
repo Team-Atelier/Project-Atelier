@@ -7,10 +7,10 @@ import { IconContext } from 'react-icons';
 import styled from 'styled-components';
 
 const OutfitCard = styled.div`
-  border: solid;
   text-align: center;
-  min-width: 33.33%;
+  min-width: 20%;
   min-height: 100%;
+  line-height: 100%;
   position: relative;
   cursor: pointer;
 `;

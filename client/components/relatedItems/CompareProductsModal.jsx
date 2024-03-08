@@ -4,13 +4,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Modal = styled.div`
-  display: block;
+  display: inline-block;
   position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 3;
+  left: 35%;
+  top: 35%;
   overflow: auto;
   background-color: rgba(0,0,0,0.4)
   border: 1px solid #888;
@@ -20,13 +18,45 @@ const ModalContent = styled.div`
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+`;
+const ModalHeader = styled.header`
+  font-weight: 1000;
+  letter-spacing:  -.008rem;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  font-align: left;
 `;
 const Close = styled.button`
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
+`;
+const Table = styled.table`
+  font-weight: 400;
+  letter-spacing: -.08px;
+  font-size: 14px;
+  line-height: 18px;
+  border: none;
+  border-collapse: collapse;
+  text-indent: initial;
+  border-spacing: 2px;
+  tr:nth-child(odd) {background-color: #f4f2ed;}
+  text-align: center;
+`;
+const Feature = styled.th`
+  min-width: 200px;
+  font-weight: 600px;
+  min-height: 48px;
+  padding: 0.8rem 1.6rem;
+  text-alight: center;
+  vertical-align: top;
+`;
+const Header = styled.thead`
+  font-weight: 800;
+  font-size: 20px;
+  padding: 0.8rem 1.6rem;
 `;
 
 export default function CompareProductsModal({ handleModalClose, thisProduct, comparisonProduct }) {
@@ -37,14 +67,15 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
     const productFeatureList = thisProduct.features;
     const compareFeatureList = comparisonProduct.features;
     for (let i = 0; i < productFeatureList.length; i += 1) {
-      if (productFeatureList[i].value === 'null') {
+      console.log('Here is the value:', productFeatureList[i].value);
+      if (productFeatureList[i].value === null) {
         combinedFeatures[productFeatureList[i].feature] = ['check', null];
       } else {
         combinedFeatures[productFeatureList[i].feature] = [productFeatureList[i].value, null];
       }
     }
     for (let j = 0; j < compareFeatureList.length; j += 1) {
-      if (combinedFeatures[compareFeatureList[j].feature] && combinedFeatures[compareFeatureList[j].value] === 'null') {
+      if (combinedFeatures[compareFeatureList[j].feature] && combinedFeatures[compareFeatureList[j].value] === null) {
         combinedFeatures[compareFeatureList[j].feature][1] = 'check';
       } else if (combinedFeatures[compareFeatureList[j].feature]) {
         combinedFeatures[compareFeatureList[j].feature][1] = compareFeatureList[j].value;
@@ -61,35 +92,33 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
   return (
     <Modal id="modal">
       <ModalContent>
-        <header>
+        <ModalHeader>
           <Close type="button" onClick={handleModalClose}>
             &times;
           </Close>
-          <h1>Compare</h1>
-        </header>
-        <table>
-          <thead>
-            <tr>
-              <th>{thisProduct.name}</th>
-              <th aria-label="empty" />
-              <th>{comparisonProduct.name}</th>
-            </tr>
-          </thead>
+          <span>Compare</span>
+        </ModalHeader>
+        <Table>
+          <Header>
+            <Feature>{thisProduct.name}</Feature>
+            <th aria-label="empty" />
+            <Feature>{comparisonProduct.name}</Feature>
+          </Header>
           <tbody>
             <tr>
               <td>{thisProduct.category}</td>
-              <td>Category</td>
+              <Feature>Category</Feature>
               <td>{comparisonProduct.category}</td>
             </tr>
             {features ? features.map((feature) => (
               <tr>
                 <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
-                <td>{feature[0]}</td>
+                <Feature>{feature[0]}</Feature>
                 <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
               </tr>
             )) : null }
           </tbody>
-        </table>
+        </Table>
       </ModalContent>
     </Modal>
   );
