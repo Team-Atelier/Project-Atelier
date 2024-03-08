@@ -63,7 +63,7 @@ function App() {
       });
   }, []);
 
-  const scrollToReviews = () => {
+  const scrollToReviews = ({}) => {
     const reviewsSection = document.getElementById('reviews-section');
     if (reviewsSection) {
       reviewsSection.scrollIntoView({ behavior: 'smooth' });
@@ -75,7 +75,6 @@ function App() {
 
       <div>
         <h1>Project Atelier</h1>
-        <button onClick={(() => { console.log(metadata); })}>Debug</button>
       </div>
       <ProductDetail scrollToReviews={scrollToReviews} />
       <RelatedItems />
