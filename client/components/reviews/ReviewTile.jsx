@@ -65,10 +65,11 @@ const Right = styled.section`
 display: inline-block;
 `;
 
-function ReviewTile({ review, handleModalImgChange, handleAPIClick, markedAsHelpful }) {
+function ReviewTile({
+  review, handleModalImgChange, handleAPIClick, markedAsHelpful,
+}) {
   const [showFullReview, setShowFullReview] = useState(false);
   const date = new Date(review.date);
-  console.log('MAH,', markedAsHelpful);
   return (
     <article className="reviewTile">
       <MainBox>
@@ -108,22 +109,23 @@ function ReviewTile({ review, handleModalImgChange, handleAPIClick, markedAsHelp
         <>
           <br />
           <FlexRow>✓ I recommend this product</FlexRow>
-          <ImageRow>
-            {review.photos.map((img) => (
-              <Image
-                key={img.id}
-                src={img.url}
-                onClick={(e) => {
-                  handleModalImgChange(e);
-                }}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-            ))}
-          </ImageRow>
+
         </>
         )}
+        <ImageRow>
+          {review.photos.map((img) => (
+            <Image
+              key={img.id}
+              src={img.url}
+              onClick={(e) => {
+                handleModalImgChange(e);
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
+          ))}
+        </ImageRow>
         <br />
         {review.response && (
         <>

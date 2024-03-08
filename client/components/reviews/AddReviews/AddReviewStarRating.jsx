@@ -22,7 +22,6 @@ const Star = ({
   solid, rating, handleClick, handleHover, newReviewData,
 }) => {
   const clicked = (review) => {
-    console.log('review', review); console.log('rate', rating);
     handleClick(null, review, rating);
   };
   const handleMouseEnter = () => {
@@ -35,7 +34,7 @@ const Star = ({
     // fill(value, start, end)
     let nextRating = [false, false, false, false, false];
     console.log(newReviewData);
-    nextRating = nextRating.fill(true, 0, newReviewData.reviewRating);
+    nextRating = nextRating.fill(true, 0, newReviewData.rating);
     handleHover(nextRating);
   };
   return (

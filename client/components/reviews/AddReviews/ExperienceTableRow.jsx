@@ -15,7 +15,7 @@ function ExperienceTableRow({
         <td key={index}>
           <label htmlFor={name.toLowerCase()}>
             {des}
-            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e, id); }} checked={newReviewData.name} />
+            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e, id); }} checked={newReviewData.characteristics?.[name]} />
           </label>
         </td>
       ))}
