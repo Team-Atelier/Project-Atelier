@@ -148,7 +148,8 @@ function ReviewTile({
               onClick={(e) => {
                 handleAPIClick(e, review.review_id)
                   .then((res) => {
-                    const helpfulAlreadyClicked = res?.[review.review_id];
+                    const helpfulAlreadyClicked = res;
+                    console.log(res);
                     e.target.disabled = helpfulAlreadyClicked;
                   });
               }}

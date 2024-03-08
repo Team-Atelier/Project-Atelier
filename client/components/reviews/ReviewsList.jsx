@@ -63,11 +63,10 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     },
   });
 
-  const refresh = async (meta) => {
+  const refresh = async (meta = metadata?.ratings) => {
     const convertData = Object.values(meta).map((item) => Number(item));
     let numReviewsToLoad = convertData.reduce((total, value) => total + value);
     numReviewsToLoad = numReviewsToLoad || 100;
-
     Promise.all([getReviews(numReviewsToLoad, 'relevant'), getReviews(numReviewsToLoad, 'helpful'), getReviews(numReviewsToLoad, 'newest')])
       .then((data) => {
         const [relevant, helpful, newest] = data;
