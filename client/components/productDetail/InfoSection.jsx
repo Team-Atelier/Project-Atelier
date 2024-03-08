@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
@@ -204,7 +205,7 @@ const PinterestButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function InfoSection({ productId, onStyleSelect }) {
+function InfoSection({ productId, onStyleSelect, scrollToReviews }) {
   const [infoSectionProduct, setInfoSectionProduct] = useState([]);
   const [productStyle, setProductStyle] = useState([]);
   const [selectedStyleId, setSelectedStyleId] = useState(null);
@@ -298,7 +299,6 @@ function InfoSection({ productId, onStyleSelect }) {
 
   const handleAddCart = () => {
     if (selectedSize === '') {
-      // open dropdown
       setErrorMessage('Please select size');
       sizeDropdownRef.current.focus();
     } else {
@@ -310,7 +310,10 @@ function InfoSection({ productId, onStyleSelect }) {
   return (
 
     <InfoSectionContainer>
-      <StarRating>(stars will go here) Read all reviews</StarRating>
+      <StarRating scrollToReviews={scrollToReviews}>
+        (stars will go here)
+        <a href="#" onClick={scrollToReviews}>Read all reviews</a>
+      </StarRating>
 
       <ProductCategory>{infoSectionProduct.category}</ProductCategory>
 
