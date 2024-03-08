@@ -32,7 +32,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
-  const [ratings, setRatings] = useState({})
+  // eslint-disable-next-line no-unused-vars
+  const [ratings, setRatings] = useState({});
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {

@@ -15,7 +15,6 @@ export default function RelatedItems() {
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
   const [thisProduct, setThisProduct] = useState([]);
-  const [reviewData, setReviewData] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
 
@@ -92,7 +91,7 @@ export default function RelatedItems() {
   return (
     <div>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} reviewData={reviewData} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} />
       </div>
       <div className="yourOutfitList">
         <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} />

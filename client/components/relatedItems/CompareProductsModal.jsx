@@ -31,8 +31,6 @@ const Close = styled.button`
 export default function CompareProductsModal({ handleModalClose, thisProduct, comparisonProduct }) {
   const [features, setFeatures] = useState([]);
 
-  console.log('features', Object.entries(features));
-
   useEffect(() => {
     const combinedFeatures = {};
     const productFeatureList = thisProduct.features;
@@ -45,7 +43,6 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
       }
     }
     for (let j = 0; j < compareFeatureList.length; j += 1) {
-      console.log(compareFeatureList[j])
       if (combinedFeatures[compareFeatureList[j].feature] && combinedFeatures[compareFeatureList[j].value] === 'null') {
         combinedFeatures[compareFeatureList[j].feature][1] = 'check';
       } else if (combinedFeatures[compareFeatureList[j].feature]) {
