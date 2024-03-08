@@ -18,6 +18,7 @@ const ModalWindow = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-position: 1;
 `;
 const ModalContent = styled.div`
 padding: 0px;
@@ -28,7 +29,7 @@ background-color: white;
 padding: 20px;
 padding-top: 5px;
 `;
-function ModalWindowTemplate({id, children}) {
+function ModalWindowTemplate({ id, children }) {
   const modal = document.getElementById(id);
   return (
     <ModalOverlay id={id} className="modal">
