@@ -8,6 +8,7 @@ import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
+
 const ReviewBox = styled.div`
 overflow-y: auto;
 max-height: 541px;
@@ -29,7 +30,7 @@ function ImageModal({ src }) {
   );
 }
 
-function ReviewsList({ productId, ratingFilter }) {
+function ReviewsList({ productId, ratingFilter, metadata }) {
   const [relevantReviews, setRelevantReviews] = useState([]);
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
@@ -39,6 +40,7 @@ function ReviewsList({ productId, ratingFilter }) {
   const [modalImg, setModalImg] = useState();
   const [markedAsHelpful, setMarkedAsHelpful] = useState({});
 
+  /*
   const getNumberOfReviews = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
       headers: { Authorization: token },
@@ -50,7 +52,7 @@ function ReviewsList({ productId, ratingFilter }) {
     const sum = result.reduce((accumulator, currentValue) => accumulator + currentValue);
     return sum;
   };
-
+  */
   const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
     headers: { Authorization: token },
     params: {
@@ -60,9 +62,12 @@ function ReviewsList({ productId, ratingFilter }) {
     },
   });
 
-  const refresh = async () => {
-    getNumberOfReviews()
-      .then((numReviews) => Promise.all([getReviews(numReviews, 'relevant'), getReviews(numReviews, 'helpful'), getReviews(numReviews, 'newest')]))
+  const refresh = async (meta = metadata?.ratings) => {
+    const convertData = Object.values(meta).map((item) => Number(item));
+    let numReviewsToLoad = convertData.reduce((total, value) => total + value);
+    numReviewsToLoad = numReviewsToLoad || 100;
+
+    Promise.all([getReviews(numReviewsToLoad, 'relevant'), getReviews(numReviewsToLoad, 'helpful'), getReviews(numReviewsToLoad, 'newest')])
       .then((data) => {
         const [relevant, helpful, newest] = data;
         setRelevantReviews(relevant.data.results);
@@ -72,8 +77,8 @@ function ReviewsList({ productId, ratingFilter }) {
   };
 
   useEffect(() => {
-    refresh();
-  }, []);
+    refresh(metadata?.ratings);
+  }, [metadata?.ratings]);
 
   const handleAPIClick = async (e, reviewID) => {
     if (e.target.value !== 'helpful' && e.target.value !== 'report') {
