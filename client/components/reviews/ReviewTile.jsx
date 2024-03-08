@@ -101,15 +101,12 @@ function ReviewTile({
           >
             Show full review
           </button>
-
           )}
-
         </ReviewBody>
         {review.recommend && (
         <>
           <br />
           <FlexRow>✓ I recommend this product</FlexRow>
-
         </>
         )}
         <ImageRow>

@@ -59,7 +59,13 @@ function AddReviews({
       <div>
         Nickname:
         <br />
-        <input name="name" maxLength="60" value={newReviewData.name ?? 'Example: jackson11!'} onChange={(e) => { handleNewReviewChange(e); }} />
+        <input
+          name="name"
+          maxLength="60"
+          value={newReviewData.name ?? 'Example: jackson11!'}
+          style={{ width: '300px' }}
+          onChange={(e) => { handleNewReviewChange(e); }}
+        />
         <br />
         For privacy reasons, do not use your full name or email address
         <br />
@@ -69,7 +75,13 @@ function AddReviews({
       <div>
         Email:
         <br />
-        <input name="email" maxLength="60" value={newReviewData.email ?? 'Example: jackson11@email.com'} onChange={(e) => { handleNewReviewChange(e); }} />
+        <input
+          name="email"
+          maxLength="60"
+          value={newReviewData.email ?? 'Example: jackson11@email.com'}
+          style={{ width: '300px' }}
+          onChange={(e) => { handleNewReviewChange(e); }}
+        />
         <br />
         For authentication reasons, you will not be emailed
       </div>
@@ -107,7 +119,14 @@ function AddReviews({
       <div>
         Review summary:
         <br />
-        <input name="summary" maxLength="60" value={newReviewData.summary ?? 'Example: Best purchase ever!'} onChange={(e) => { handleNewReviewChange(e); }} />
+        <input
+          name="summary"
+          maxLength="60"
+          value={newReviewData.summary ?? 'Example: Best purchase ever!'}
+          style={{ width: '300px' }}
+          onChange={(e) => { handleNewReviewChange(e); }}
+        />
+
         <br />
         {newReviewData.summary ? `${(60 - (newReviewData.summary.length))} characters remaining` : ''}
       </div>
@@ -115,7 +134,7 @@ function AddReviews({
       <div>
         Your honest review:
         <br />
-        <textarea name="body" maxLength="1000" value={newReviewData.body ?? 'Why did you like the product or not?'} onChange={(e) => { handleNewReviewChange(e); }} />
+        <textarea name="body" maxLength="1000" value={newReviewData.body ?? 'Why did you like the product or not?'} style={{ width: '90%' }} onChange={(e) => { handleNewReviewChange(e); }} />
         <br />
         {newReviewData.body && newReviewData.body.length >= 50 ? 'Minimum reached' : ''}
         {newReviewData.body && newReviewData.body.length < 50 ? `${50 - newReviewData.body.length} characters needed until 50 character minimum reached` : ''}
@@ -178,7 +197,7 @@ function AddReviews({
           review.recommend = review.recommend === 'true';
           // console.log(review.product_id);
           postReview(review)
-            .then((data) => {console.log(data) /*window.location.reload();*/ })
+            .then((data) => { console.log(data); /* window.location.reload(); */ })
             .catch(() => { alert('cannot post review'); });
         }}
       >
