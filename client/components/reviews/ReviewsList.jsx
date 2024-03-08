@@ -23,7 +23,7 @@ padding: 0px
 
 function ImageModal({ src }) {
   return (
-    <ModalWindowTemplate>
+    <ModalWindowTemplate id="fullReviewImage">
       <ModalImage src={src} />
     </ModalWindowTemplate>
   );
@@ -157,7 +157,6 @@ function ReviewsList({ productId, ratingFilter }) {
       </ReviewBox>
       <div>
         <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
-        <button type="button" onClick={(e) => { alert('placeholder'); }}>Add review</button>
       </div>
     </>
   );

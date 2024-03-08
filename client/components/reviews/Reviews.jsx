@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
+import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
@@ -32,6 +33,29 @@ const getMetadata = async () => {
   }).catch((err) => console.log(err));
   return data;
 };
+
+const ReviewFormStyle = styled.div`
+background-color: white;
+overflow-y: scroll;
+max-height: 80vh;
+width: 85vw;
+`;
+function ReviewModal({
+  newReviewData, metadata, handleNewReviewChange, resetImages,
+}) {
+  return (
+    <ModalWindowTemplate id="reviewsScreen">
+      <ReviewFormStyle>
+        <AddReviews
+          newReviewData={newReviewData}
+          metadata={metadata}
+          handleNewReviewChange={handleNewReviewChange}
+          resetImages={resetImages}
+        />
+      </ReviewFormStyle>
+    </ModalWindowTemplate>
+  );
+}
 
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
@@ -128,6 +152,24 @@ function Reviews() {
           />
         </ReviewListContainer>
       </FlexRow>
+      <ReviewModal
+        newReviewData={newReviewData}
+        metadata={metadata}
+        handleNewReviewChange={handleNewReviewChange}
+        resetImages={resetImages}
+      />
+      <button
+        type="button"
+        style={{ position: 'relative', left: '40%' }}
+        onClick={(e) => {
+          const modal = document.getElementById('reviewsScreen');
+          modal.style.display = 'flex';
+        }}
+      >
+        Add review
+      </button>
+      {
+        /*
       <div>
         <AddReviews
           newReviewData={newReviewData}
@@ -136,6 +178,8 @@ function Reviews() {
           resetImages={resetImages}
         />
       </div>
+      */
+    }
     </>
   );
 }
