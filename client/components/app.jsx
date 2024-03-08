@@ -20,30 +20,30 @@ const scaleRatings = (ratings) => {
   });
   return result;
 };
-const computeAverage = (ratings) => {
+const computeAverage = (scaledRatings) => {
   let result = 0;
-  Object?.keys(ratings)?.forEach((key) => {
-    result += Number(key) * Number(ratings[key]);
+  Object?.keys(scaledRatings)?.forEach((key) => {
+    result += Number(key) * Number(scaledRatings[key]);
   });
   return result;
 };
 
 function App() {
   const [metadata, setMetadata] = useState();
+  /*
   const rec = Number(metadata?.recommended?.true);
   const noRec = Number(metadata?.recommended?.false);
   const percentRecommend = 100 * (rec / (rec + noRec));
   const rate = metadata?.ratings && scaleRatings(metadata.ratings);
   let average = metadata?.ratings && computeAverage(rate);
   average = Math.round(average * 10) / 10;
-
-
+  */
 
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
-      headers: { Authorization: process.env.GITHUB_TOKEN },
+      headers: { Authorization: token },
       params: {
-        product_id: 40346,
+        product_id: productId,
       },
     }).catch((err) => console.log(err));
     return data;

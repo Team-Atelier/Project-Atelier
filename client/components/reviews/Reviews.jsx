@@ -9,10 +9,6 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
 import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
-const url = process.env.API_URL;
-const token = process.env.GITHUB_TOKEN;
-const productId = 40346;
-
 //const url = process.env.API_URL;
 //const token = process.env.GITHUB_TOKEN;
 //const productId = 40346;
