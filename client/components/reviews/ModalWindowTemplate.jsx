@@ -23,18 +23,11 @@ const ModalContent = styled.div`
 padding: 0px;
 border: 5px solid white;
 `;
-const ModalImage = styled.img`
-width:  600px;
-height: 600px;
-object-fit: cover;
-padding: 0px
-`;
 const CloseButton = styled.span`
 background-color: white;
 padding: 20px;
 padding-top: 5px;
 `;
-//"fullReviewImage"
 function ModalWindowTemplate({id, children}) {
   const modal = document.getElementById(id);
   return (

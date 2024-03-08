@@ -40,7 +40,9 @@ overflow-y: scroll;
 max-height: 80vh;
 width: 85vw;
 `;
-function ReviewModal({newReviewData, metadata, handleNewReviewChange, resetImages}) {
+function ReviewModal({
+  newReviewData, metadata, handleNewReviewChange, resetImages,
+}) {
   return (
     <ModalWindowTemplate id="reviewsScreen">
       <ReviewFormStyle>
@@ -158,6 +160,7 @@ function Reviews() {
       />
       <button
         type="button"
+        style={{ position: 'relative', left: '40%' }}
         onClick={(e) => {
           const modal = document.getElementById('reviewsScreen');
           modal.style.display = 'flex';

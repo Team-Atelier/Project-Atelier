@@ -191,7 +191,7 @@ function AddReviews({
       <button
         type="button"
         onClick={() => {
-          // Need to validate review first.
+          // TODO: Need to validate review first.
           const review = { ...newReviewData };
           review.product_id = Number(metadata.product_id);
           review.recommend = review.recommend === 'true';
