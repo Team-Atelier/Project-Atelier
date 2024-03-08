@@ -7,6 +7,7 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FaImage } from 'react-icons/fa';
+import { TfiClose } from 'react-icons/tfi';
 
 const { useState, useEffect, useRef } = React;
 
@@ -163,6 +164,21 @@ const ThumbnailIcon = styled(FaImage)`
   color: ${({ selected }) => (selected ? 'blue' : 'black')};
 `;
 
+const ExitIcon = styled(TfiClose)`
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+`;
+
+const ExitButton = styled.button`
+  display: flex;
+  position: absolute;
+  background: transparent;
+  top: 10px;
+  right: 10px;
+  border: none;
+`;
+
 function PhotoSection({ productId, selectedStyle }) {
   const [styles, setStyles] = useState([]);
   const [selectedStyleIndex, setSelectedStyleIndex] = useState(0);
@@ -237,6 +253,10 @@ function PhotoSection({ productId, selectedStyle }) {
     setZoomed(true);
   };
 
+  const handleXClick = () => {
+    setExpandedView(false);
+  };
+
   const handleMouseMove = (event) => {
     const container = document.getElementById('zoomedContainer');
     const zoomedImage = document.getElementById('zoomedMainImage');
@@ -306,6 +326,11 @@ function PhotoSection({ productId, selectedStyle }) {
             &#8594;
           </RightArrow>
           )}
+
+          <ExitButton onClick={handleXClick}>
+            <ExitIcon />
+          </ExitButton>
+
         </ExpandedPhotoContainer>
       )}
 
