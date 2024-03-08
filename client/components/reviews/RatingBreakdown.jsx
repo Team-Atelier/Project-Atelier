@@ -147,10 +147,15 @@ function RatingBreakdown({ metadata, handleRatingFilterClick, ratingFilter }) {
       </button>
       )}
       <div>
-        Rating:
-        {' '}
-        {average}
-        <StarRating rating={average || 0} />
+        <h1>
+          <StarRating rating={average || 0} />
+          {' '}
+          Rating:
+          {' '}
+          {average}
+
+        </h1>
+
       </div>
       <div>
         {Math.round(percentRecommend)}

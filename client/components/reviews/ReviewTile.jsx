@@ -65,7 +65,9 @@ const Right = styled.section`
 display: inline-block;
 `;
 
-function ReviewTile({ review, handleModalImgChange, handleAPIClick }) {
+function ReviewTile({
+  review, handleModalImgChange, handleAPIClick, markedAsHelpful,
+}) {
   const [showFullReview, setShowFullReview] = useState(false);
   const date = new Date(review.date);
   return (
@@ -99,30 +101,28 @@ function ReviewTile({ review, handleModalImgChange, handleAPIClick }) {
           >
             Show full review
           </button>
-
           )}
-
         </ReviewBody>
         {review.recommend && (
         <>
           <br />
           <FlexRow>✓ I recommend this product</FlexRow>
-          <ImageRow>
-            {review.photos.map((img) => (
-              <Image
-                key={img.id}
-                src={img.url}
-                onClick={(e) => {
-                  handleModalImgChange(e);
-                }}
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-            ))}
-          </ImageRow>
         </>
         )}
+        <ImageRow>
+          {review.photos.map((img) => (
+            <Image
+              key={img.id}
+              src={img.url}
+              onClick={(e) => {
+                handleModalImgChange(e);
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
+          ))}
+        </ImageRow>
         <br />
         {review.response && (
         <>
@@ -139,12 +139,19 @@ function ReviewTile({ review, handleModalImgChange, handleAPIClick }) {
         )}
         <FlexRow>
           <StaticRow>
-            <div>Was this review helpful?  </div>
+            <div>Was this review helpful? </div>
             {' '}
             <button
               type="button"
               value="helpful"
-              onClick={(e) => { handleAPIClick(e, review.review_id); }}
+              disabled={markedAsHelpful?.[review.review_id]}
+              onClick={(e) => {
+                handleAPIClick(e, review.review_id)
+                  .then((res) => {
+                    const helpfulAlreadyClicked = res?.[review.review_id];
+                    e.target.disabled = helpfulAlreadyClicked;
+                  });
+              }}
             >
               Yes
             </button>

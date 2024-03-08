@@ -15,30 +15,23 @@ const ModalOverlay = styled.div`
 `;
 const ModalWindow = styled.div`
   position: fixed;
-  left: 25%;
-  top: 6.25%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 const ModalContent = styled.div`
-background-color:
-margin: 15% auto;
 padding: 0px;
 border: 5px solid white;
-`;
-const ModalImage = styled.img`
-width:  600px;
-height: 600px;
-object-fit: cover;
-padding: 0px
 `;
 const CloseButton = styled.span`
 background-color: white;
 padding: 20px;
 padding-top: 5px;
 `;
-function ModalWindowTemplate({children}) {
-  const modal = document.getElementById('fullReviewImage');
+function ModalWindowTemplate({id, children}) {
+  const modal = document.getElementById(id);
   return (
-    <ModalOverlay id="fullReviewImage" className="modal">
+    <ModalOverlay id={id} className="modal">
       <ModalWindow>
         <CloseButton onClick={() => { modal.style.display = 'none'; }}>
           CLOSE (&times;)

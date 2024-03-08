@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
+import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
 const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
@@ -32,6 +33,29 @@ const getMetadata = async () => {
   }).catch((err) => console.log(err));
   return data;
 };
+
+const ReviewFormStyle = styled.div`
+background-color: white;
+overflow-y: scroll;
+max-height: 80vh;
+width: 85vw;
+`;
+function ReviewModal({
+  newReviewData, metadata, handleNewReviewChange, resetImages,
+}) {
+  return (
+    <ModalWindowTemplate id="reviewsScreen">
+      <ReviewFormStyle>
+        <AddReviews
+          newReviewData={newReviewData}
+          metadata={metadata}
+          handleNewReviewChange={handleNewReviewChange}
+          resetImages={resetImages}
+        />
+      </ReviewFormStyle>
+    </ModalWindowTemplate>
+  );
+}
 
 function Reviews() {
   const [newReviewData, setNewReviewData] = useState({});
@@ -70,42 +94,45 @@ function Reviews() {
       });
   }, []);
 
-  const handleNewReviewChange = (e, name, value) => {
-    if (e && e.target.name === 'images') {
-      const currentFiles = newReviewData[e.target.name] || [];
-      const nextFiles = [...currentFiles, URL.createObjectURL(e.target.files[0])];
+  const handleNewReviewChange = (e, name, value, id) => {
+    if (e && e.target?.className === 'reviewimg') {
+      const currentFiles = newReviewData.photos || [];
+      const nextFiles = [...currentFiles, e.target.imgurl.value];
       const nextReviewData = {
         ...newReviewData,
-        [e.target.name]: nextFiles,
+        photos: nextFiles,
       };
       console.log(nextReviewData);
       setNewReviewData(nextReviewData);
-      console.log('image');
+    } else if (e && e.target?.className === 'charSelect') {
+      const nextCharacteristic = {
+        ...newReviewData.characteristics,
+        [id]: Number(e.target.value),
+      };
+      const nextReviewData = {
+        ...newReviewData,
+        characteristics: nextCharacteristic,
+      };
+      setNewReviewData(nextReviewData);
     } else if (e === null) {
-      console.log('goes here');
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
       };
-      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     } else {
       const nextReviewData = {
         ...newReviewData,
         [e.target.name]: e.target.value,
       };
-      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     }
   };
 
   const resetImages = () => {
-    newReviewData.images.forEach((item) => {
-      URL.revokeObjectURL(item);
-    });
     const nextData = {
       ...newReviewData,
-      images: Array(0),
+      photos: Array(0),
     };
     console.log(nextData);
     setNewReviewData(nextData);
@@ -125,13 +152,34 @@ function Reviews() {
           />
         </ReviewListContainer>
       </FlexRow>
+      <ReviewModal
+        newReviewData={newReviewData}
+        metadata={metadata}
+        handleNewReviewChange={handleNewReviewChange}
+        resetImages={resetImages}
+      />
+      <button
+        type="button"
+        style={{ position: 'relative', left: '40%' }}
+        onClick={(e) => {
+          const modal = document.getElementById('reviewsScreen');
+          modal.style.display = 'flex';
+        }}
+      >
+        Add review
+      </button>
+      {
+        /*
       <div>
         <AddReviews
           newReviewData={newReviewData}
+          metadata={metadata}
           handleNewReviewChange={handleNewReviewChange}
           resetImages={resetImages}
         />
       </div>
+      */
+    }
     </>
   );
 }

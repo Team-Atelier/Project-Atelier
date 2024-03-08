@@ -1,11 +1,12 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
 
 function ExperienceTableRow({
-  name, descriptions, newReviewData, handleNewReviewChange,
+  name, descriptions, newReviewData, handleNewReviewChange, id,
 }) {
   const change = (e) => {
-    handleNewReviewChange(e);
+    handleNewReviewChange(e, null, null, id);
   };
   return (
     <tr>
@@ -14,7 +15,7 @@ function ExperienceTableRow({
         <td key={index}>
           <label htmlFor={name.toLowerCase()}>
             {des}
-            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e); }} checked={newReviewData.name} />
+            <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e, id); }} checked={newReviewData.characteristics?.[name]} />
           </label>
         </td>
       ))}
