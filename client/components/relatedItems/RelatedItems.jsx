@@ -3,9 +3,9 @@
 /* eslint-disable import/extensions */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import RelatedProductsList from './RelatedProductsList.jsx';
 import YourOutfitList from './YourOutfitList.jsx';
-import styled from 'styled-components';
 
 const RelatedItemsDiv = styled.div`
   font-family: mate;

@@ -29,11 +29,13 @@ const ActionButton = styled.button`
 
 const CardClick = styled.div`
   display: flex;
+  height: 100%;
+  width: 100%;
 `;
 
 const ImageContainer = styled.div`
   width: 100%;
-  height: 85%;
+  max-height: 85%;
   object-fit: cover;
   overflow: hidden;
   display: flex;
@@ -42,9 +44,9 @@ const ImageContainer = styled.div`
 `;
 
 const ProductImage = styled.img`
+  display: flex;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: 100%;
   overflow: hidden;
 `;
 
