@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -37,15 +38,25 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
     const productFeatureList = thisProduct.features;
     const compareFeatureList = comparisonProduct.features;
     for (let i = 0; i < productFeatureList.length; i += 1) {
-      combinedFeatures[productFeatureList[i].feature] = [productFeatureList[i].value, null];
+      if (productFeatureList[i].value === 'null') {
+        combinedFeatures[productFeatureList[i].feature] = ['check', null];
+      } else {
+        combinedFeatures[productFeatureList[i].feature] = [productFeatureList[i].value, null];
+      }
     }
     for (let j = 0; j < compareFeatureList.length; j += 1) {
-      if (combinedFeatures[compareFeatureList[j].feature]) {
+      console.log(compareFeatureList[j])
+      if (combinedFeatures[compareFeatureList[j].feature] && combinedFeatures[compareFeatureList[j].value] === 'null') {
+        combinedFeatures[compareFeatureList[j].feature][1] = 'check';
+      } else if (combinedFeatures[compareFeatureList[j].feature]) {
         combinedFeatures[compareFeatureList[j].feature][1] = compareFeatureList[j].value;
+      } else if (compareFeatureList[j].value === null) {
+        combinedFeatures[compareFeatureList[j].feature] = [null, 'check'];
       } else {
         combinedFeatures[compareFeatureList[j].feature] = [null, compareFeatureList[j].value];
       }
     }
+    console.log('WHAT is happening', Object.entries(combinedFeatures));
     setFeatures(Object.entries(combinedFeatures));
   }, [thisProduct, comparisonProduct]);
 
@@ -74,9 +85,9 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
             </tr>
             {features ? features.map((feature) => (
               <tr>
-                <td>{feature[1][0]}</td>
+                <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
                 <td>{feature[0]}</td>
-                <td>{feature[1][1]}</td>
+                <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
               </tr>
             )) : null }
           </tbody>
