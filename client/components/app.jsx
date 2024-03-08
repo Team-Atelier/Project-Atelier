@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
-import axios from 'Axios';
+import axios from 'axios';
 import ProductDetail from './productDetail/ProductDetail.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
