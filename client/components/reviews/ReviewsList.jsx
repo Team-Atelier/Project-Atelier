@@ -51,7 +51,7 @@ function ReviewsList({ productId, ratingFilter }) {
     return sum;
   };
 
-  const getReviews = (count = 100, sort = 'relevant') => axios.get(`${url}reviews`, {
+  const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
     headers: { Authorization: token },
     params: {
       product_id: productId,

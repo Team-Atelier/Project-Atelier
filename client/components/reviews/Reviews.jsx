@@ -83,28 +83,24 @@ function Reviews() {
     } else if (e && e.target?.className === 'charSelect') {
       const nextCharacteristic = {
         ...newReviewData.characteristics,
-        [id]: e.target.value,
-        [e.target.name]: e.target.value,
+        [id]: Number(e.target.value),
       };
       const nextReviewData = {
         ...newReviewData,
         characteristics: nextCharacteristic,
       };
-      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     } else if (e === null) {
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
       };
-      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     } else {
       const nextReviewData = {
         ...newReviewData,
         [e.target.name]: e.target.value,
       };
-      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     }
   };
