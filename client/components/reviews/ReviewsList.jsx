@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
@@ -62,7 +63,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     },
   });
 
-  const refresh = async (meta = metadata?.ratings) => {
+  const refresh = async (meta) => {
     const convertData = Object.values(meta).map((item) => Number(item));
     let numReviewsToLoad = convertData.reduce((total, value) => total + value);
     numReviewsToLoad = numReviewsToLoad || 100;
@@ -77,7 +78,9 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
 
   useEffect(() => {
-    refresh(metadata?.ratings);
+    if (metadata?.ratings !== undefined) {
+      refresh(metadata?.ratings);
+    }
   }, [metadata?.ratings]);
 
   const handleAPIClick = async (e, reviewID) => {
