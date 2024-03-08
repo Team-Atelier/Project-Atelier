@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import React from 'react';
@@ -22,7 +24,7 @@ const ProductSectionContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-function ProductDetail() {
+function ProductDetail({ scrollToReviews }) {
   const [productInformation, setProductInformation] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
 
@@ -55,7 +57,7 @@ function ProductDetail() {
     <ProductDetailContainer>
       <ProductSectionContainer>
         <PhotoSection productId={productInformation.id} selectedStyle={selectedStyle} />
-        <InfoSection productId={productInformation.id} onStyleSelect={handleStyleSelect} />
+        <InfoSection productId={productInformation.id} onStyleSelect={handleStyleSelect} scrollToReviews={scrollToReviews} />
       </ProductSectionContainer>
       <Description productId={productInformation.id} />
     </ProductDetailContainer>
