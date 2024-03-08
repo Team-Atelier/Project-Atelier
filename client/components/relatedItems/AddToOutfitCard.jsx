@@ -7,11 +7,15 @@ import { IconContext } from 'react-icons';
 import styled from 'styled-components';
 
 const OutfitCard = styled.div`
-  border: solid;
-  text-align: center;
-  min-width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 20%;
   min-height: 100%;
+  line-height: 100%;
   position: relative;
+  cursor: pointer;
 `;
 
 export default function AddToOutfitCard({ thisProductID, addToOutfit }) {
