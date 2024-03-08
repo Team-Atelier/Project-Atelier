@@ -37,7 +37,9 @@ export default function RelatedItems() {
     axios.get(`${apiURL}products/${productData.id}/related`, {
       headers: { Authorization: token },
     })
-      .then((results) => getProductInfo(results.data, 'relatedProducts'))
+      .then((results) => {
+        getProductInfo(results.data, 'relatedProducts');
+      })
       .catch((err) => console.log(err));
   };
 
@@ -67,7 +69,6 @@ export default function RelatedItems() {
   // HANDLE PRODUCT CHANGE
   const handleProductChange = (newID) => {
     setProductID(newID);
-    console.log(newID);
   };
 
   // USE EFFECTS

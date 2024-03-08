@@ -1,7 +1,17 @@
 import React from 'react';
 import ExperienceTableRow from './ExperienceTableRow.jsx';
 
-function ExperienceTable({ newReviewData, handleNewReviewChange }) {
+const descriptions = {
+  size: ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'],
+  width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+  comfort: ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+  quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+  length: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+  fit: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+};
+
+function ExperienceTable({ newReviewData, handleNewReviewChange, metadata }) {
+  const { characteristics } = metadata || {};
   return (
     <table className="rating">
       <caption>
@@ -18,12 +28,21 @@ function ExperienceTable({ newReviewData, handleNewReviewChange }) {
         </tr>
       </thead>
       <tbody>
-        <ExperienceTableRow name="Size" descriptions={['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
-        <ExperienceTableRow name="Width" descriptions={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
-        <ExperienceTableRow name="Comfort" descriptions={['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
-        <ExperienceTableRow name="Quality" descriptions={['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
-        <ExperienceTableRow name="Length" descriptions={['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
-        <ExperienceTableRow name="Fit" descriptions={['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']} newReviewData={newReviewData} handleNewReviewChange={handleNewReviewChange} />
+        {Object.keys(characteristics || []).map(
+          (characteristic) => {
+            const desc = descriptions[characteristic.toLowerCase()] || [1, 2, 3, 4, 5];
+            return (
+              <ExperienceTableRow
+                key={characteristics[characteristic].id}
+                id={characteristics[characteristic].id}
+                name={characteristic}
+                descriptions={desc}
+                newReviewData={newReviewData}
+                handleNewReviewChange={handleNewReviewChange}
+              />
+            );
+          },
+        )}
       </tbody>
     </table>
   );

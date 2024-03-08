@@ -50,7 +50,6 @@ function CharacteristicRating({ characteristic, rating }) {
     fit: ['Runs tight', 'Perfect', 'Runs long'],
   };
   const key = characteristic.toLowerCase();
-  console.log(key);
   return (
     <div>
       {characteristic}

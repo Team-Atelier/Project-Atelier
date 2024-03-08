@@ -34,7 +34,7 @@ const Star = ({
     // fill(value, start, end)
     let nextRating = [false, false, false, false, false];
     console.log(newReviewData);
-    nextRating = nextRating.fill(true, 0, newReviewData.reviewRating);
+    nextRating = nextRating.fill(true, 0, newReviewData.rating);
     handleHover(nextRating);
   };
   return (
@@ -43,7 +43,7 @@ const Star = ({
       {solid && (
       <span
         className="fa fa-star"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
 
@@ -52,7 +52,7 @@ const Star = ({
       {!solid && (
       <span
         className="fa fa-star-o"
-        onClick={() => { clicked('reviewRating'); }}
+        onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
       />
