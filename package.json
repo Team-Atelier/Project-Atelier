@@ -4,7 +4,7 @@
   "description": "Modernization of e-commerce site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon --watch server server/server.js",
     "coverage": "jest --env=jsdom --coverage",
@@ -54,5 +54,9 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "styled-components": "^6.1.8"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [ "@testing-library/jest-dom" ]
   }
 }
