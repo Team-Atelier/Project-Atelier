@@ -11,11 +11,31 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 // const productId = 40346;
 
+
 const Title = styled.div`
   font-family: mate;
 `;
 
 function App() {
+  const scaleRatings = (ratings) => {
+    const result = {};
+    let sum = 0;
+    Object.keys(ratings)?.forEach((key) => {
+      sum += Number(ratings[key]);
+    });
+    Object.keys(ratings).forEach((key) => {
+      result[key] = (Number(ratings[key]) / sum);
+    });
+    return result;
+  };
+  const computeAverage = (scaledRatings) => {
+    let result = 0;
+    Object?.keys(scaledRatings)?.forEach((key) => {
+      result += Number(key) * Number(scaledRatings[key]);
+    });
+    return result;
+  };
+
   const [metadata, setMetadata] = useState();
   const [currentProductData, setCurrentProductData] = useState({});
   const [currentProductID, setCurrentProductID] = useState(40346);
@@ -27,7 +47,7 @@ function App() {
   let average = metadata?.ratings && computeAverage(rate);
   average = Math.round(average * 10) / 10;
   */
-
+  
   /* ----- Functions for grabbing review data and computing averges ----- */
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
@@ -83,7 +103,7 @@ function App() {
   }, []);
 
   /* ----- Function for user navigation ----- */
-  const scrollToReviews = ({}) => {
+  const scrollToReviews = () => {
     const reviewsSection = document.getElementById('reviews-section');
     if (reviewsSection) {
       reviewsSection.scrollIntoView({ behavior: 'smooth' });
