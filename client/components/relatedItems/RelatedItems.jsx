@@ -12,15 +12,14 @@ const RelatedItemsDiv = styled.div`
   font-family: mate;
 `;
 
-export default function RelatedItems({ scaleRatings, computeAverage }) {
+export default function RelatedItems({
+  scaleRatings, computeAverage, currentProductData, currentProductID, handleProductChange,
+}) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
-  // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
-  const [productID, setProductID] = useState(40346);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
-  const [thisProduct, setThisProduct] = useState([]);
 
   // FUNCTIONS FOR INITIAL RENDERING
 
@@ -34,9 +33,6 @@ export default function RelatedItems({ scaleRatings, computeAverage }) {
     if (typeOfList === 'yourOutfit') {
       setOutfitInfo(results.map((product) => product.data));
     }
-    if (typeOfList === 'thisProduct') {
-      setThisProduct(results.map((product) => product.data));
-    }
   };
 
   const getRelatedProducts = (productData) => {
@@ -46,14 +42,6 @@ export default function RelatedItems({ scaleRatings, computeAverage }) {
       .then((results) => {
         getProductInfo(results.data, 'relatedProducts');
       })
-      .catch((err) => console.log(err));
-  };
-
-  const getCurrentProduct = () => {
-    axios.get(`${apiURL}products/${productID}`, {
-      headers: { Authorization: token },
-    })
-      .then((results) => getRelatedProducts(results.data))
       .catch((err) => console.log(err));
   };
 
@@ -72,16 +60,10 @@ export default function RelatedItems({ scaleRatings, computeAverage }) {
     setStoredOutfit(productRemoved);
   };
 
-  // HANDLE PRODUCT CHANGE
-  const handleProductChange = (newID) => {
-    setProductID(newID);
-  };
-
   // USE EFFECTS
   useEffect(() => {
-    getCurrentProduct();
-    getProductInfo([productID], 'thisProduct');
-  }, [productID]);
+    getRelatedProducts(currentProductData);
+  }, [currentProductData]);
 
   useEffect(() => {
     if (localStorage.getItem('outfit') === null) {
@@ -97,10 +79,10 @@ export default function RelatedItems({ scaleRatings, computeAverage }) {
   return (
     <RelatedItemsDiv>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={currentProductData} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
+        <YourOutfitList currentProductID={currentProductID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
     </RelatedItemsDiv>
   );
