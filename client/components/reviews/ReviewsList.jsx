@@ -57,7 +57,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
     headers: { Authorization: token },
     params: {
-      product_id: productId,
+      product_id: metadata?.product_id,
       count,
       sort,
     },
@@ -142,6 +142,21 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   const loadMoreReviews = () => {
     setVisibleReviews(visibleReviews + 2);
   };
+
+  const twoReviewsOrLess = () => {
+    if (currentSort === 'relevant' && (relevantReviews.length - visibleReviews) <= 0) {
+      console.log(relevantReviews.length);
+      console.log(visibleReviews);
+      return true;
+    }
+    if (currentSort === 'helpful' && (helpfulReviews.length - visibleReviews) <= 0) {
+      return true;
+    }
+    if (currentSort === 'newest' && (newestReviews.length - visibleReviews) <= 0) {
+      return true;
+    }
+    return false;
+  };
   return (
     <>
       <div>
@@ -163,7 +178,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
         && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
       </ReviewBox>
       <div>
-        <button type="button" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>
+        {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(twoReviewsOrLess()); }}>More reviews</button>}
       </div>
     </>
   );

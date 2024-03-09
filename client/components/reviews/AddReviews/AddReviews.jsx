@@ -54,6 +54,45 @@ const postReview = async (reviewInfo) => {
 function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages,
 }) {
+  const validReview = () => {
+    debugger;
+    const mandatoryFields = [
+      'rating',
+      'summary',
+      'body',
+      'recommend',
+      'name',
+      'email',
+      'characteristics'];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const item of mandatoryFields) {
+      if (newReviewData[item] === undefined) {
+        return false;
+      }
+      if (newReviewData[item] === '') {
+        return false;
+      }
+      if (newReviewData[item] === []) {
+        return false;
+      }
+    }
+    // Other aspects have been resolved as those text boxes have character limits.
+    if (newReviewData.body.length <= 50) {
+      return false;
+    }
+    const emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    if (!emailRegEx.test(newReviewData.email)) {
+      return false;
+    }
+
+    const validCharacteristics = Object.keys(metadata?.characteristics)?.length
+    === Object.keys(newReviewData.characteristics).length;
+    if (!validCharacteristics) {
+      return false;
+    }
+
+    return true;
+  };
   return (
     <>
       <div>
@@ -184,20 +223,37 @@ function AddReviews({
           </button>
           )}
           <ImageRow>
-            {newReviewData.photos && newReviewData.photos.map((imageURL) => <Image src={imageURL} alt="user content" />)}
+            {newReviewData.photos && newReviewData.photos.map((imageURL) => (
+              <Image
+                onError={() => {
+                  resetImages(true);
+                  alert('Invalid image');
+                }}
+                src={imageURL}
+                alt="user content"
+              />
+            ))}
           </ImageRow>
         </label>
       </div>
       <button
         type="button"
         onClick={() => {
-          // TODO: Need to validate review first.
+          if (!validReview()) {
+            console.log(validReview());
+            alert('Invalid review, please ensure no field are empty and character minimums are met.');
+            return;
+          }
           const review = { ...newReviewData };
           review.product_id = Number(metadata.product_id);
           review.recommend = review.recommend === 'true';
           // console.log(review.product_id);
           postReview(review)
-            .then((data) => { console.log(data); /* window.location.reload(); */ })
+            .then((data) => {
+              console.log(data);
+              alert('Review submitted!');
+              window.location.reload();
+            })
             .catch(() => { alert('cannot post review'); });
         }}
       >

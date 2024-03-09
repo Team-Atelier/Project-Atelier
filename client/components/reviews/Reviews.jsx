@@ -9,9 +9,9 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
 import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
-//const url = process.env.API_URL;
-//const token = process.env.GITHUB_TOKEN;
-//const productId = 40346;
+// const url = process.env.API_URL;
+// const token = process.env.GITHUB_TOKEN;
+// const productId = 40346;
 // og: 40346
 
 const FlexRow = styled.section`
@@ -34,7 +34,7 @@ const getMetadata = async () => {
     },
   }).catch((err) => console.log(err));
   return data;
-};*/
+}; */
 
 const ReviewFormStyle = styled.div`
 background-color: white;
@@ -59,9 +59,9 @@ function ReviewModal({
   );
 }
 
-function Reviews({metadata}) {
+function Reviews({ metadata }) {
   const [newReviewData, setNewReviewData] = useState({});
- // const [metadata, setMetadata] = useState();
+  // const [metadata, setMetadata] = useState();
   const [ratingFilter, setRatingFilter] = useState({
     5: false,
     4: false,
@@ -88,7 +88,7 @@ function Reviews({metadata}) {
     console.log(nextRatingFilter);
     setRatingFilter(nextRatingFilter);
   };
-/*
+  /*
   useEffect(() => {
     getMetadata()
       .then((res) => {
@@ -115,30 +115,41 @@ function Reviews({metadata}) {
         ...newReviewData,
         characteristics: nextCharacteristic,
       };
+      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     } else if (e === null) {
       const nextReviewData = {
         ...newReviewData,
         [name]: value,
       };
+      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     } else {
       const nextReviewData = {
         ...newReviewData,
         [e.target.name]: e.target.value,
       };
+      console.log(nextReviewData);
       setNewReviewData(nextReviewData);
     }
   };
-
-  const resetImages = () => {
-    const nextData = {
-      ...newReviewData,
-      photos: Array(0),
-    };
+  const resetImages = (removeLastOnly = false) => {
+    let nextData;
+    if (removeLastOnly) {
+      nextData = {
+        ...newReviewData,
+        photos: newReviewData.photos.toSpliced(newReviewData.photos.length - 1, 1),
+      };
+    } else {
+      nextData = {
+        ...newReviewData,
+        photos: Array(0),
+      };
+    }
     console.log(nextData);
     setNewReviewData(nextData);
   };
+
   return (
     <>
       <FlexRow>
@@ -150,7 +161,6 @@ function Reviews({metadata}) {
         <ReviewListContainer>
           <ReviewsList
             metadata={metadata}
-            productId={metadata?.product_id}
             ratingFilter={ratingFilter}
           />
         </ReviewListContainer>

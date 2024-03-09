@@ -109,6 +109,7 @@ function ReviewTile({
           <FlexRow>✓ I recommend this product</FlexRow>
         </>
         )}
+        <br />
         <ImageRow>
           {review.photos.map((img) => (
             <Image
@@ -123,7 +124,7 @@ function ReviewTile({
             />
           ))}
         </ImageRow>
-        <br />
+
         {review.response && (
         <>
           <FlexRow>
