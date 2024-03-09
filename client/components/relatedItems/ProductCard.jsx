@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { BsStarFill } from 'react-icons/bs';
 import { TfiClose } from 'react-icons/tfi';
+import StarRating from '../reviews/StarRating.jsx';
 
 const Card = styled.div`
   display: flex;
@@ -82,7 +83,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState([]);
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
     })
       .then((results) => {
         const scaledRatings = scaleRatings(results.data.ratings);
-        setRating(computeAverage(scaledRatings));
+        setRating([computeAverage(scaledRatings)]);
       });
   }, [id]);
 
@@ -141,7 +142,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
               {originalPrice}
             </p>
           )}
-          <p>{rating}</p>
+          <StarRating rating={rating || 0} />
         </TextContainer>
       </CardClick>
     </Card>
