@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
@@ -11,7 +12,7 @@ const RelatedItemsDiv = styled.div`
   font-family: mate;
 `;
 
-export default function RelatedItems() {
+export default function RelatedItems({ scaleRatings, computeAverage }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   // TO-DO: TO BE GRABBED FROM INITIAL GET REQUEST
@@ -96,10 +97,10 @@ export default function RelatedItems() {
   return (
     <RelatedItemsDiv>
       <div className="relatedProductsList">
-        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} />
+        <RelatedProductsList relatedProducts={relatedProducts} thisProduct={thisProduct[0]} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
       <div className="yourOutfitList">
-        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} />
+        <YourOutfitList thisProductID={productID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
     </RelatedItemsDiv>
   );

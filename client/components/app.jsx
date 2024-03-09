@@ -9,25 +9,6 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 const productId = 40346;
 
-const scaleRatings = (ratings) => {
-  const result = {};
-  let sum = 0;
-  Object.keys(ratings)?.forEach((key) => {
-    sum += Number(ratings[key]);
-  });
-  Object.keys(ratings).forEach((key) => {
-    result[key] = (Number(ratings[key]) / sum);
-  });
-  return result;
-};
-const computeAverage = (scaledRatings) => {
-  let result = 0;
-  Object?.keys(scaledRatings)?.forEach((key) => {
-    result += Number(key) * Number(scaledRatings[key]);
-  });
-  return result;
-};
-
 function App() {
   const [metadata, setMetadata] = useState();
   /*
@@ -38,6 +19,25 @@ function App() {
   let average = metadata?.ratings && computeAverage(rate);
   average = Math.round(average * 10) / 10;
   */
+
+  const scaleRatings = (ratings) => {
+    const result = {};
+    let sum = 0;
+    Object.keys(ratings)?.forEach((key) => {
+      sum += Number(ratings[key]);
+    });
+    Object.keys(ratings).forEach((key) => {
+      result[key] = (Number(ratings[key]) / sum);
+    });
+    return result;
+  };
+  const computeAverage = (scaledRatings) => {
+    let result = 0;
+    Object?.keys(scaledRatings)?.forEach((key) => {
+      result += Number(key) * Number(scaledRatings[key]);
+    });
+    return result;
+  };
 
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
@@ -77,7 +77,7 @@ function App() {
         <h1>Project Atelier</h1>
       </div>
       <ProductDetail scrollToReviews={scrollToReviews} />
-      <RelatedItems />
+      <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} />
 
       <div id="reviews-section">
         <Reviews metadata={metadata} />

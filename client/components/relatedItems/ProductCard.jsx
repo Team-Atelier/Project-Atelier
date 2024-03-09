@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
@@ -74,14 +75,14 @@ const TextContainer = styled.div`
 `;
 
 // eslint-disable-next-line object-curly-newline
-export default function ProductCard({ category, name, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit, handleProductChange }) {
+export default function ProductCard({ category, name, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit, handleProductChange, scaleRatings, computeAverage }) {
   const apiURL = process.env.API_URL;
   const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [ratings, setRatings] = useState({});
+  const [rating, setRating] = useState(0);
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -105,7 +106,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
       headers: { Authorization: token },
     })
       .then((results) => {
-        setRatings(results.data.ratings);
+        const scaledRatings = scaleRatings(results.data.ratings);
+        setRating(computeAverage(scaledRatings));
       });
   }, [id]);
 
@@ -139,7 +141,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
               {originalPrice}
             </p>
           )}
-          <p>Star Rating: </p>
+          <p>{rating}</p>
         </TextContainer>
       </CardClick>
     </Card>
