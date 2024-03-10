@@ -43,7 +43,7 @@ max-height: 80vh;
 width: 85vw;
 `;
 function ReviewModal({
-  newReviewData, metadata, handleNewReviewChange, resetImages,
+  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
 }) {
   return (
     <ModalWindowTemplate id="reviewsScreen">
@@ -53,13 +53,13 @@ function ReviewModal({
           metadata={metadata}
           handleNewReviewChange={handleNewReviewChange}
           resetImages={resetImages}
+          reloadReviews={reloadReviews}
         />
       </ReviewFormStyle>
     </ModalWindowTemplate>
   );
 }
-
-function Reviews({ metadata }) {
+function Reviews({ metadata, reloadReviews }) {
   const [newReviewData, setNewReviewData] = useState({});
   // const [metadata, setMetadata] = useState();
   const [ratingFilter, setRatingFilter] = useState({
@@ -152,6 +152,7 @@ function Reviews({ metadata }) {
 
   return (
     <>
+      <button type="button" onClick={() => { console.log(reloadReviews); }}> Test reload classReviews </button>
       <FlexRow>
         <RatingBreakdown
           metadata={metadata}
@@ -170,6 +171,7 @@ function Reviews({ metadata }) {
         metadata={metadata}
         handleNewReviewChange={handleNewReviewChange}
         resetImages={resetImages}
+        reloadReviews={reloadReviews}
       />
       <button
         type="button"

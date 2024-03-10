@@ -37,50 +37,39 @@ const Image = styled.img`
     },
   })
 */
-const postReview = async (reviewInfo) => {
-  let res;
-  try {
-    res = await axios.post(`${url}reviews`, reviewInfo, {
-      headers: { Authorization: token },
-    });
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-  console.log('post res', res);
-  return res;
-};
+const postReview = (reviewInfo) => axios.post(`${url}reviews`, reviewInfo, {
+  headers: { Authorization: token },
+});
 
 function AddReviews({
-  newReviewData, metadata, handleNewReviewChange, resetImages,
+  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
 }) {
   const validReview = () => {
-    debugger;
     const mandatoryFields = [
       'rating',
       'summary',
       'body',
       'recommend',
       'name',
-      'email',
-      'characteristics'];
+      'email'];
     // eslint-disable-next-line no-restricted-syntax
-    for (const item of mandatoryFields) {
+    const result = mandatoryFields.every((item) => {
       if (newReviewData[item] === undefined) {
         return false;
       }
       if (newReviewData[item] === '') {
         return false;
       }
-      if (newReviewData[item] === []) {
-        return false;
-      }
+      return true;
+    });
+    if (result === false) {
+      return false;
     }
     // Other aspects have been resolved as those text boxes have character limits.
     if (newReviewData.body.length <= 50) {
       return false;
     }
-    const emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+    const emailRegEx = /^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i;
     if (!emailRegEx.test(newReviewData.email)) {
       return false;
     }
@@ -90,7 +79,6 @@ function AddReviews({
     if (!validCharacteristics) {
       return false;
     }
-
     return true;
   };
   return (
@@ -101,7 +89,8 @@ function AddReviews({
         <input
           name="name"
           maxLength="60"
-          value={newReviewData.name ?? 'Example: jackson11!'}
+          value={newReviewData.name}
+          placeholder="Example: jackson11!"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
         />
@@ -117,7 +106,8 @@ function AddReviews({
         <input
           name="email"
           maxLength="60"
-          value={newReviewData.email ?? 'Example: jackson11@email.com'}
+          value={newReviewData.email}
+          placeholder="Example: jackson11@email.com"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
         />
@@ -161,7 +151,8 @@ function AddReviews({
         <input
           name="summary"
           maxLength="60"
-          value={newReviewData.summary ?? 'Example: Best purchase ever!'}
+          value={newReviewData.summary}
+          placeholder="Example: Best purchase ever!"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
         />
@@ -173,7 +164,14 @@ function AddReviews({
       <div>
         Your honest review:
         <br />
-        <textarea name="body" maxLength="1000" value={newReviewData.body ?? 'Why did you like the product or not?'} style={{ width: '90%' }} onChange={(e) => { handleNewReviewChange(e); }} />
+        <textarea
+          name="body"
+          maxLength="1000"
+          value={newReviewData.body}
+          placeholder="Why did you like the product or not?"
+          style={{ width: '90%' }}
+          onChange={(e) => { handleNewReviewChange(e); }}
+        />
         <br />
         {newReviewData.body && newReviewData.body.length >= 50 ? 'Minimum reached' : ''}
         {newReviewData.body && newReviewData.body.length < 50 ? `${50 - newReviewData.body.length} characters needed until 50 character minimum reached` : ''}
@@ -241,7 +239,7 @@ function AddReviews({
         onClick={() => {
           if (!validReview()) {
             console.log(validReview());
-            alert('Invalid review, please ensure no field are empty and character minimums are met.');
+            alert('Invalid review, please ensure no fields are empty and character minimums are met.');
             return;
           }
           const review = { ...newReviewData };
@@ -249,15 +247,27 @@ function AddReviews({
           review.recommend = review.recommend === 'true';
           // console.log(review.product_id);
           postReview(review)
-            .then((data) => {
-              console.log(data);
+            .then(() => {
+              reloadReviews();
               alert('Review submitted!');
-              window.location.reload();
+              document.getElementById('reviewsScreen').style.display = 'none';
+              const modal = document.getElementById('reviewsScreen');
+              modal.style.display = 'none';
             })
-            .catch(() => { alert('cannot post review'); });
+            .catch((err) => (console.log(err)));
         }}
       >
         Submit review
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          console.log(reloadReviews);
+          const test = document.getElementById('reviewsScreen');
+          test.style.display = 'none';
+        }}
+      >
+        Debug
       </button>
     </>
   );
