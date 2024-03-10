@@ -11,7 +11,6 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 // const productId = 40346;
 
-
 const Title = styled.div`
   font-family: mate;
 `;
@@ -103,7 +102,7 @@ function App() {
       <Title>
         <h1>Project Atelier</h1>
       </Title>
-      <ProductDetail scrollToReviews={scrollToReviews} />
+      <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
 
       <div id="reviews-section">
