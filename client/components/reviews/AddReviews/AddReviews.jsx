@@ -259,16 +259,6 @@ function AddReviews({
       >
         Submit review
       </button>
-      <button
-        type="button"
-        onClick={() => {
-          console.log(reloadReviews);
-          const test = document.getElementById('reviewsScreen');
-          test.style.display = 'none';
-        }}
-      >
-        Debug
-      </button>
     </>
   );
 }

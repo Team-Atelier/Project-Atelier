@@ -152,7 +152,6 @@ function Reviews({ metadata, reloadReviews }) {
 
   return (
     <>
-      <button type="button" onClick={() => { console.log(reloadReviews); }}> Test reload classReviews </button>
       <FlexRow>
         <RatingBreakdown
           metadata={metadata}

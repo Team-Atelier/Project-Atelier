@@ -75,7 +75,7 @@ function App() {
         meta.average = computeAverage(meta.scaled);
         setMetadata(meta);
       });
-  }, [numReviewsAdded]);
+  }, [currentProductID, numReviewsAdded]);
 
   /* ----- Function for user navigation ----- */
   const scrollToReviews = () => {
@@ -98,8 +98,8 @@ function App() {
         <h1>Project Atelier</h1>
       </Title>
       <ProductDetail scrollToReviews={scrollToReviews} />
-      <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
 
+      <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
         <Reviews metadata={metadata} reloadReviews={reloadReviews} />
       </div>
