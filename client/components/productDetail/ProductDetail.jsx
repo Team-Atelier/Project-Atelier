@@ -46,7 +46,7 @@ function ProductDetail({
       .catch((err) => {
         console.error('Error fetching data:', err);
       });
-  }, []);
+  }, [currentProductID]);
 
   if (!productInformation) {
     return <div>Loading...</div>;
