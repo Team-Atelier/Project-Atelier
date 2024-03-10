@@ -7,7 +7,7 @@ import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';
 import CompareProductsModal from './CompareProductsModal.jsx';
 
-export default function RelatedProductsList({ relatedProducts, thisProduct, handleProductChange }) {
+export default function RelatedProductsList({ relatedProducts, thisProduct, handleProductChange, scaleRatings, computeAverage }) {
   const [showModal, setShowModal] = useState(false);
   const [comparisonProduct, setComparisonProduct] = useState({});
 
@@ -26,7 +26,7 @@ export default function RelatedProductsList({ relatedProducts, thisProduct, hand
       </h2>
       {showModal ? <CompareProductsModal handleModalClose={handleModalClose} comparisonProduct={comparisonProduct} thisProduct={thisProduct} /> : null}
       <ItemCarousel>
-        {relatedProducts ? relatedProducts.map((product) => <ProductCard comparisonProduct={product} category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} relatedProduct={true} handleModalOpen={handleModalOpen} handleProductChange={handleProductChange} />) : null}
+        {relatedProducts ? relatedProducts.map((product) => <ProductCard comparisonProduct={product} category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} relatedProduct={true} handleModalOpen={handleModalOpen} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />) : null}
       </ItemCarousel>
     </>
   );
