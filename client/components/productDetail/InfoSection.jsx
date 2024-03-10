@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/extensions */
@@ -8,6 +9,7 @@ import styled from 'styled-components';
 import { FaFacebookSquare, FaPinterestSquare } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import ThumbnailOverlay from './ThumbnailOverlay.jsx';
+import StarRating from '../reviews/StarRating.jsx';
 
 const { useState, useEffect, useRef } = React;
 
@@ -16,7 +18,7 @@ const InfoSectionContainer = styled.div`
   padding: 20px;
 `;
 
-const StarRating = styled.div`
+const Stars = styled.div`
   font-size: 14px;
 `;
 
@@ -205,7 +207,9 @@ const PinterestButton = styled.button`
 `;
 
 // eslint-disable-next-line react/prop-types
-function InfoSection({ productId, onStyleSelect, scrollToReviews }) {
+function InfoSection({
+  productId, onStyleSelect, scrollToReviews, scaleRatings, computeAverage,
+}) {
   const [infoSectionProduct, setInfoSectionProduct] = useState([]);
   const [productStyle, setProductStyle] = useState([]);
   const [selectedStyleId, setSelectedStyleId] = useState(null);
@@ -215,6 +219,7 @@ function InfoSection({ productId, onStyleSelect, scrollToReviews }) {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
+  const [rating, setRating] = useState([]);
   const sizeDropdownRef = useRef(null);
 
   const apiURL = process.env.API_URL;
@@ -254,7 +259,17 @@ function InfoSection({ productId, onStyleSelect, scrollToReviews }) {
             console.error('Error retrieving product styles:', err);
           });
       });
-  }, []);
+  }, [productId]);
+
+  useEffect(() => {
+    axios.get(`${apiURL}reviews/meta?product_id=${productId}`, {
+      headers: { Authorization: token },
+    })
+      .then((results) => {
+        const scaledRatings = scaleRatings(results.data.ratings);
+        setRating([computeAverage(scaledRatings)]);
+      });
+  }, [productId]);
 
   // eslint-disable-next-line no-shadow
   const handleStyleSelect = (styleId, styleName, stylePrice, styleSalePrice) => {
@@ -310,10 +325,10 @@ function InfoSection({ productId, onStyleSelect, scrollToReviews }) {
   return (
 
     <InfoSectionContainer>
-      <StarRating scrollToReviews={scrollToReviews}>
-        (stars will go here)
+      <Stars scrollToReviews={scrollToReviews}>
+        <StarRating rating={rating || 0} />
         <a href="#" onClick={scrollToReviews}>Read all reviews</a>
-      </StarRating>
+      </Stars>
 
       <ProductCategory>{infoSectionProduct.category}</ProductCategory>
 
