@@ -70,15 +70,16 @@ function AddReviews({
       return false;
     }
     const emailRegEx = /^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i;
-    if (!emailRegEx.test(newReviewData.email)) {
+    if (emailRegEx.test(newReviewData.email) === false) {
       return false;
     }
 
     const validCharacteristics = Object.keys(metadata?.characteristics)?.length
     === Object.keys(newReviewData.characteristics).length;
-    if (!validCharacteristics) {
+    if (validCharacteristics === false) {
       return false;
     }
+
     return true;
   };
   return (
@@ -89,7 +90,7 @@ function AddReviews({
         <input
           name="name"
           maxLength="60"
-          value={newReviewData.name}
+          value={newReviewData.name || ''}
           placeholder="Example: jackson11!"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
@@ -106,7 +107,7 @@ function AddReviews({
         <input
           name="email"
           maxLength="60"
-          value={newReviewData.email}
+          value={newReviewData.email || ''}
           placeholder="Example: jackson11@email.com"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
@@ -151,7 +152,7 @@ function AddReviews({
         <input
           name="summary"
           maxLength="60"
-          value={newReviewData.summary}
+          value={newReviewData.summary || ''}
           placeholder="Example: Best purchase ever!"
           style={{ width: '300px' }}
           onChange={(e) => { handleNewReviewChange(e); }}
@@ -167,7 +168,7 @@ function AddReviews({
         <textarea
           name="body"
           maxLength="1000"
-          value={newReviewData.body}
+          value={newReviewData.body || ''}
           placeholder="Why did you like the product or not?"
           style={{ width: '90%' }}
           onChange={(e) => { handleNewReviewChange(e); }}
