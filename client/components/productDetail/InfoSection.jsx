@@ -259,7 +259,7 @@ function InfoSection({
             console.error('Error retrieving product styles:', err);
           });
       });
-  }, []);
+  }, [productId]);
 
   useEffect(() => {
     axios.get(`${apiURL}reviews/meta?product_id=${productId}`, {
