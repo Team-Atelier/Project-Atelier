@@ -97,8 +97,8 @@ function App() {
       <Title>
         <h1>Project Atelier</h1>
       </Title>
-      <ProductDetail scrollToReviews={scrollToReviews} />
 
+      <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
         <Reviews metadata={metadata} reloadReviews={reloadReviews} />
