@@ -53,7 +53,7 @@ function RatingRowElement({
       </div>
 
       <PartiallyFilledBar percentage={rate?.[star] * 100 || 100} />
-      <div>{`(${metadata?.ratings[star]})`}</div>
+      <div>{`(${metadata?.ratings?.[star]})`}</div>
     </RatingRow>
   );
 }

@@ -15,6 +15,7 @@ const ProductDetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: mate;
 `;
 
 const ProductSectionContainer = styled.div`
@@ -24,7 +25,9 @@ const ProductSectionContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-function ProductDetail({ scrollToReviews }) {
+function ProductDetail({
+  currentProductID, scrollToReviews, scaleRatings, computeAverage,
+}) {
   const [productInformation, setProductInformation] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
 
@@ -32,7 +35,7 @@ function ProductDetail({ scrollToReviews }) {
   const token = process.env.GITHUB_TOKEN;
 
   useEffect(() => {
-    axios.get(`${apiURL}products/40346`, {
+    axios.get(`${apiURL}products/${currentProductID}`, {
       headers: {
         Authorization: token,
       },
@@ -43,7 +46,7 @@ function ProductDetail({ scrollToReviews }) {
       .catch((err) => {
         console.error('Error fetching data:', err);
       });
-  }, []);
+  }, [currentProductID]);
 
   if (!productInformation) {
     return <div>Loading...</div>;
@@ -57,7 +60,13 @@ function ProductDetail({ scrollToReviews }) {
     <ProductDetailContainer>
       <ProductSectionContainer>
         <PhotoSection productId={productInformation.id} selectedStyle={selectedStyle} />
-        <InfoSection productId={productInformation.id} onStyleSelect={handleStyleSelect} scrollToReviews={scrollToReviews} />
+        <InfoSection
+          productId={productInformation.id}
+          onStyleSelect={handleStyleSelect}
+          scrollToReviews={scrollToReviews}
+          scaleRatings={scaleRatings}
+          computeAverage={computeAverage}
+        />
       </ProductSectionContainer>
       <Description productId={productInformation.id} />
     </ProductDetailContainer>

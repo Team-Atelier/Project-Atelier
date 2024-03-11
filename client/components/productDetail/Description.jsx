@@ -71,7 +71,7 @@ function Description({ productId }) {
       .catch((err) => {
         console.error('Error retrieving product information:', err);
       });
-  }, []);
+  }, [productId]);
 
   return (
     <DescriptionContainer>
