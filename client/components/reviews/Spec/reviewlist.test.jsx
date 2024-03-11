@@ -3,8 +3,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-deprecated */
 import React from 'react';
-import { render, screen, act, waitFor } from '@testing-library/react';
+import {
+  render, screen, act, waitFor,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import ReviewsList from '../ReviewsList.jsx';
 import ReviewTile from '../ReviewTile.jsx';
@@ -129,6 +132,7 @@ describe('Review tile', () => {
     mockReviewAPI.results.push(mockReviewAPI.results[0]);
     mockReviewAPI.results.push(mockReviewAPI.results[0]);
     const reply = { status: 200, data: mockReviewAPI };
+    const user = userEvent.setup();
     axios.get = jest.fn().mockResolvedValue(reply);
     const rendered = render(<ReviewsList
       productId={40346}
@@ -144,7 +148,12 @@ describe('Review tile', () => {
     await waitFor(() => {
       expect(screen.getAllByRole('article')).toHaveLength(2);
     });
+    await waitFor(() => {
+      user.click(screen.getByRole('button'), { name: /More Reviews/ });
+    });
 
-
+    await waitFor(() => {
+      expect(screen.getAllByRole('article')).toHaveLength(4);
+    });
   });
 });

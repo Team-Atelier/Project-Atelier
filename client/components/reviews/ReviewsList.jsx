@@ -146,6 +146,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     });
     return results;
   };
+
   const setSort = (e) => {
     setVisibleReviews(2);
     const method = e.target.value;
