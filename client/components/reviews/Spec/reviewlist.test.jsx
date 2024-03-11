@@ -3,13 +3,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-deprecated */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {
+  render, screen, act, waitFor,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
-import ReviewList from '../ReviewList.jsx';
-import MockAdapter from 'axios-mock-adapter';
-
-jest.mock('axios');
+import ReviewsList from '../ReviewsList.jsx';
+import ReviewTile from '../ReviewTile.jsx';
 
 const mockMetadata = {
   product_id: '40346',
@@ -54,32 +55,105 @@ const mockMetadata = {
   },
   average: 3.477031802120141,
 };
-
+const mockReviewAPI = {
+  product: '40346',
+  page: 0,
+  count: 400,
+  results: [
+    {
+      review_id: 1280925,
+      rating: 4,
+      summary: 'I love dogs more than cats',
+      recommend: false,
+      response: null,
+      body: 'I love dogs more than cats I love dogs more than cats I love dogs more than cats I love dogs more than cats I love dogs more than cats I love dogs more than cats',
+      date: '2024-03-10T00:00:00.000Z',
+      reviewer_name: 'jackson11',
+      helpfulness: 0,
+      photos: [
+        {
+          id: 2459297,
+          url: 'https://i.imgur.com/E6cvpNw.jpeg',
+        },
+      ],
+    },
+    {
+      review_id: 1280924,
+      rating: 4,
+      summary: 'Example: Best purchase ever',
+      recommend: true,
+      response: null,
+      body: 'Why did you like the product or not? Why did you like the product or not? Why did you like the product or not? Why did you like the product or not? Why did you like the product or not?',
+      date: '2024-03-10T00:00:00.000Z',
+      reviewer_name: 'jackson11',
+      helpfulness: 0,
+      photos: [],
+    },
+    {
+      review_id: 1280923,
+      rating: 3,
+      summary: 'Best purchase ever!',
+      recommend: true,
+      response: null,
+      body: 'Why did you like the product or not? Why did you like the product or not?',
+      date: '2024-03-10T00:00:00.000Z',
+      reviewer_name: 'jackson11!',
+      helpfulness: 0,
+      photos: [
+        {
+          id: 2459296,
+          url: 'https://www.popsci.com/uploads/2022/04/29/husky-independent-personality-dog-breeds.jpg',
+        },
+      ],
+    },
+    {
+      review_id: 1280922,
+      rating: 5,
+      summary: 'I love dogs more than cats',
+      recommend: false,
+      response: null,
+      body: 'This is my testThis is my testThis is my testThis is my testThis is my test',
+      date: '2024-03-10T00:00:00.000Z',
+      reviewer_name: 'jackson11!',
+      helpfulness: 0,
+      photos: [
+        {
+          id: 2459295,
+          url: 'https://i.imgur.com/E6cvpNw.jpeg',
+        },
+      ],
+    },
+  ],
+};
+// jest.mock('axios');
 describe('Review tile', () => {
-  test('Should render seller response if present', () => {
-    const mockCallback = (() => {});
-    render(
-    );
-    expect(screen.getByText(new RegExp(aReview.response))).toBeInTheDocument();
-    expect(screen.getByText('✓ I recommend this product')).toBeInTheDocument();
+  test('should render two list items at first', async () => {
+    mockReviewAPI.results.push(mockReviewAPI.results[0]);
+    mockReviewAPI.results.push(mockReviewAPI.results[0]);
+    mockReviewAPI.results.push(mockReviewAPI.results[0]);
+    const reply = { status: 200, data: mockReviewAPI };
+    const user = userEvent.setup();
+    axios.get = jest.fn().mockResolvedValue(reply);
+    const rendered = render(<ReviewsList
+      productId={40346}
+      ratingFilter={{
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+      }}
+      metadata={mockMetadata}
+    />);
+    await waitFor(() => {
+      expect(screen.getAllByRole('article')).toHaveLength(2);
+    });
+    await waitFor(() => {
+      user.click(screen.getByRole('button'), { name: /More Reviews/ });
+    });
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('article')).toHaveLength(4);
+    });
   });
-});
-
-
-
-describe('Api tests', () => {
-  let mockAxios;
-
-  beforeAll(() => {
-    mockAxios = new MockAdapter(axios);
-  });
-
-  afterEach(() => {
-    mockAxios.reset();
-  });
-
-  afterAll(() => {
-    mockAxios.restore();
-  });
-
 });
