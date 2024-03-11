@@ -11,11 +11,13 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 // const productId = 40346;
 
+
 const Title = styled.div`
   font-family: mate;
 `;
 
 function App() {
+
   const [metadata, setMetadata] = useState();
   const [currentProductData, setCurrentProductData] = useState({});
   const [currentProductID, setCurrentProductID] = useState(40346);
@@ -29,6 +31,9 @@ function App() {
   */
 
   /* ----- Functions for grabbing review data and computing averges ----- */
+
+  console.log('I want to keep these files!');
+
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
       headers: { Authorization: token },
@@ -83,7 +88,7 @@ function App() {
   }, []);
 
   /* ----- Function for user navigation ----- */
-  const scrollToReviews = ({}) => {
+  const scrollToReviews = () => {
     const reviewsSection = document.getElementById('reviews-section');
     if (reviewsSection) {
       reviewsSection.scrollIntoView({ behavior: 'smooth' });
@@ -93,7 +98,6 @@ function App() {
   /* ----- Function for changing product ----- */
   const handleProductChange = (newID) => {
     setCurrentProductID(newID);
-    console.log('hello');
   };
 
   return (

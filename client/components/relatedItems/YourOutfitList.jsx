@@ -12,8 +12,7 @@ export default function YourOutfitList({
   const outfitList = true;
 
   return (
-    <
-    
+    <>
       <h2>
         Build an ensemble
       </h2>
