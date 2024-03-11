@@ -102,15 +102,6 @@ function App() {
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
         <Reviews metadata={metadata} reloadReviews={reloadReviews} />
-        <button
-          type="button"
-          onClick={() => {
-            console.log('Testing');
-            currentProductID === 40346 ? setCurrentProductID(40344) : setCurrentProductID(40346);
-          }}
-        >
-          Test switching products
-        </button>
       </div>
     </>
   );
