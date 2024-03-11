@@ -21,7 +21,7 @@ function App() {
   const [currentProductID, setCurrentProductID] = useState(40346);
   const [numReviewsAdded, setNumReviewsAdded] = useState(0);
 
-  /* ----- Function tell page to refresh when new review is added ----- */
+  /* ----- Function tells reviews to refresh when new review is added ----- */
   const reloadReviews = () => {
     setNumReviewsAdded(numReviewsAdded + 1);
   };
@@ -102,6 +102,15 @@ function App() {
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
         <Reviews metadata={metadata} reloadReviews={reloadReviews} />
+        <button
+          type="button"
+          onClick={() => {
+            console.log('Testing');
+            currentProductID === 40346 ? setCurrentProductID(40344) : setCurrentProductID(40346);
+          }}
+        >
+          Test switching products
+        </button>
       </div>
     </>
   );

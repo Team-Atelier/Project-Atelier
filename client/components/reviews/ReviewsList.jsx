@@ -158,7 +158,25 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     return false;
   };
   return (
+
     <>
+      {relevantReviews.length === 0 && (
+      <div>
+        <h2>Be the first to review this product!</h2>
+        <button
+          type="button"
+          style={{ position: 'relative', left: '40%' }}
+          onClick={(e) => {
+            const modal = document.getElementById('reviewsScreen');
+            modal.style.display = 'flex';
+          }}
+        >
+          Add your review today!
+        </button>
+      </div>
+      )}
+      {relevantReviews.length !== 0
+      && (
       <div>
         <ImageModal src={modalImg} />
         Sort by:
@@ -169,18 +187,21 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
           <option value="newest">Newest</option>
         </select>
       </div>
+      )}
       <ReviewBox>
-        {currentSort === 'relevant'
+        {relevantReviews.length !== 0 && currentSort === 'relevant'
         && <FormatReviews reviewsArray={relevantReviews} markedAsHelpful={markedAsHelpful} />}
-        {currentSort === 'helpful'
+        {relevantReviews.length !== 0 && currentSort === 'helpful'
         && <FormatReviews reviewsArray={helpfulReviews} markedAsHelpful={markedAsHelpful} />}
-        {currentSort === 'newest'
+        {relevantReviews.length !== 0 && currentSort === 'newest'
         && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
       </ReviewBox>
+
       <div>
         {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(twoReviewsOrLess()); }}>More reviews</button>}
       </div>
     </>
+
   );
 }
 export default ReviewsList;
