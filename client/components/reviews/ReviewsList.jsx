@@ -141,7 +141,9 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
       .toSpliced(visibleReviews, relevantReviews.length)
     );
     console.log(results.length);
-    setCurrentLength(results.length);
+    useEffect(() => {
+      setCurrentLength(results.length);
+    });
     return results;
   };
   const setSort = (e) => {
