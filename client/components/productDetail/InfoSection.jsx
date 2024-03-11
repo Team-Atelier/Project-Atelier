@@ -220,6 +220,7 @@ function InfoSection({
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
   const [rating, setRating] = useState([]);
+  const [reviewCount, setReviewCount] = useState(0);
   const sizeDropdownRef = useRef(null);
 
   const apiURL = process.env.API_URL;
@@ -268,6 +269,10 @@ function InfoSection({
       .then((results) => {
         const scaledRatings = scaleRatings(results.data.ratings);
         setRating([computeAverage(scaledRatings)]);
+        const recCount = results.data.recommended;
+        const noCount = Number(recCount.false);
+        const yesCount = Number(recCount.true);
+        setReviewCount(noCount + yesCount);
       });
   }, [productId]);
 
@@ -327,7 +332,15 @@ function InfoSection({
     <InfoSectionContainer>
       <Stars scrollToReviews={scrollToReviews}>
         <StarRating rating={rating || 0} />
-        <a href="#" onClick={scrollToReviews}>Read all reviews</a>
+        <a href="#" onClick={scrollToReviews} data-testid="scroll-to-reviews">
+          Read
+          {' '}
+          all
+          {' '}
+          {reviewCount}
+          {' '}
+          reviews
+        </a>
       </Stars>
 
       <ProductCategory>{infoSectionProduct.category}</ProductCategory>
@@ -361,7 +374,7 @@ function InfoSection({
         {styleName}
       </SelectedStyle>
 
-      <ThumbnailContainer>
+      <ThumbnailContainer data-testid="thumbnail-overlay">
         {productStyle.map((style) => (
           <ThumbnailOverlay
             key={style.style_id}
