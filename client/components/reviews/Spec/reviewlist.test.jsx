@@ -128,13 +128,13 @@ const mockReviewAPI = {
 // jest.mock('axios');
 describe('Review tile', () => {
   test('should render two list items at first', async () => {
+    const user = userEvent.setup();
     mockReviewAPI.results.push(mockReviewAPI.results[0]);
     mockReviewAPI.results.push(mockReviewAPI.results[0]);
     mockReviewAPI.results.push(mockReviewAPI.results[0]);
     const reply = { status: 200, data: mockReviewAPI };
-    const user = userEvent.setup();
     axios.get = jest.fn().mockResolvedValue(reply);
-    const rendered = render(<ReviewsList
+    render(<ReviewsList
       productId={40346}
       ratingFilter={{
         1: false,
@@ -145,13 +145,14 @@ describe('Review tile', () => {
       }}
       metadata={mockMetadata}
     />);
+
     await waitFor(() => {
       expect(screen.getAllByRole('article')).toHaveLength(2);
     });
-    await waitFor(() => {
-      user.click(screen.getByRole('button'), { name: /More Reviews/ });
-    });
 
+    await waitFor(() => {
+      user.click(screen.getByRole('button', { name: /More reviews/ }));
+    });
     await waitFor(() => {
       expect(screen.getAllByRole('article')).toHaveLength(4);
     });
