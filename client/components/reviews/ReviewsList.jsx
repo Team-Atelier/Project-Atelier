@@ -77,7 +77,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
 
   useEffect(() => {
-    if (metadata?.ratings !== undefined) {
+    if (metadata?.ratings) {
       refresh(metadata?.ratings);
     }
   }, [metadata?.ratings]);

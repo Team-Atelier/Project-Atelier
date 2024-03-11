@@ -11,25 +11,20 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 // const productId = 40346;
 
-
 const Title = styled.div`
   font-family: mate;
 `;
 
 function App() {
-
-  const [metadata, setMetadata] = useState();
+  const [metadata, setMetadata] = useState({});
   const [currentProductData, setCurrentProductData] = useState({});
   const [currentProductID, setCurrentProductID] = useState(40346);
-  /*
-  const rec = Number(metadata?.recommended?.true);
-  const noRec = Number(metadata?.recommended?.false);
-  const percentRecommend = 100 * (rec / (rec + noRec));
-  const rate = metadata?.ratings && scaleRatings(metadata.ratings);
-  let average = metadata?.ratings && computeAverage(rate);
-  average = Math.round(average * 10) / 10;
-  */
+  const [numReviewsAdded, setNumReviewsAdded] = useState(0);
 
+  /* ----- Function tell page to refresh when new review is added ----- */
+  const reloadReviews = () => {
+    setNumReviewsAdded(numReviewsAdded + 1);
+  };
   /* ----- Functions for grabbing review data and computing averges ----- */
 
   console.log('I want to keep these files!');
@@ -40,7 +35,7 @@ function App() {
       params: {
         product_id: currentProductID,
       },
-    }).catch((err) => console.log(err));
+    }).catch((err) => err);
     return data;
   };
   const scaleRatings = (ratings) => {
@@ -61,7 +56,6 @@ function App() {
     });
     return result;
   };
-
   /* ----- Rendering Initial State ----- */
   useEffect(() => {
     axios.get(`${url}products/${currentProductID}`, {
@@ -77,7 +71,6 @@ function App() {
       .then((res) => {
         const { data } = res;
         const meta = { ...res.data };
-        console.log('the meta', meta);
         meta.rec = Number(data?.recommended?.true);
         meta.noRec = Number(data?.recommended?.false);
         meta.percentRecommend = 100 * (meta.rec / (meta.rec + meta.noRec));
@@ -85,7 +78,7 @@ function App() {
         meta.average = computeAverage(meta.scaled);
         setMetadata(meta);
       });
-  }, []);
+  }, [currentProductID, numReviewsAdded]);
 
   /* ----- Function for user navigation ----- */
   const scrollToReviews = () => {
@@ -106,11 +99,11 @@ function App() {
       <Title>
         <h1>Project Atelier</h1>
       </Title>
-      <ProductDetail scrollToReviews={scrollToReviews} />
-      <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
 
+      <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
+      <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
-        <Reviews metadata={metadata} />
+        <Reviews metadata={metadata} reloadReviews={reloadReviews} />
       </div>
     </>
   );
