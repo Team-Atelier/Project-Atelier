@@ -21,9 +21,14 @@ export default function RelatedItems({
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
 
+  console.log('relatedprodcuts', relatedProducts);
+  console.log('storedoutfit', storedOutfit);
+  console.log('outfitinfo', outfitInfo);
+
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getProductInfo = async (ProductIDs, typeOfList) => {
+    console.log('productIDs are here:', ProductIDs);
     const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
     })));
@@ -35,8 +40,8 @@ export default function RelatedItems({
     }
   };
 
-  const getRelatedProducts = (productData) => {
-    axios.get(`${apiURL}products/${productData.id}/related`, {
+  const getRelatedProducts = (id) => {
+    axios.get(`${apiURL}products/${id}/related`, {
       headers: { Authorization: token },
     })
       .then((results) => {
@@ -49,6 +54,7 @@ export default function RelatedItems({
   const outfits = JSON.parse(localStorage.getItem('outfit'));
 
   const addToOutfit = (ID) => {
+    console.log('here is ID', ID);
     if (!outfits.includes(ID)) {
       localStorage.setItem('outfit', JSON.stringify(outfits.concat(ID)));
       setStoredOutfit(outfits.concat(ID));
@@ -62,8 +68,8 @@ export default function RelatedItems({
 
   // USE EFFECTS
   useEffect(() => {
-    getRelatedProducts(currentProductData);
-  }, [currentProductData]);
+    getRelatedProducts(currentProductData.id);
+  }, [currentProductData.id]);
 
   useEffect(() => {
     if (localStorage.getItem('outfit') === null) {

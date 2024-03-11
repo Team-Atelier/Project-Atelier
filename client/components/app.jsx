@@ -26,6 +26,9 @@ function App() {
     setNumReviewsAdded(numReviewsAdded + 1);
   };
   /* ----- Functions for grabbing review data and computing averges ----- */
+
+  console.log('I want to keep these files!');
+
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
       headers: { Authorization: token },
@@ -88,7 +91,6 @@ function App() {
   /* ----- Function for changing product ----- */
   const handleProductChange = (newID) => {
     setCurrentProductID(newID);
-    console.log('hello');
   };
 
   return (

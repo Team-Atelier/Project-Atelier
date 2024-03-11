@@ -4,11 +4,11 @@
   "description": "Modernization of e-commerce site",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "client-dev": "npx webpack --watch",
     "server-dev": "npx nodemon --watch server server/server.js",
     "coverage": "jest --env=jsdom --coverage",
-    "coverage:single": "jest --env=jsdom --coverage client/components/productDetail/Spec/ProductDetail.test.jsx"
+    "coverage:single": "jest --env=jsdom --coverage client/components/relatedItems/Spec/RelatedItems.test.jsx"
   },
   "repository": {
     "type": "git",
@@ -54,9 +54,5 @@
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "styled-components": "^6.1.8"
-  },
-  "jest": {
-    "testEnvironment": "jsdom",
-    "setupFilesAfterEnv": [ "@testing-library/jest-dom" ]
   }
 }
