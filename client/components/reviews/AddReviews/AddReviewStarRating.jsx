@@ -38,10 +38,11 @@ const Star = ({
     handleHover(nextRating);
   };
   return (
-    <>
+    <div data-testid={`rsr-${rating}`}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/cssfont-awesome.min.css" />
       {solid && (
       <span
+
         className="fa fa-star"
         onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
@@ -57,11 +58,11 @@ const Star = ({
         onMouseLeave={() => { handleMouseExit(); }}
       />
       )}
-    </>
+    </div>
   );
 };
 
-const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, handleHover }) => {
+const AddReviewStarRating = ({ newReviewData, handleNewReviewChange }) => {
   const [hoverRating, setHoverRating] = useState([false, false, false, false]);
   const [ratingBlurb, setRatingBlurb] = useState('');
   const handleStarClick = (e) => {
@@ -79,11 +80,13 @@ const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, handleHover
       {ratingBlurb === 3 && <div>Average</div>}
       {ratingBlurb === 4 && <div>Good</div>}
       {ratingBlurb === 5 && <div>Great</div>}
-      <Star solid={hoverRating[0]} rating={1} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[1]} rating={2} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[2]} rating={3} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[3]} rating={4} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[4]} rating={5} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+      <div style={{ display: 'flex' }}>
+        <Star solid={hoverRating[0]} rating={1} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[1]} rating={2} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[2]} rating={3} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[3]} rating={4} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[4]} rating={5} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+      </div>
     </>
 
   );
