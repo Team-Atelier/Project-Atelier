@@ -11,8 +11,11 @@ const url = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 // const productId = 40346;
 
-const Title = styled.div`
+const Title = styled.h1`
   font-family: mate;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
 `;
 
 function App() {
@@ -26,8 +29,6 @@ function App() {
     setNumReviewsAdded(numReviewsAdded + 1);
   };
   /* ----- Functions for grabbing review data and computing averges ----- */
-
-  console.log('I want to keep these files!');
 
   const getMetadata = async () => {
     const data = await axios.get(`${url}reviews/meta`, {
@@ -97,7 +98,7 @@ function App() {
     <>
 
       <Title>
-        <h1>Project Atelier</h1>
+        Project Atelier
       </Title>
 
       <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
