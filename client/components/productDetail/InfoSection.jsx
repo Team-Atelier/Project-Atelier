@@ -223,15 +223,8 @@ function InfoSection({
   const [reviewCount, setReviewCount] = useState(0);
   const sizeDropdownRef = useRef(null);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${productId}`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${productId}`)
       .then((response) => {
         setInfoSectionProduct(response.data);
       })
@@ -239,11 +232,7 @@ function InfoSection({
         console.error('Error retrieving product information for InfoSection component:', err);
       })
       .then(() => {
-        axios.get(`${apiURL}products/${productId}/styles`, {
-          headers: {
-            Authorization: token,
-          },
-        })
+        axios.get(`/api/products/${productId}/styles`)
           .then((response) => {
             setProductStyle(response.data.results);
             if (response.data.results.length > 0) {
@@ -263,9 +252,7 @@ function InfoSection({
   }, [productId]);
 
   useEffect(() => {
-    axios.get(`${apiURL}reviews/meta?product_id=${productId}`, {
-      headers: { Authorization: token },
-    })
+    axios.get(`/api/reviews/meta?product_id=${productId}`)
       .then((results) => {
         const scaledRatings = scaleRatings(results.data.ratings);
         setRating([computeAverage(scaledRatings)]);

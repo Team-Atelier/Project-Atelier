@@ -189,15 +189,8 @@ function PhotoSection({ productId, selectedStyle }) {
   const [expandedView, setExpandedView] = useState(false);
   const [zoomed, setZoomed] = useState(false);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${productId}/styles`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${productId}/styles`)
       .then((response) => {
         setStyles(response.data.results);
       })
@@ -237,6 +230,10 @@ function PhotoSection({ productId, selectedStyle }) {
 
     const visibleThumbnails = 7;
     const totalThumbnails = selectedPhotos.length;
+
+    if (totalThumbnails <= 7) {
+      return;
+    }
 
     if (direction === 'up') {
       setStartIdx(Math.max(0, startIdx - 1));

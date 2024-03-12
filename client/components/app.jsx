@@ -7,12 +7,11 @@ import ProductDetail from './productDetail/ProductDetail.jsx';
 import Reviews from './reviews/Reviews.jsx';
 import RelatedItems from './relatedItems/RelatedItems.jsx';
 
-const url = process.env.API_URL;
-const token = process.env.GITHUB_TOKEN;
-// const productId = 40346;
-
-const Title = styled.div`
+const Title = styled.h1`
   font-family: mate;
+  text-align: center;
+  font-style: italic;
+  font-weight: bold;
 `;
 
 function App() {
@@ -28,8 +27,7 @@ function App() {
   /* ----- Functions for grabbing review data and computing averges ----- */
 
   const getMetadata = async () => {
-    const data = await axios.get(`${url}reviews/meta`, {
-      headers: { Authorization: token },
+    const data = await axios.get('/api/reviews/meta', {
       params: {
         product_id: currentProductID,
       },
@@ -56,9 +54,7 @@ function App() {
   };
   /* ----- Rendering Initial State ----- */
   useEffect(() => {
-    axios.get(`${url}products/${currentProductID}`, {
-      headers: { Authorization: token },
-    })
+    axios.get(`/api/products/${currentProductID}`)
       .then((results) => {
         setCurrentProductData(results.data);
       });
@@ -95,7 +91,7 @@ function App() {
     <>
 
       <Title>
-        <h1>Project Atelier</h1>
+        Project Atelier
       </Title>
 
       <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
