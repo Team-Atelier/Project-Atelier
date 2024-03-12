@@ -46,18 +46,12 @@ function RatingRowElement({
           : document.getElementById(parentID).style.background = selectedColor;
       }}
     >
-      <div>
-        {star}
-        {' '}
-        star
-      </div>
-
+      <div>{`${star} star`} </div>
       <PartiallyFilledBar percentage={rate?.[star] * 100 || 100} />
       <div>{`(${metadata?.ratings?.[star]})`}</div>
     </RatingRow>
   );
 }
-
 function RatingBreakdown({ metadata, handleRatingFilterClick, ratingFilter }) {
   const filteringEnabled = Object.values(ratingFilter).some((filter) => (filter === true));
   return (

@@ -56,8 +56,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
   */
 
-  const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
-    headers: { Authorization: token },
+  const getReviews = (count = 1000, sort = 'relevant') => axios.get('/api/reviews', {
     params: {
       product_id: metadata?.product_id,
       count,
@@ -96,7 +95,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
 
     let response;
     try {
-      response = await axios.put(`${url}reviews/${reviewID}/${e.target.value}`, {}, {
+      response = await axios.put(`/api/reviews/${reviewID}/${e.target.value}`, {}, {
         headers: { Authorization: token },
       });
       await refresh();
@@ -105,7 +104,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
           ...markedAsHelpful,
           [reviewID]: true,
         };
-        console.log(nextMarkedAsHelpful);
         setMarkedAsHelpful(nextMarkedAsHelpful);
         return nextMarkedAsHelpful;
       }
@@ -140,7 +138,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     }, [])
       .toSpliced(visibleReviews, relevantReviews.length)
     );
-    console.log(results.length);
     useEffect(() => {
       setCurrentLength(results.length);
     });
@@ -157,9 +154,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
 
   const twoReviewsOrLess = () => {
-    console.log(relevantReviews.length);
-    console.log(visibleReviews);
-    console.log(currentLength);
     if (currentLength === undefined) {
       return true;
     }
@@ -214,7 +208,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
       </ReviewBox>
 
       <div>
-        {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
+        {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
       </div>
     </>
 

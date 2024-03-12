@@ -1,0 +1,490 @@
+   Here are the accessible roles:
+
+      heading:
+
+      Name "Ratings Breakdown:":
+      <h2 />
+
+      Name "Rating: 3.5":
+      <h1 />
+
+      Name "I love dogs more than cats":
+      <h2
+        class="ReviewTile__Summary-sc-8761aj-0 iqZHWF"
+      />
+
+      Name "Example: Best purchase ever":
+      <h2
+        class="ReviewTile__Summary-sc-8761aj-0 iqZHWF"
+      />
+
+      --------------------------------------------------
+      combobox:
+
+      Name "":
+      <select />
+
+      --------------------------------------------------
+      option:
+
+      Name "Relevant":
+      <option
+        value="relevant"
+      />
+
+      Name "Helpful":
+      <option
+        value="helpful"
+      />
+
+      Name "Newest":
+      <option
+        value="newest"
+      />
+
+      --------------------------------------------------
+      article:
+
+      Name "":
+      <article
+        class="reviewTile"
+      />
+
+      Name "":
+      <article
+        class="reviewTile"
+      />
+
+      --------------------------------------------------
+      complementary:
+
+      Name "":
+      <aside />
+
+      Name "":
+      <aside />
+
+      --------------------------------------------------
+      img:
+
+      Name "":
+      <img
+        class="ReviewTile__Image-sc-8761aj-5 iSRvai"
+        src="https://i.imgur.com/E6cvpNw.jpeg"
+      />
+
+      --------------------------------------------------
+      button:
+
+      Name "Yes":
+      <button
+        type="button"
+        value="helpful"
+      />
+
+      Name "Report":
+      <button
+        type="button"
+        value="report"
+      />
+
+      Name "Yes":
+      <button
+        type="button"
+        value="helpful"
+      />
+
+      Name "Report":
+      <button
+        type="button"
+        value="report"
+      />
+
+      Name "More reviews":
+      <button
+        type="button"
+        value="morereviews"
+      />
+
+      Name "Insert image":
+      <button
+        type="submit"
+      />
+
+      Name "Submit review":
+      <button
+        type="button"
+      />
+
+      Name "Add review":
+      <button
+        style="position: relative; left: 40%;"
+        type="button"
+      />
+
+      --------------------------------------------------
+      textbox:
+
+      Name "Nickname: For privacy reasons, do not use your full name or email address":
+      <input
+        maxlength="60"
+        name="name"
+        placeholder="Example: jackson11!"
+        style="width: 300px;"
+        value=""
+      />
+
+      Name "Email: For authentication reasons, you will not be emailed":
+      <input
+        maxlength="60"
+        name="email"
+        placeholder="Example: jackson11@email.com"
+        style="width: 300px;"
+        value=""
+      />
+
+      Name "Review summary:":
+      <input
+        maxlength="60"
+        name="summary"
+        placeholder="Example: Best purchase ever!"
+        style="width: 300px;"
+        value=""
+      />
+
+      Name "Your honest review:":
+      <textarea
+        maxlength="1000"
+        name="body"
+        placeholder="Why did you like the product or not?"
+        style="width: 90%;"
+      />
+
+      Name "Upload images of product: (Max 5 images.) Input image url: Insert image":
+      <input
+        id="imgurl"
+        name="images"
+        type="url"
+      />
+
+      --------------------------------------------------
+      radio:
+
+      Name "Yes":
+      <input
+        name="recommend"
+        type="radio"
+        value="true"
+      />
+
+      Name "No":
+      <input
+        name="recommend"
+        type="radio"
+        value="false"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="fit"
+        type="radio"
+        value="1"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="fit"
+        type="radio"
+        value="2"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="fit"
+        type="radio"
+        value="3"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="fit"
+        type="radio"
+        value="4"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="fit"
+        type="radio"
+        value="5"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="length"
+        type="radio"
+        value="1"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="length"
+        type="radio"
+        value="2"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="length"
+        type="radio"
+        value="3"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="length"
+        type="radio"
+        value="4"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="length"
+        type="radio"
+        value="5"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="comfort"
+        type="radio"
+        value="1"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="comfort"
+        type="radio"
+        value="2"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="comfort"
+        type="radio"
+        value="3"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="comfort"
+        type="radio"
+        value="4"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="comfort"
+        type="radio"
+        value="5"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="quality"
+        type="radio"
+        value="1"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="quality"
+        type="radio"
+        value="2"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="quality"
+        type="radio"
+        value="3"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="quality"
+        type="radio"
+        value="4"
+      />
+
+      Name "":
+      <input
+        class="charSelect"
+        name="quality"
+        type="radio"
+        value="5"
+      />
+
+      --------------------------------------------------
+      table:
+
+      Name "Your Experience":
+      <table
+        class="rating"
+      />
+
+      --------------------------------------------------
+      rowgroup:
+
+      Name "":
+      <thead />
+
+      Name "":
+      <tbody />
+
+      --------------------------------------------------
+      row:
+
+      Name "Characteristic 1 2 3 4 5":
+      <tr />
+
+      Name "Fit Runs short Runs slightly short Perfect Runs slightly long Runs long":
+      <tr />
+
+      Name "Length Runs short Runs slightly short Perfect Runs slightly long Runs long":
+      <tr />
+
+      Name "Comfort Uncomfortable Slightly uncomfortable Ok Comfortable Perfect":
+      <tr />
+
+      Name "Quality Poor Below average What I expected Pretty great Perfect":
+      <tr />
+
+      --------------------------------------------------
+      columnheader:
+
+      Name "Characteristic":
+      <th
+        scope="col"
+      />
+
+      Name "1":
+      <th
+        scope="col"
+      />
+
+      Name "2":
+      <th
+        scope="col"
+      />
+
+      Name "3":
+      <th
+        scope="col"
+      />
+
+      Name "4":
+      <th
+        scope="col"
+      />
+
+      Name "5":
+      <th
+        scope="col"
+      />
+
+      --------------------------------------------------
+      cell:
+
+      Name "Fit":
+      <td />
+
+      Name "Runs short":
+      <td />
+
+      Name "Runs slightly short":
+      <td />
+
+      Name "Perfect":
+      <td />
+
+      Name "Runs slightly long":
+      <td />
+
+      Name "Runs long":
+      <td />
+
+      Name "Length":
+      <td />
+
+      Name "Runs short":
+      <td />
+
+      Name "Runs slightly short":
+      <td />
+
+      Name "Perfect":
+      <td />
+
+      Name "Runs slightly long":
+      <td />
+
+      Name "Runs long":
+      <td />
+
+      Name "Comfort":
+      <td />
+
+      Name "Uncomfortable":
+      <td />
+
+      Name "Slightly uncomfortable":
+      <td />
+
+      Name "Ok":
+      <td />
+
+      Name "Comfortable":
+      <td />
+
+      Name "Perfect":
+      <td />
+
+      Name "Quality":
+      <td />
+
+      Name "Poor":
+      <td />
+
+      Name "Below average":
+      <td />
+
+      Name "What I expected":
+      <td />
+
+      Name "Pretty great":
+      <td />
+
+      Name "Perfect":
+      <td />
+
+      --------------------------------------------------

@@ -13,10 +13,13 @@ function ExperienceTableRow({
       <td>{name}</td>
       { descriptions.map((des, index) => (
         <td key={index}>
-          <label htmlFor={name.toLowerCase()}>
-            {des}
+          <span>
+            <label htmlFor={name.toLowerCase()}>
+              {des}
+            </label>
             <input className="charSelect" type="radio" name={name.toLowerCase()} value={index + 1} onChange={(e) => { change(e, id); }} checked={newReviewData.characteristics?.[name]} />
-          </label>
+          </span>
+
         </td>
       ))}
     </tr>

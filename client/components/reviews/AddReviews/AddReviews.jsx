@@ -37,22 +37,13 @@ const Image = styled.img`
     },
   })
 */
-const postReview = (reviewInfo) => axios.post(`${url}reviews`, reviewInfo, {
-  headers: { Authorization: token },
-});
+const postReview = (reviewInfo) => axios.post(`/post/reviews`, reviewInfo);
 
 function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
 }) {
   const validReview = () => {
-    debugger;
-    const mandatoryFields = [
-      'rating',
-      'summary',
-      'body',
-      'recommend',
-      'name',
-      'email'];
+    const mandatoryFields = ['rating', 'summary', 'body', 'recommend', 'name', 'email'];
     // eslint-disable-next-line no-restricted-syntax
     const result = mandatoryFields.every((item) => {
       if (newReviewData[item] === undefined) {
@@ -86,48 +77,58 @@ function AddReviews({
   return (
     <>
       <div>
-        Nickname:
-        <br />
-        <input
-          name="name"
-          maxLength="60"
-          value={newReviewData.name || ''}
-          placeholder="Example: jackson11!"
-          style={{ width: '300px' }}
-          onChange={(e) => { handleNewReviewChange(e); }}
-        />
-        <br />
-        For privacy reasons, do not use your full name or email address
-        <br />
-        {newReviewData.name ? `${(60 - (newReviewData.name.length))} characters remaining` : ''}
+        <label>
+          Nickname:
+          <br />
+          <input
+            name="name"
+            maxLength="60"
+            value={newReviewData.name || ''}
+            placeholder="Example: jackson11!"
+            style={{ width: '300px' }}
+            onChange={(e) => { handleNewReviewChange(e); }}
+          />
+          <br />
+          For privacy reasons, do not use your full name or email address
+          <br />
+          {newReviewData.name ? `${(60 - (newReviewData.name.length))} characters remaining` : ''}
+        </label>
       </div>
       <br />
       <div>
-        Email:
-        <br />
-        <input
-          name="email"
-          maxLength="60"
-          value={newReviewData.email || ''}
-          placeholder="Example: jackson11@email.com"
-          style={{ width: '300px' }}
-          onChange={(e) => { handleNewReviewChange(e); }}
-        />
-        <br />
-        For authentication reasons, you will not be emailed
+        <label>
+          Email:
+          <br />
+          <input
+            name="email"
+            maxLength="60"
+            value={newReviewData.email || ''}
+            placeholder="Example: jackson11@email.com"
+            style={{ width: '300px' }}
+            onChange={(e) => { handleNewReviewChange(e); }}
+          />
+          <br />
+          For authentication reasons, you will not be emailed
+        </label>
       </div>
       <br />
       <div>
-        Your rating:
-        <br />
-        <AddReviewStarRating
-          newReviewData={newReviewData}
-          handleNewReviewChange={handleNewReviewChange}
-        />
+        <label>
+          Your rating:
+          <br />
+          <div data-testid="star-element">
+            <AddReviewStarRating
+              newReviewData={newReviewData}
+              handleNewReviewChange={handleNewReviewChange}
+            />
+          </div>
+        </label>
       </div>
       <br />
       <div>
-        Do you recommend this product?
+        <label>
+          Do you recommend this product?
+        </label>
         <br />
         <label>
           <input
@@ -148,22 +149,24 @@ function AddReviews({
       </div>
       <br />
       <div>
-        Review summary:
-        <br />
-        <input
-          name="summary"
-          maxLength="60"
-          value={newReviewData.summary || ''}
-          placeholder="Example: Best purchase ever!"
-          style={{ width: '300px' }}
-          onChange={(e) => { handleNewReviewChange(e); }}
-        />
+        <label>
+          Review summary:
+          <br />
+          <input
+            name="summary"
+            maxLength="60"
+            value={newReviewData.summary || ''}
+            placeholder="Example: Best purchase ever!"
+            style={{ width: '300px' }}
+            onChange={(e) => { handleNewReviewChange(e); }}
+          />
 
-        <br />
-        {newReviewData.summary ? `${(60 - (newReviewData.summary.length))} characters remaining` : ''}
+          <br />
+          {newReviewData.summary ? `${(60 - (newReviewData.summary.length))} characters remaining` : ''}
+        </label>
       </div>
       <br />
-      <div>
+      <label>
         Your honest review:
         <br />
         <textarea
@@ -179,7 +182,7 @@ function AddReviews({
         {newReviewData.body && newReviewData.body.length < 50 ? `${50 - newReviewData.body.length} characters needed until 50 character minimum reached` : ''}
         <br />
         {newReviewData.body ? `${(1000 - (newReviewData.body.length))} characters remaining` : ''}
-      </div>
+      </label>
       <br />
       <div>
         <ExperienceTable
@@ -240,14 +243,12 @@ function AddReviews({
         type="button"
         onClick={() => {
           if (!validReview()) {
-            console.log(validReview());
             alert('Invalid review, please ensure no fields are empty and character minimums are met.');
             return;
           }
           const review = { ...newReviewData };
           review.product_id = Number(metadata.product_id);
           review.recommend = review.recommend === 'true';
-          // console.log(review.product_id);
           postReview(review)
             .then(() => {
               reloadReviews();

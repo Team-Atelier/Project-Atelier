@@ -38,7 +38,7 @@ const Star = ({
     handleHover(nextRating);
   };
   return (
-    <>
+    <div data-testid={`rsr-${rating}`}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/cssfont-awesome.min.css" />
       {solid && (
       <span
@@ -57,16 +57,13 @@ const Star = ({
         onMouseLeave={() => { handleMouseExit(); }}
       />
       )}
-    </>
+    </div>
   );
 };
 
-const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, handleHover }) => {
+const AddReviewStarRating = ({ newReviewData, handleNewReviewChange }) => {
   const [hoverRating, setHoverRating] = useState([false, false, false, false]);
   const [ratingBlurb, setRatingBlurb] = useState('');
-  const handleStarClick = (e) => {
-    handleNewReviewChange(e);
-  };
   const hover = (ratings) => {
     const nextRating = ratings.filter((item) => (item === true)).length;
     setRatingBlurb(nextRating);
@@ -74,16 +71,18 @@ const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, handleHover
   };
   return (
     <>
-      {ratingBlurb === 1 && <div>Poor</div>}
-      {ratingBlurb === 2 && <div>Fair</div>}
-      {ratingBlurb === 3 && <div>Average</div>}
-      {ratingBlurb === 4 && <div>Good</div>}
-      {ratingBlurb === 5 && <div>Great</div>}
-      <Star solid={hoverRating[0]} rating={1} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[1]} rating={2} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[2]} rating={3} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[3]} rating={4} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
-      <Star solid={hoverRating[4]} rating={5} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+      {ratingBlurb === 1 && <div data-testid="poor">Poor</div>}
+      {ratingBlurb === 2 && <div data-testid="fair">Fair</div>}
+      {ratingBlurb === 3 && <div data-testid="average">Average</div>}
+      {ratingBlurb === 4 && <div data-testid="good">Good</div>}
+      {ratingBlurb === 5 && <div data-testid="great">Great</div>}
+      <div style={{ display: 'flex' }}>
+        <Star solid={hoverRating[0]} rating={1} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[1]} rating={2} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[2]} rating={3} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[3]} rating={4} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+        <Star solid={hoverRating[4]} rating={5} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
+      </div>
     </>
 
   );
