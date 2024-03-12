@@ -69,13 +69,27 @@ const AddReviewStarRating = ({ newReviewData, handleNewReviewChange }) => {
     setRatingBlurb(nextRating);
     setHoverRating(ratings);
   };
+  const getRatingBlurb = () => {
+    if (ratingBlurb === 1) {
+      return 'Poor';
+    }
+    if (ratingBlurb === 2) {
+      return 'Fair';
+    }
+    if (ratingBlurb === 3) {
+      return 'Average';
+    }
+    if (ratingBlurb === 4) {
+      return 'Good';
+    }
+    if (ratingBlurb === 5) {
+      return 'Great';
+    }
+    return '';
+  };
   return (
     <>
-      {ratingBlurb === 1 && <div data-testid="poor">Poor</div>}
-      {ratingBlurb === 2 && <div data-testid="fair">Fair</div>}
-      {ratingBlurb === 3 && <div data-testid="average">Average</div>}
-      {ratingBlurb === 4 && <div data-testid="good">Good</div>}
-      {ratingBlurb === 5 && <div data-testid="great">Great</div>}
+      <div data-testid="rating-blurb">{getRatingBlurb()}</div>
       <div style={{ display: 'flex' }}>
         <Star solid={hoverRating[0]} rating={1} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />
         <Star solid={hoverRating[1]} rating={2} handleHover={hover} handleClick={handleNewReviewChange} newReviewData={newReviewData} />

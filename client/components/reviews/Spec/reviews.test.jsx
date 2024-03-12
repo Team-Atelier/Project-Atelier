@@ -178,8 +178,11 @@ describe('Main review controller', () => {
       />,
     );
     await user.click(screen.getByRole('button', { name: /Add review/ }));
-    waitFor(() => {
+    await waitFor(() => {
       expect(component.container.querySelector('#reviewsScreen')).toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId('rating-blurb')).toHaveTextContent('');
     });
   });
   test('should render the add review modal when button is clicked', async () => {
@@ -262,9 +265,9 @@ test('should properly add and reset images, and track of new review info state',
     expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).toBeInTheDocument();
   //  user.click(screen.getByRole('button', { name: /Reset/ }));
   });
-  //await waitFor(() => {
- //   expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
- // });
+  // await waitFor(() => {
+  //   expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
+  // });
 });
 
 test('should render clickable radio buttons by characteristic ', async () => {
