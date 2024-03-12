@@ -3,27 +3,37 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/no-deprecated */
 import React from 'react';
-import {
-  render, screen, act, waitFor,
-} from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import axios from 'axios';
-import ReviewsList from '../ReviewsList.jsx';
+import userEvent from '@testing-library/user-event';
 import ReviewTile from '../ReviewTile.jsx';
+import Reviews from '../Reviews.jsx';
 
+const aReview = {
+  review_id: 3,
+  rating: 4,
+  summary: 'I am liking these glasses',
+  recommend: false,
+  response: null,
+  body: "They are very dark. But that's good because I'm in very sunny spots",
+  date: '2019-06-23T00:00:00.000Z',
+  reviewer_name: 'bigbrotherbenjamin',
+  helpfulness: 5,
+  photos: [],
+};
 const mockMetadata = {
   product_id: '40346',
   ratings: {
-    1: '26',
-    2: '55',
-    3: '59',
-    4: '44',
-    5: '99',
+    1: '0',
+    2: '1',
+    3: '1',
+    4: '1',
+    5: '1',
   },
   recommended: {
-    false: '74',
-    true: '209',
+    false: '2',
+    true: '2',
   },
   characteristics: {
     Fit: {
@@ -125,35 +135,39 @@ const mockReviewAPI = {
     },
   ],
 };
-// jest.mock('axios');
-describe('Review tile', () => {
-  test('should render two list items at first', async () => {
-    mockReviewAPI.results.push(mockReviewAPI.results[0]);
-    mockReviewAPI.results.push(mockReviewAPI.results[0]);
-    mockReviewAPI.results.push(mockReviewAPI.results[0]);
-    const reply = { status: 200, data: mockReviewAPI };
+describe('Test review length validation', () => {
+  test('should properly add and reset images, and track of new review info state', async () => {
+    const getReviewsReply = { status: 200, data: mockReviewAPI };
     const user = userEvent.setup();
-    axios.get = jest.fn().mockResolvedValue(reply);
-    const rendered = render(<ReviewsList
-      productId={40346}
-      ratingFilter={{
-        1: false,
-        2: false,
-        3: false,
-        4: false,
-        5: false,
-      }}
-      metadata={mockMetadata}
-    />);
-    await waitFor(() => {
-      expect(screen.getAllByRole('article')).toHaveLength(2);
-    });
-    await waitFor(() => {
-      user.click(screen.getByRole('button'), { name: /More Reviews/ });
-    });
+    const mockProp = jest.fn(() => {});
+    axios.get = jest.fn().mockResolvedValue(getReviewsReply);
+    axios.post = jest.fn().mockResolvedValue({ status: 200 });
+    const alertMock = jest.spyOn(window, 'alert').mockImplementation();
+    const component = render(
+      <Reviews
+        productId="40346"
+        metadata={mockMetadata}
+        reloadReviews={mockProp}
+      />,
+    );
+    await user.click(screen.getByRole('button', { name: /Add review/ }));
 
+    const body = await screen.getByRole('textbox', { name: /honest review/ });
+    const nickname = await screen.getByRole('textbox', { name: /name/ });
+    const email = await screen.getByRole('textbox', { name: /Email/ });
+    const addImg = await screen.getByRole('textbox', { name: /Upload images of product/ });
+    const reccomend = component.container.querySelector('radio[name="reccomend"]');
+    await user.click(reccomend, { name: /Yes/ });
+
+    await user.type(nickname, 'Chris');
+    await user.type(email, 'chris');
+    await user.type(body, '0'.repeat(50));
+    await user.type(addImg, 'https://i.imgur.com/E6cvpNw.jpeg');
+    await user.click(screen.getByRole('button', { name: /Insert image/ }));
+    await user.click(screen.getByRole('button', { name: /Submit review/ }));
     await waitFor(() => {
-      expect(screen.getAllByRole('article')).toHaveLength(4);
+      expect(alertMock).toHaveBeenCalledTimes(1);
     });
+    await user.click(screen.getByRole('button', { name: /Insert image/ }));
   });
 });
