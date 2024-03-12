@@ -88,9 +88,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
     if (id !== undefined) {
-      axios.get(`${apiURL}products/${id}/styles`, {
-        headers: { Authorization: token },
-      })
+      axios.get(`api/products/${id}/styles`)
         .then((results) => {
           const styles = results.data.results;
           const defaultStyle = styles.filter((product) => product['default?'] === true)[0] || styles[0];
@@ -103,9 +101,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   }, [id]);
 
   useEffect(() => {
-    axios.get(`${apiURL}reviews/meta?product_id=${id}`, {
-      headers: { Authorization: token },
-    })
+    axios.get(`api/reviews/meta?product_id=${id}`)
       .then((results) => {
         const scaledRatings = scaleRatings(results.data.ratings);
         setRating([computeAverage(scaledRatings)]);
