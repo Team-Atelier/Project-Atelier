@@ -8,6 +8,7 @@ import '@testing-library/jest-dom';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
 import ReviewTile from '../ReviewTile.jsx';
+import Reviews from '.../Reviews.jsx'
 
 describe('Review tile', () => {
   test('Should render seller response if present', () => {
@@ -111,7 +112,7 @@ describe('Review tile', () => {
       />,
     );
     expect(screen.queryByText(/Yes/)).toBeInTheDocument();
-
+    expect(screen.queryByText(/Was this review helpful/)).toBeInTheDocument();
     await waitFor(() => {
       user.click(screen.getByRole('button', { name: /Yes/ }));
     });
@@ -147,3 +148,4 @@ describe('Review tile', () => {
     });
   });
 });
+

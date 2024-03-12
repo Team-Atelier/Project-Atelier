@@ -214,7 +214,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
       </ReviewBox>
 
       <div>
-        {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
+        {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
       </div>
     </>
 

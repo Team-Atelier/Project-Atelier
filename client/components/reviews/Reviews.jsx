@@ -97,7 +97,10 @@ function Reviews({ metadata, reloadReviews }) {
   }, []);
 */
   const handleNewReviewChange = (e, name, value, id) => {
+    console.log("TT", e?.target?.value)
     if (e && e.target?.className === 'reviewimg') {
+      console.log('newRevData', newReviewData);
+      console.log('the test', e.target.innerHTML);
       const currentFiles = newReviewData.photos || [];
       const nextFiles = [...currentFiles, e.target.imgurl.value];
       const nextReviewData = {
