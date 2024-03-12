@@ -36,6 +36,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
   const [currentSort, setCurrentSort] = useState('relevant');
+  const [currentLength, setCurrentLength] = useState();
   // Increases as "show more reviews clicked"
   const [visibleReviews, setVisibleReviews] = useState(2);
   const [modalImg, setModalImg] = useState();
@@ -54,6 +55,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     return sum;
   };
   */
+
   const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
     headers: { Authorization: token },
     params: {
@@ -78,9 +80,14 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
 
   useEffect(() => {
     if (metadata?.ratings) {
+      setVisibleReviews(2);
       refresh(metadata?.ratings);
     }
   }, [metadata?.ratings]);
+
+  useEffect(() => {
+    setVisibleReviews(2);
+  }, [ratingFilter]);
 
   const handleAPIClick = async (e, reviewID) => {
     if (e.target.value !== 'helpful' && e.target.value !== 'report') {
@@ -116,7 +123,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
 
   const FormatReviews = ({ reviewsArray, markedAsHelpful }) => {
     const allDeselected = Object.values(ratingFilter).every((value) => (value === false));
-    return (reviewsArray.reduce((filteredList, review) => {
+    const results = (reviewsArray.reduce((filteredList, review) => {
       if (ratingFilter?.[review.rating] || allDeselected) {
         const nextReview = (
           <ReviewTile
@@ -133,7 +140,13 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     }, [])
       .toSpliced(visibleReviews, relevantReviews.length)
     );
+    console.log(results.length);
+    useEffect(() => {
+      setCurrentLength(results.length);
+    });
+    return results;
   };
+
   const setSort = (e) => {
     setVisibleReviews(2);
     const method = e.target.value;
@@ -144,21 +157,27 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
 
   const twoReviewsOrLess = () => {
-    if (currentSort === 'relevant' && (relevantReviews.length - visibleReviews) <= 0) {
-      console.log(relevantReviews.length);
-      console.log(visibleReviews);
+    console.log(relevantReviews.length);
+    console.log(visibleReviews);
+    console.log(currentLength);
+    if (currentLength === undefined) {
       return true;
     }
-    if (currentSort === 'helpful' && (helpfulReviews.length - visibleReviews) <= 0) {
+    if (relevantReviews.length <= 2) {
       return true;
     }
-    if (currentSort === 'newest' && (newestReviews.length - visibleReviews) <= 0) {
+    if ((visibleReviews) > currentLength) {
+      // Never reaches this part;
       return true;
     }
+
     return false;
   };
   return (
+
     <>
+      {relevantReviews.length !== 0
+      && (
       <div>
         <ImageModal src={modalImg} />
         Sort by:
@@ -169,18 +188,36 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
           <option value="newest">Newest</option>
         </select>
       </div>
+      )}
+      {relevantReviews.length === 0 && (
+      <div>
+        <h2>Be the first to review this product!</h2>
+        <button
+          type="button"
+          style={{ position: 'relative', left: '40%' }}
+          onClick={(e) => {
+            const modal = document.getElementById('reviewsScreen');
+            modal.style.display = 'flex';
+          }}
+        >
+          Add your review today!
+        </button>
+      </div>
+      )}
       <ReviewBox>
-        {currentSort === 'relevant'
+        {relevantReviews.length !== 0 && currentSort === 'relevant'
         && <FormatReviews reviewsArray={relevantReviews} markedAsHelpful={markedAsHelpful} />}
-        {currentSort === 'helpful'
+        {relevantReviews.length !== 0 && currentSort === 'helpful'
         && <FormatReviews reviewsArray={helpfulReviews} markedAsHelpful={markedAsHelpful} />}
-        {currentSort === 'newest'
+        {relevantReviews.length !== 0 && currentSort === 'newest'
         && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
       </ReviewBox>
+
       <div>
-        {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(twoReviewsOrLess()); }}>More reviews</button>}
+        {(!twoReviewsOrLess()) && <button type="button" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
       </div>
     </>
+
   );
 }
 export default ReviewsList;

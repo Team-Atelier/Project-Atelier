@@ -45,6 +45,7 @@ function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
 }) {
   const validReview = () => {
+    debugger;
     const mandatoryFields = [
       'rating',
       'summary',

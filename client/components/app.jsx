@@ -21,7 +21,7 @@ function App() {
   const [currentProductID, setCurrentProductID] = useState(40346);
   const [numReviewsAdded, setNumReviewsAdded] = useState(0);
 
-  /* ----- Function tell page to refresh when new review is added ----- */
+  /* ----- Function tells reviews to refresh when new review is added ----- */
   const reloadReviews = () => {
     setNumReviewsAdded(numReviewsAdded + 1);
   };
