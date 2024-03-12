@@ -45,13 +45,7 @@ function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
 }) {
   const validReview = () => {
-    const mandatoryFields = [
-      'rating',
-      'summary',
-      'body',
-      'recommend',
-      'name',
-      'email'];
+    const mandatoryFields = ['rating', 'summary', 'body', 'recommend', 'name', 'email'];
     // eslint-disable-next-line no-restricted-syntax
     const result = mandatoryFields.every((item) => {
       if (newReviewData[item] === undefined) {
@@ -124,15 +118,19 @@ function AddReviews({
         <label>
           Your rating:
           <br />
-          <AddReviewStarRating
-            newReviewData={newReviewData}
-            handleNewReviewChange={handleNewReviewChange}
-          />
+          <div data-testid="star-element">
+            <AddReviewStarRating
+              newReviewData={newReviewData}
+              handleNewReviewChange={handleNewReviewChange}
+            />
+          </div>
         </label>
       </div>
       <br />
       <div>
-        Do you recommend this product?
+        <label>
+          Do you recommend this product?
+        </label>
         <br />
         <label>
           <input
@@ -247,14 +245,12 @@ function AddReviews({
         type="button"
         onClick={() => {
           if (!validReview()) {
-            console.log(validReview());
             alert('Invalid review, please ensure no fields are empty and character minimums are met.');
             return;
           }
           const review = { ...newReviewData };
           review.product_id = Number(metadata.product_id);
           review.recommend = review.recommend === 'true';
-          // console.log(review.product_id);
           postReview(review)
             .then(() => {
               reloadReviews();

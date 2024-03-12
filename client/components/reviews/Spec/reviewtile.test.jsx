@@ -8,7 +8,6 @@ import '@testing-library/jest-dom';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
 import ReviewTile from '../ReviewTile.jsx';
-import Reviews from '.../Reviews.jsx'
 
 describe('Review tile', () => {
   test('Should render seller response if present', () => {
@@ -44,7 +43,7 @@ describe('Review tile', () => {
       summary: 'I am liking these glasses',
       recommend: false,
       response: null,
-      body: "They are very dark. But that's good because I'm in very sunny spots",
+      body: "They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots",
       date: '2019-06-23T00:00:00.000Z',
       reviewer_name: 'bigbrotherbenjamin',
       helpfulness: 5,
@@ -117,7 +116,7 @@ describe('Review tile', () => {
       user.click(screen.getByRole('button', { name: /Yes/ }));
     });
   });
-  test('Should if review is already marked as helpful, button should be disabled', async () => {
+  test('if review is already marked as helpful, button should be disabled', async () => {
     const reply = { status: 201 };
     axios.get = jest.fn().mockResolvedValue(reply);
     const user = userEvent.setup();
@@ -148,4 +147,27 @@ describe('Review tile', () => {
     });
   });
 });
-
+test('Should render show more reviews if review is long', () => {
+  const mockCallback = (() => {});
+  const aReview = {
+    review_id: 3,
+    rating: 4,
+    summary: 'I am liking these glasses',
+    recommend: false,
+    response: null,
+    body: "They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots. They are very dark. But that's good because I'm in very sunny spots.",
+    date: '2019-06-23T00:00:00.000Z',
+    reviewer_name: 'bigbrotherbenjamin',
+    helpfulness: 5,
+    photos: [],
+  };
+  render(
+    <ReviewTile
+      review={aReview}
+      handleModalImgChange={mockCallback}
+      handleAPIClick={mockCallback}
+      markedAsHelpful
+    />,
+  );
+  expect(screen.queryByText(/Show full review/)).toBeInTheDocument();
+});

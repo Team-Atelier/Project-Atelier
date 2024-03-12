@@ -105,7 +105,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
           ...markedAsHelpful,
           [reviewID]: true,
         };
-        console.log(nextMarkedAsHelpful);
         setMarkedAsHelpful(nextMarkedAsHelpful);
         return nextMarkedAsHelpful;
       }
@@ -140,7 +139,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
     }, [])
       .toSpliced(visibleReviews, relevantReviews.length)
     );
-    console.log(results.length);
     useEffect(() => {
       setCurrentLength(results.length);
     });
@@ -157,9 +155,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
 
   const twoReviewsOrLess = () => {
-    console.log(relevantReviews.length);
-    console.log(visibleReviews);
-    console.log(currentLength);
     if (currentLength === undefined) {
       return true;
     }

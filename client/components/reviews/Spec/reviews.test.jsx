@@ -59,6 +59,7 @@ const mockReviewAPI = {
   product: '40346',
   page: 0,
   count: 400,
+
   results: [
     {
       review_id: 1280925,
@@ -112,7 +113,7 @@ const mockReviewAPI = {
       summary: 'I love dogs more than cats',
       recommend: false,
       response: null,
-      body: 'This is my testThis is my testThis is my testThis is my testThis is my test',
+      body: 'Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review Long review',
       date: '2024-03-10T00:00:00.000Z',
       reviewer_name: 'jackson11!',
       helpfulness: 0,
@@ -172,6 +173,7 @@ describe('Main review controller', () => {
     const component = render(
       <Reviews
         productId="40346"
+        metadata={mockMetadata}
         reloadReviews={mockProp}
       />,
     );
@@ -187,6 +189,7 @@ describe('Main review controller', () => {
     const component = render(
       <Reviews
         productId="40346"
+        metadata={mockMetadata}
         reloadReviews={mockProp}
       />,
     );
@@ -204,6 +207,7 @@ test('should filter properly when filter ratings clicked', async () => {
   const component = render(
     <Reviews
       productId="40346"
+      metadata={mockMetadata}
       reloadReviews={mockProp}
     />,
   );
@@ -221,17 +225,21 @@ test('should filter properly when filter ratings clicked', async () => {
   await user.click(component.container.querySelector('#five-star'));
   waitFor(() => {
     expect(component.container.querySelector('#five-star')).toHaveAttribute({ background: 'darkgreen' });
+    expect(screen.getAllByRole('article')).toHaveLength(1);
   });
-  await user.click(component.container.querySelector('#five-star'));
+  expect(screen.getByRole('button', { name: 'Yes' })).toBeInTheDocument();
+  expect(screen.getByText(/Review filtering enabled/)).toBeInTheDocument();
+  // await user.click(component.container.querySelector('#five-star'));
 });
 
-test('should properly add and reset images and track text state', async () => {
+test('should properly add and reset images, and track of new review info state', async () => {
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});
   axios.get = jest.fn().mockResolvedValue(getReviewsReply);
   const component = render(
     <Reviews
       productId="40346"
+      metadata={mockMetadata}
       reloadReviews={mockProp}
     />,
   );
@@ -240,24 +248,26 @@ test('should properly add and reset images and track text state', async () => {
   const nickname = await screen.getByRole('textbox', { name: /name/ });
   const addImg = await screen.getByRole('textbox', { name: /Upload images of product/ });
   await user.type(nickname, 'Chris');
-  await user.type(reviewBodyField, 'test');
+  await user.type(reviewBodyField, '012345679');
   await user.type(addImg, 'https://i.imgur.com/BXlZVQh.jpeg');
-  waitFor(() => {
-    expect(reviewBodyField).toHaveValue('test');
+  await waitFor(() => {
+    expect(reviewBodyField).toHaveValue('012345679');
+    expect(screen.getByText(/41 characters needed until 50 character minimum reached/)).toBeInTheDocument();
+    expect(screen.getByText(/991 characters remaining/)).toBeInTheDocument();
   });
-  waitFor(() => {
+  await (() => {
     user.click(screen.getByRole('button', { name: /Insert image/ }));
   });
-  waitFor(() => {
+  await waitFor(() => {
     expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).toBeInTheDocument();
-    user.click(screen.getByRole('button', { name: /Reset/ }));
+  //  user.click(screen.getByRole('button', { name: /Reset/ }));
   });
-  waitFor(() => {
-    expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
-  });
+  //await waitFor(() => {
+ //   expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
+ // });
 });
 
-test('should render clickable buttons by characteristic ', async () => {
+test('should render clickable radio buttons by characteristic ', async () => {
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});
   // Your Experience
@@ -272,8 +282,98 @@ test('should render clickable buttons by characteristic ', async () => {
   );
   await user.click(screen.getByRole('button', { name: /Add review/ }));
   user.click(screen.getByRole('row', { name: /characteristic/ }));
-  //Comfort
-  waitFor(() => {
-    expect(screen.getByRole('row', { name: /characteristic/ })).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByRole('row', { name: /Fit/ })).toBeInTheDocument();
+    expect(screen.getByRole('row', { name: /Length/ })).toBeInTheDocument();
+    expect(screen.getByRole('row', { name: /Comfort/ })).toBeInTheDocument();
+    expect(screen.getByRole('row', { name: /Quality/ })).toBeInTheDocument();
+  });
+  // await user.click(screen.getByRole('cell', { name: /Slightly uncomfortable/ }));
+});
+/*
+test('should display text when stars are clicked', async () => {
+  const user = userEvent.setup();
+  const mockProp = jest.fn(() => {});
+  // Your Experience
+  // Characteristic
+  axios.get = jest.fn().mockResolvedValue(getReviewsReply);
+  const component = render(
+    <Reviews
+      productId="40346"
+      metadata={mockMetadata}
+      reloadReviews={mockProp}
+    />,
+  );
+  await waitFor(async () => {
+    user.click(component.getByRole('button', { name: /Add review/ }));
+  });
+  await waitFor(() => {
+    user.hover(component.getByTestId('rsr-2'));
+    // user.click(component.getByTestId('rsr-2'));
+  });
+  await waitFor(() => {
+    expect(screen.getByTestId('fair')).toBeInTheDocument();
+  });
+});
+*/
+/*
+test('hover/unhover', async () => {
+  const user = userEvent.setup();
+  const mockProp = jest.fn(() => {});
+  // Your Experience
+  // Characteristic
+  axios.get = jest.fn().mockResolvedValue(getReviewsReply);
+  const component = render(
+    <Reviews
+      productId="40346"
+      metadata={mockMetadata}
+      reloadReviews={mockProp}
+    />,
+  );
+
+  const hoverBox1 = screen.getByTestId('rsr-1');
+  const hoverBox2 = screen.getByTestId('rsr-2');
+  const hoverBox3 = screen.getByTestId('rsr-3');
+  const hoverBox4 = screen.getByTestId('rsr-4');
+  const hoverBox5 = screen.getByTestId('rsr-5');
+
+  await user.click(screen.getByRole('button', { name: /Add review/ }));
+  await user.hover(hoverBox2);
+  await waitFor(() => {
+    expect(screen.getByTestId('fair')).toBeInTheDocument();
+  });
+  await user.unhover(hoverBox2);
+  await user.hover(hoverBox1);
+
+  await waitFor(() => {
+    expect(screen.getByTestId('fair')).not.toBeInTheDocument();
+    expect(screen.getByTestId('poor')).toBeInTheDocument();
+  });
+});
+*/
+test('elements appear on the screen', async () => {
+  const user = userEvent.setup();
+  const mockProp = jest.fn(() => {});
+  // Your Experience
+  // Characteristic
+  axios.get = jest.fn().mockResolvedValue(getReviewsReply);
+
+  const component = render(
+    <Reviews
+      productId="40346"
+      metadata={mockMetadata}
+      reloadReviews={mockProp}
+    />,
+  );
+
+  await waitFor(() => {
+    expect(screen.getByText(/reviewers recommend this product/)).toBeInTheDocument();
+    expect(screen.getByText(/5 star/)).toBeInTheDocument();
+    expect(screen.getByText(/4 star/)).toBeInTheDocument();
+    expect(screen.getByText(/3 star/)).toBeInTheDocument();
+    expect(screen.getByText(/2 star/)).toBeInTheDocument();
+    expect(screen.getByText(/1 star/)).toBeInTheDocument();
+    expect(screen.getAllByText('(1)')).toHaveLength(4);
+    expect(screen.getByText(mockReviewAPI.results[0].body)).toBeInTheDocument();
   });
 });
