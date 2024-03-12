@@ -113,7 +113,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   }, [id]);
 
   return (
-    <Card className="product-card" data-testid="hello" >
+    <Card className="product-card">
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
       <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
         <ImageContainer>
