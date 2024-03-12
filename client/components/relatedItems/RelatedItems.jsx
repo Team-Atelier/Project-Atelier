@@ -21,14 +21,9 @@ export default function RelatedItems({
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
 
-  console.log('relatedprodcuts', relatedProducts);
-  console.log('storedoutfit', storedOutfit);
-  console.log('outfitinfo', outfitInfo);
-
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getProductInfo = async (ProductIDs, typeOfList) => {
-    console.log('productIDs are here:', ProductIDs);
     const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
       headers: { Authorization: token },
     })));
@@ -40,21 +35,23 @@ export default function RelatedItems({
     }
   };
 
-  const getRelatedProducts = (id) => {
-    axios.get(`${apiURL}products/${id}/related`, {
-      headers: { Authorization: token },
-    })
-      .then((results) => {
+  const getRelatedProducts = async (id) => {
+    try {
+      if (id) {
+        const results = await axios.get(`${apiURL}products/${id}/related`, {
+          headers: { Authorization: token },
+        });
         getProductInfo(results.data, 'relatedProducts');
-      })
-      .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   // ADDING AND REMOVING FROM OUTFITS
   const outfits = JSON.parse(localStorage.getItem('outfit'));
 
   const addToOutfit = (ID) => {
-    console.log('here is ID', ID);
     if (!outfits.includes(ID)) {
       localStorage.setItem('outfit', JSON.stringify(outfits.concat(ID)));
       setStoredOutfit(outfits.concat(ID));
@@ -68,8 +65,8 @@ export default function RelatedItems({
 
   // USE EFFECTS
   useEffect(() => {
-    getRelatedProducts(currentProductData.id);
-  }, [currentProductData.id]);
+    getRelatedProducts(currentProductID);
+  }, [currentProductID]);
 
   useEffect(() => {
     if (localStorage.getItem('outfit') === null) {
@@ -84,10 +81,10 @@ export default function RelatedItems({
 
   return (
     <RelatedItemsDiv>
-      <div className="relatedProductsList">
+      <div className="relatedProductsList" data-testid="relatedProductsList">
         <RelatedProductsList relatedProducts={relatedProducts} thisProduct={currentProductData} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
-      <div className="yourOutfitList">
+      <div className="yourOutfitList" data-testid="yourOutfitList">
         <YourOutfitList currentProductID={currentProductID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
     </RelatedItemsDiv>

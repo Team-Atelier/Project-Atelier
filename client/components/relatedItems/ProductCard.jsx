@@ -113,9 +113,9 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   }, [id]);
 
   return (
-    <Card>
+    <Card className="product-card">
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
-      <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0}>
+      <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
         <ImageContainer>
           <ProductImage
             src={productPhoto}
@@ -142,7 +142,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
               {originalPrice}
             </p>
           )}
-          <StarRating rating={rating || 0} />
+          <StarRating data-testid="star-rating" rating={rating || 0} />
         </TextContainer>
       </CardClick>
     </Card>
