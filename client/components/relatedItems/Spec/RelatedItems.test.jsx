@@ -3,14 +3,14 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import {
+  render, screen, fireEvent, act,
+} from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import '@testing-library/jest-dom';
 import RelatedItems from '../RelatedItems.jsx';
 import AddToOutfitCard from '../AddToOutfitCard.jsx';
-import YourOutfitList from '../YourOutfitList.jsx';
-import ItemCarousel from '../ItemCarousel.jsx';
 import ProductCard from '../ProductCard.jsx';
 import CompareProductsModal from '../CompareProductsModal.jsx';
 
@@ -46,10 +46,7 @@ describe('RelatedItems Components', () => {
 describe('AddToOutfitCard Click Event', () => {
   it('adds the current product to YourOutfitList and updates local storage on click', () => {
     const mockAddToOutfit = jest.fn();
-    const testProductID = '789012'
-    const storedOutfit = [{ id: testProductID, name: 'Test Product', category: 'Test category' }];
-    const outfitInfo = [{ id: testProductID, name: 'Test Product', category: 'Test Category' }];
-
+    const testProductID = '789012';
 
     render(<AddToOutfitCard thisProductID={testProductID} addToOutfit={mockAddToOutfit} />);
     const addToOutfitButton = screen.getByRole('button', { name: /Add to Outfit/ });
