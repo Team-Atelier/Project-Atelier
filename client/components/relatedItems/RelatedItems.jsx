@@ -81,10 +81,10 @@ export default function RelatedItems({
 
   return (
     <RelatedItemsDiv>
-      <div className="relatedProductsList">
+      <div className="relatedProductsList" data-testid="relatedProductsList">
         <RelatedProductsList relatedProducts={relatedProducts} thisProduct={currentProductData} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
-      <div className="yourOutfitList">
+      <div className="yourOutfitList" data-testid="yourOutfitList">
         <YourOutfitList currentProductID={currentProductID} storedOutfit={storedOutfit} addToOutfit={addToOutfit} removeFromOutfit={removeFromOutfit} outfitInfo={outfitInfo} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       </div>
     </RelatedItemsDiv>
