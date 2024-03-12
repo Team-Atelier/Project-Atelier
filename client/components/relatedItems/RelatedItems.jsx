@@ -10,13 +10,15 @@ import YourOutfitList from './YourOutfitList.jsx';
 
 const RelatedItemsDiv = styled.div`
   font-family: mate;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 `;
 
 export default function RelatedItems({
   scaleRatings, computeAverage, currentProductData, currentProductID, handleProductChange,
 }) {
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [storedOutfit, setStoredOutfit] = useState([]);
   const [outfitInfo, setOutfitInfo] = useState([]);
@@ -24,9 +26,7 @@ export default function RelatedItems({
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getProductInfo = async (ProductIDs, typeOfList) => {
-    const results = await Promise.all(ProductIDs.map((id) => axios.get(`${apiURL}products/${id}`, {
-      headers: { Authorization: token },
-    })));
+    const results = await Promise.all(ProductIDs.map((id) => axios.get(`api/products/${id}`)));
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
     }
@@ -38,9 +38,7 @@ export default function RelatedItems({
   const getRelatedProducts = async (id) => {
     try {
       if (id) {
-        const results = await axios.get(`${apiURL}products/${id}/related`, {
-          headers: { Authorization: token },
-        });
+        const results = await axios.get(`api/products/${id}/related`);
         getProductInfo(results.data, 'relatedProducts');
       }
     } catch (error) {
