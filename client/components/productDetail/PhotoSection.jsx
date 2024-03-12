@@ -189,15 +189,8 @@ function PhotoSection({ productId, selectedStyle }) {
   const [expandedView, setExpandedView] = useState(false);
   const [zoomed, setZoomed] = useState(false);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${productId}/styles`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${productId}/styles`)
       .then((response) => {
         setStyles(response.data.results);
       })
@@ -237,6 +230,10 @@ function PhotoSection({ productId, selectedStyle }) {
 
     const visibleThumbnails = 7;
     const totalThumbnails = selectedPhotos.length;
+
+    if (totalThumbnails <= 7) {
+      return;
+    }
 
     if (direction === 'up') {
       setStartIdx(Math.max(0, startIdx - 1));
@@ -310,7 +307,7 @@ function PhotoSection({ productId, selectedStyle }) {
           </ZoomedThumbnailContainerWrapper>
 
           {selectedMainPhotoIndex !== 0 && (
-          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0}>
+          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0} data-testid="left-arrow">
             &#8592;
           </LeftArrow>
           )}
@@ -322,12 +319,12 @@ function PhotoSection({ productId, selectedStyle }) {
           />
 
           {selectedMainPhotoIndex !== selectedPhotos.length - 1 && (
-          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
+          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1} data-testid="right-arrow-one">
             &#8594;
           </RightArrow>
           )}
 
-          <ExitButton onClick={handleXClick}>
+          <ExitButton onClick={handleXClick} data-testid="exit-button">
             <ExitIcon />
           </ExitButton>
 
@@ -335,19 +332,20 @@ function PhotoSection({ productId, selectedStyle }) {
       )}
 
       {zoomed && (
-        <ZoomedContainer id="zoomedContainer" onClick={() => setZoomed(false)}>
+        <ZoomedContainer id="zoomedContainer" onClick={() => setZoomed(false)} data-testid="zoomed-container">
           <ZoomedMainImage
             id="zoomedMainImage"
             style={{ backgroundImage: `url(${selectedPhotos[selectedMainPhotoIndex]?.url})` }}
             alt="Zoomed"
             onMouseMove={handleMouseMove}
+            data-test-id="zoomed-image"
           />
         </ZoomedContainer>
       )}
 
       <MainPhotoContainer>
         <ThumbnailContainerWrapper ref={thumbnailContainerRef}>
-          <ScrollButtonTop onClick={() => handleThumbnailScroll('up')}>
+          <ScrollButtonTop onClick={() => handleThumbnailScroll('up')} data-testid="scroll-top-btn">
             ^
           </ScrollButtonTop>
           <ThumbnailContainer>
@@ -355,13 +353,13 @@ function PhotoSection({ productId, selectedStyle }) {
               <Thumbnail key={index} src={photo.thumbnail_url} alt={`Thumbnail ${index}`} selected={index + startIdx === selectedMainPhotoIndex} onClick={() => handleThumbnailClick(index + startIdx)} />
             ))}
           </ThumbnailContainer>
-          <ScrollButtonBottom onClick={() => handleThumbnailScroll('down')}>
+          <ScrollButtonBottom onClick={() => handleThumbnailScroll('down')} data-testid="scroll-bottom-btn">
             v
           </ScrollButtonBottom>
         </ThumbnailContainerWrapper>
 
         {selectedMainPhotoIndex !== 0 && (
-          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0}>
+          <LeftArrow onClick={() => handleArrowClick('left')} disabled={selectedStyleIndex === 0} data-testid="left-arrow-index">
             &#8592;
           </LeftArrow>
         )}
@@ -372,7 +370,7 @@ function PhotoSection({ productId, selectedStyle }) {
           style={{ cursor: 'zoom-in' }}
         />
         {selectedMainPhotoIndex !== selectedPhotos.length - 1 && (
-          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1}>
+          <RightArrow onClick={() => handleArrowClick('right')} disabled={selectedStyleIndex === styles.length - 1} data-testid="right-arrow">
             &#8594;
           </RightArrow>
         )}

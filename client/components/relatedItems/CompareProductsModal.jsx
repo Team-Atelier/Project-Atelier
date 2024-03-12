@@ -67,7 +67,6 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
     const productFeatureList = thisProduct.features;
     const compareFeatureList = comparisonProduct.features;
     for (let i = 0; i < productFeatureList.length; i += 1) {
-      console.log('Here is the value:', productFeatureList[i].value);
       if (productFeatureList[i].value === null) {
         combinedFeatures[productFeatureList[i].feature] = ['check', null];
       } else {
@@ -85,7 +84,6 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
         combinedFeatures[compareFeatureList[j].feature] = [null, compareFeatureList[j].value];
       }
     }
-    console.log('WHAT is happening', Object.entries(combinedFeatures));
     setFeatures(Object.entries(combinedFeatures));
   }, [thisProduct, comparisonProduct]);
 

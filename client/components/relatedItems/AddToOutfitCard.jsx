@@ -20,7 +20,7 @@ const OutfitCard = styled.div`
 
 export default function AddToOutfitCard({ thisProductID, addToOutfit }) {
   return (
-    <OutfitCard onClick={() => addToOutfit(thisProductID)} role="button" tabIndex="0">
+    <OutfitCard onClick={() => addToOutfit(thisProductID)} role="button" aria-label="Add to Outfit" tabIndex="0">
       <h3>Add to Outfit</h3>
       <IconContext.Provider value={{ size: '7em' }}>
         <FiPlus />
