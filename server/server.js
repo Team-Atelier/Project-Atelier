@@ -17,14 +17,17 @@ app.use(express.json());
 
 app.all('/api/*', async (req, res) => {
   try {
-    const response = await axios({
+    const finalUrl = `${apiURL}${req.url.replace('/api/', '')}`;
+    const requestConfig = {
       method: req.method,
-      url: `${apiURL}${req.url.replace('/api/', '')}`,
+      url: finalUrl,
       headers: {
         Authorization: token,
       },
       data: req.body,
-    });
+    };
+
+    const response = await axios(requestConfig);
 
     res.status(response.status).json(response.data);
   } catch (error) {
