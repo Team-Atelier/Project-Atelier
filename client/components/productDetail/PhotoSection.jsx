@@ -189,15 +189,8 @@ function PhotoSection({ productId, selectedStyle }) {
   const [expandedView, setExpandedView] = useState(false);
   const [zoomed, setZoomed] = useState(false);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${productId}/styles`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${productId}/styles`)
       .then((response) => {
         setStyles(response.data.results);
       })

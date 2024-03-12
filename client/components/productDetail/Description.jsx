@@ -55,15 +55,8 @@ function Description({ productId }) {
   const [productDescription, setProductDescription] = useState([]);
   const [productFeatures, setProductFeatures] = useState([]);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${productId}`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${productId}`)
       .then((response) => {
         setProductDescription(response.data);
         setProductFeatures(response.data.features);
