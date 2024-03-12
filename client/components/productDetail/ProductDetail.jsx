@@ -31,15 +31,8 @@ function ProductDetail({
   const [productInformation, setProductInformation] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
 
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
-
   useEffect(() => {
-    axios.get(`${apiURL}products/${currentProductID}`, {
-      headers: {
-        Authorization: token,
-      },
-    })
+    axios.get(`/api/products/${currentProductID}`)
       .then((response) => {
         setProductInformation(response.data);
       })
