@@ -24,8 +24,6 @@ const CarouselContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: left;
-  align-items: center;
 `;
 const CarouselContent = styled.div`
   display: flex;

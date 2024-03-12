@@ -24,9 +24,13 @@ const Card = styled.div`
 // To-do: Add a more description button name
 const ActionButton = styled.button`
   position: absolute;
-  top: 0px;
+  top: 3px;
   right: 0px;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: grey;
+  margin: 3px;
 `;
 
 const CardClick = styled.div`
@@ -77,8 +81,6 @@ const TextContainer = styled.div`
 
 // eslint-disable-next-line object-curly-newline
 export default function ProductCard({ category, name, id, relatedProduct, handleModalOpen, comparisonProduct, removeFromOutfit, handleProductChange, scaleRatings, computeAverage }) {
-  const apiURL = process.env.API_URL;
-  const token = process.env.GITHUB_TOKEN;
   const [productPhoto, setProductPhoto] = useState('');
   const [originalPrice, setOriginalPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
@@ -88,7 +90,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
     if (id !== undefined) {
-      axios.get(`api/products/${id}/styles`)
+      axios.get(`/api/products/${id}/styles`)
         .then((results) => {
           const styles = results.data.results;
           const defaultStyle = styles.filter((product) => product['default?'] === true)[0] || styles[0];
@@ -101,7 +103,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   }, [id]);
 
   useEffect(() => {
-    axios.get(`api/reviews/meta?product_id=${id}`)
+    axios.get(`/api/reviews/meta?product_id=${id}`)
       .then((results) => {
         const scaledRatings = scaleRatings(results.data.ratings);
         setRating([computeAverage(scaledRatings)]);
@@ -110,7 +112,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
 
   return (
     <Card className="product-card">
-      {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose /></ActionButton> }
+      {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill size={20} /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose size={20} /></ActionButton> }
       <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
         <ImageContainer>
           <ProductImage
