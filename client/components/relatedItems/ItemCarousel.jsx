@@ -58,8 +58,7 @@ export default function ItemCarousel(props) {
   const [length, setLength] = useState(0);
 
   useEffect(() => {
-    props.outfitList ? setLength(children[1].length + 1)
-      : setLength(children.length);
+    Array.isArray(children[1]) ? setLength(children[1].length + 1) : setLength(children.length);
   }, [children]);
 
   const next = () => {
