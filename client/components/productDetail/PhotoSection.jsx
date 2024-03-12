@@ -238,6 +238,10 @@ function PhotoSection({ productId, selectedStyle }) {
     const visibleThumbnails = 7;
     const totalThumbnails = selectedPhotos.length;
 
+    if (totalThumbnails <= 7) {
+      return;
+    }
+
     if (direction === 'up') {
       setStartIdx(Math.max(0, startIdx - 1));
     } else if (direction === 'down') {
