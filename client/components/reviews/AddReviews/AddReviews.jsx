@@ -37,7 +37,7 @@ const Image = styled.img`
     },
   })
 */
-const postReview = (reviewInfo) => axios.post(`/post/reviews`, reviewInfo);
+const postReview = (reviewInfo) => axios.post('/api/reviews', reviewInfo);
 
 function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
