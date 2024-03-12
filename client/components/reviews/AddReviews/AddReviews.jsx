@@ -37,9 +37,7 @@ const Image = styled.img`
     },
   })
 */
-const postReview = (reviewInfo) => axios.post(`${url}reviews`, reviewInfo, {
-  headers: { Authorization: token },
-});
+const postReview = (reviewInfo) => axios.post(`/post/reviews`, reviewInfo);
 
 function AddReviews({
   newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,

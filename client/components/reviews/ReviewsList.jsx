@@ -56,8 +56,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   };
   */
 
-  const getReviews = (count = 1000, sort = 'relevant') => axios.get(`${url}reviews`, {
-    headers: { Authorization: token },
+  const getReviews = (count = 1000, sort = 'relevant') => axios.get('/api/reviews', {
     params: {
       product_id: metadata?.product_id,
       count,
@@ -96,7 +95,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
 
     let response;
     try {
-      response = await axios.put(`${url}reviews/${reviewID}/${e.target.value}`, {}, {
+      response = await axios.put(`/api/reviews/${reviewID}/${e.target.value}`, {}, {
         headers: { Authorization: token },
       });
       await refresh();

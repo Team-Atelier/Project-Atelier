@@ -281,7 +281,6 @@ test('should render clickable radio buttons by characteristic ', async () => {
     />,
   );
   await user.click(screen.getByRole('button', { name: /Add review/ }));
-  user.click(screen.getByRole('row', { name: /characteristic/ }));
   await waitFor(() => {
     expect(screen.getByRole('row', { name: /Fit/ })).toBeInTheDocument();
     expect(screen.getByRole('row', { name: /Length/ })).toBeInTheDocument();
