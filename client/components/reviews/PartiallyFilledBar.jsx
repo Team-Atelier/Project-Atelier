@@ -5,7 +5,7 @@ const Container = styled.div`
 
   display: flex;
   height: 7px;
-  width: 70%;
+  width: 76%;
   margin-right: 5%;
   position: relative;
   margin-top: 1.05em;

@@ -52,7 +52,7 @@ const Star = ({
 const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, numReviewsAdded }) => {
   const [hoverRating, setHoverRating] = useState([false, false, false, false]);
   const [ratingBlurb, setRatingBlurb] = useState('');
-  useEffect(()=>{
+  useEffect(() => {
     setHoverRating([false, false, false, false]);
     setRatingBlurb('');
   }, [numReviewsAdded]);

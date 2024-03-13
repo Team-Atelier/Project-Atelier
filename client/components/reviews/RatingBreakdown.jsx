@@ -16,11 +16,14 @@ const RatingRow = styled.section`
   display: flex;
   flex-direction: row;
   width: 100%
+  min-width: 4vw
 `;
 
 const RatingCard = styled.section`
   display: grid;
   width: 40%;
+  margin-left: 4vw;
+  margin-right: 4vw;
 `;
 
 function RatingRowElement({

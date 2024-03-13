@@ -3,7 +3,7 @@
 import React from 'react';
 
 function ExperienceTableRow({
-  name, descriptions, newReviewData, handleNewReviewChange, id, numReviewsAdded
+  name, descriptions, newReviewData, handleNewReviewChange, id,
 }) {
   const change = (e) => {
     handleNewReviewChange(e, null, null, id);
