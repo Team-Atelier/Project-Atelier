@@ -34,10 +34,12 @@ const CheckmarkIcon = styled.span`
   font-size: 24px;
 `;
 
-function ThumbnailOverlay({ src, selected, onClick }) {
+function ThumbnailOverlay({
+  src, alt, selected, onClick,
+}) {
   return (
     <ThumbnailContainer onClick={onClick}>
-      <Thumbnail src={src} />
+      <Thumbnail src={src} alt={alt} />
       {selected && (
       <CheckmarkOverlay>
         <CheckmarkIcon>&#10003;</CheckmarkIcon>
