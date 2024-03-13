@@ -69,6 +69,12 @@ function Reviews({ metadata, reloadReviews }) {
     1: false,
   });
 
+  useEffect(() => {
+    if ((Object.keys(newReviewData)).length > 0) {
+      setNewReviewData({});
+    }
+  }, [reloadReviews]);
+
   const handleRatingFilterClick = (star, reset = false) => {
     if (reset) {
       setRatingFilter({
