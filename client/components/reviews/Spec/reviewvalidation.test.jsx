@@ -171,37 +171,3 @@ describe('Test review length validation', () => {
     await user.click(screen.getByRole('button', { name: /Insert image/ }));
   });
 });
-
-/*
-  const validReview = (metadata, newReviewData) => {
-    const mandatoryFields = ['rating', 'summary', 'body', 'recommend', 'name', 'email'];
-    const result = mandatoryFields.every((item) => {
-      if (newReviewData[item] === undefined) {
-        return false;
-      }
-      if (newReviewData[item] === '') {
-        return false;
-      }
-      return true;
-    });
-    if (result === false) {
-      return false;
-    }
-    // Other aspects have been resolved as those text boxes have character limits.
-    if (newReviewData.body.length <= 50) {
-      return false;
-    }
-    const emailRegEx = /^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i;
-    if (emailRegEx.test(newReviewData.email) === false) {
-      return false;
-    }
-
-    const validCharacteristics = Object.keys(metadata?.characteristics)?.length
-    === Object.keys(newReviewData.characteristics).length;
-    if (validCharacteristics === false) {
-      return false;
-    }
-
-    return true;
-  };
-*/
