@@ -239,7 +239,7 @@ test('should properly add and reset images, and track of new review info state',
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});
   axios.get = jest.fn().mockResolvedValue(getReviewsReply);
-  const component = render(
+  render(
     <Reviews
       productId="40346"
       metadata={mockMetadata}
@@ -253,21 +253,19 @@ test('should properly add and reset images, and track of new review info state',
   await user.type(nickname, 'Chris');
   await user.type(reviewBodyField, '012345679');
   await user.type(addImg, 'https://i.imgur.com/BXlZVQh.jpeg');
-  await waitFor(() => {
+  waitFor(() => {
     expect(reviewBodyField).toHaveValue('012345679');
     expect(screen.getByText(/41 characters needed until 50 character minimum reached/)).toBeInTheDocument();
     expect(screen.getByText(/991 characters remaining/)).toBeInTheDocument();
   });
   await (() => {
-    user.click(screen.getByRole('button', { name: /Insert image/ }));
+    user.fireEvent(screen.getByRole('button', { name: /Insert image/ }));
   });
   await waitFor(() => {
-    expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).toBeInTheDocument();
-  //  user.click(screen.getByRole('button', { name: /Reset/ }));
-  });
-  // await waitFor(() => {
-  //   expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
-  // });
+    expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).toBeInTheDocument\
+   await waitFor(() => {
+     expect(screen.getByRole('img', { src: 'https://i.imgur.com/E6cvpNw.jpeg' })).not.toBeInTheDocument();
+   });
 });
 
 test('should render clickable radio buttons by characteristic ', async () => {
@@ -276,23 +274,22 @@ test('should render clickable radio buttons by characteristic ', async () => {
   // Your Experience
   // Characteristic
   axios.get = jest.fn().mockResolvedValue(getReviewsReply);
-  const component = await render(
+
     <Reviews
       productId="40346"
       metadata={mockMetadata}
       reloadReviews={mockProp}
     />,
-  );
+
   await user.click(screen.getByRole('button', { name: /Add review/ }));
-  await waitFor(() => {
-    expect(screen.getByRole('row', { name: /Fit/ })).toBeInTheDocument();
-    expect(screen.getByRole('row', { name: /Length/ })).toBeInTheDocument();
-    expect(screen.getByRole('row', { name: /Comfort/ })).toBeInTheDocument();
-    expect(screen.getByRole('row', { name: /Quality/ })).toBeInTheDocument();
-  });
-  // await user.click(screen.getByRole('cell', { name: /Slightly uncomfortable/ }));
-});
-/*
+    await waitFor(() => {
+      expect(screen.getByRole('row', { name: /Fit/ })).toBeInTheDocument();
+      expect(screen.getByRole('row', { name: /Length/ })).toBeInTheDocument();
+      expect(screen.getByRole('row', { name: /Comfort/ })).toBeInTheDocument();
+      expect(screen.getByRole('row', { name: /Quality/ })).toBeInTheDocument();
+    });
+}));
+
 test('should display text when stars are clicked', async () => {
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});
@@ -317,8 +314,7 @@ test('should display text when stars are clicked', async () => {
     expect(screen.getByTestId('fair')).toBeInTheDocument();
   });
 });
-*/
-/*
+
 test('hover/unhover', async () => {
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});
@@ -352,7 +348,7 @@ test('hover/unhover', async () => {
     expect(screen.getByTestId('poor')).toBeInTheDocument();
   });
 });
-*/
+
 test('elements appear on the screen', async () => {
   const user = userEvent.setup();
   const mockProp = jest.fn(() => {});

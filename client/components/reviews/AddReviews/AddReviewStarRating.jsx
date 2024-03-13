@@ -38,7 +38,7 @@ const Star = ({
     handleHover(nextRating);
   };
   return (
-    <div data-testid={`rsr-${rating}`}>
+    <div data-testid={`rsr${rating}`} className={`rsr${rating}`}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/cssfont-awesome.min.css" />
       {solid && (
       <span
