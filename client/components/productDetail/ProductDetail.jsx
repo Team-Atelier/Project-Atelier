@@ -22,7 +22,7 @@ const ProductSectionContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 `;
 
 function ProductDetail({
