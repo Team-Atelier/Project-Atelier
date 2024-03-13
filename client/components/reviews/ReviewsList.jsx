@@ -7,9 +7,6 @@ import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx';
 import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
-const url = process.env.API_URL;
-const token = process.env.GITHUB_TOKEN;
-
 const ReviewBox = styled.div`
 overflow-y: auto;
 max-height: 541px;
@@ -31,7 +28,7 @@ function ImageModal({ src }) {
   );
 }
 
-function ReviewsList({ productId, ratingFilter, metadata }) {
+function ReviewsList({ ratingFilter, metadata }) {
   const [relevantReviews, setRelevantReviews] = useState([]);
   const [newestReviews, setNewestReviews] = useState([]);
   const [helpfulReviews, setHelpfulReviews] = useState([]);
@@ -41,20 +38,6 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
   const [visibleReviews, setVisibleReviews] = useState(2);
   const [modalImg, setModalImg] = useState();
   const [markedAsHelpful, setMarkedAsHelpful] = useState({});
-
-  /*
-  const getNumberOfReviews = async () => {
-    const data = await axios.get(`${url}reviews/meta`, {
-      headers: { Authorization: token },
-      params: {
-        product_id: productId,
-      },
-    });
-    const result = Object.values(data.data.ratings).map((item) => Number(item));
-    const sum = result.reduce((accumulator, currentValue) => accumulator + currentValue);
-    return sum;
-  };
-  */
 
   const getReviews = (count = 1000, sort = 'relevant') => axios.get('/api/reviews', {
     params: {
@@ -95,9 +78,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
 
     let response;
     try {
-      response = await axios.put(`/api/reviews/${reviewID}/${e.target.value}`, {}, {
-        headers: { Authorization: token },
-      });
+      response = await axios.put(`/api/reviews/${reviewID}/${e.target.value}`, {});
       await refresh();
       if (e.target.value === 'helpful') {
         const nextMarkedAsHelpful = {
@@ -208,7 +189,7 @@ function ReviewsList({ productId, ratingFilter, metadata }) {
       </ReviewBox>
 
       <div>
-        {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); console.log(!twoReviewsOrLess()); }}>More reviews</button>}
+        {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>}
       </div>
     </>
 

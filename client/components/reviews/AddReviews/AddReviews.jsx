@@ -9,9 +9,6 @@ import axios from 'axios';
 import ExperienceTable from './ExperienceTable.jsx';
 import AddReviewStarRating from './AddReviewStarRating.jsx';
 
-const url = process.env.API_URL;
-const token = process.env.GITHUB_TOKEN;
-
 const FlexRow = styled.div`
   word-wrap: break-word;
   display: flex;
@@ -29,14 +26,6 @@ const Image = styled.img`
   padding: 5px
 `;
 
-/*
-  const data = await axios.get(`${url}reviews/meta`, {
-    headers: { Authorization: token },
-    params: {
-      product_id: productId,
-    },
-  })
-*/
 const postReview = (reviewInfo) => axios.post('/api/reviews', reviewInfo);
 
 function AddReviews({
