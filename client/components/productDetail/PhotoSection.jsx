@@ -29,7 +29,7 @@ const MainPhotoContainer = styled.div`
 
 const MainImage = styled.img`
   max-width: 100%;
-  max-height: 500px;
+  max-height: 31.25em;
 `;
 
 const ThumbnailContainerWrapper = styled.div`

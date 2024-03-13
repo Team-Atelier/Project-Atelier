@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -15,37 +16,37 @@ const { useState, useEffect, useRef } = React;
 
 const InfoSectionContainer = styled.div`
   width: 40%;
-  padding: 20px;
+  padding: 1.25em;
 `;
 
 const Stars = styled.div`
-  font-size: 14px;
+  font-size: 0.875em;
 `;
 
 const ProductTitle = styled.h2`
-  font-size: 24px;
+  font-size: 1.5em;
 `;
 
 const ProductCategory = styled.p`
-  font-size: 18px;
+  font-size: 1em;
 `;
 
 const ProductPrice = styled.div`
-  font-size: 18px;
+  font-size: 1em;
 `;
 
 const SalePrice = styled.p`
-  font-size: 18px;
+  font-size: 1em;
   color: red;
 `;
 
 const OriginalPrice = styled.p`
-  font-size: 18px;
+  font-size: 1em;
   color: black;
 `;
 
 const OriginalPriceSale = styled.p`
-  font-size: 18px;
+  font-size: 1em;
   text-decoration: line-through;
   color: black;
 `;
@@ -53,46 +54,44 @@ const OriginalPriceSale = styled.p`
 const ThumbnailContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  width: 330px;
+  gap: 0.625em;
+  width: 20.625em;
 `;
 
 const SelectedStyle = styled.div`
-  margin-bottom: 10px;
-  font-size: 16px;
+  margin-bottom: 0.625em;
+  font-size: 1em;
 `;
 
 const DropdownContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: 30px;
-  margin-bottom: 10px;
+  margin-top: 1.875em;
+  margin-bottom: 0.625em;
   width: 100%;
 `;
 
 const SelectSizeContent = styled.div`
   position: relative;
-  box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
-  margin-top: 0px;
-  width: 175px;
-  margin-right: 25px;
+  margin-top: 0em;
+  width: 10.9375em;
+  margin-right: 1.5625em;
 `;
 
 const SelectQuantityContent = styled.div`
   position: relative;
-  box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   z-index: 1;
-  margin-top: 0px;
-  width: 175px;
+  margin-top: 0em;
+  width: 10.9375em;
 `;
 
 const Select = styled.select`
-  width: 175px;
+  width: 10.9375em;
   cursor: pointer;
-  font-size: 16px;
-  padding: 8px;
+  font-size: 1em;
+  padding: 0.5em;
   transition: background-color 0.7s;
   &:hover {
     background-color: black;
@@ -103,9 +102,8 @@ const Select = styled.select`
 const CartContainer = styled.div`
   position: relative;
   display: flex;
-  box-shadow: 0px 8px 16p 0px rgba(0,0,0,0.2);
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.625em;
   justify-content: space-between;
   width: 100%;
 `;
@@ -114,11 +112,11 @@ const AddButton = styled.button`
   position: relative;
   cursor: pointer;
   width: 100%;
-  font-size: 16px;
-  padding: 8px;
+  font-size: 1em;
+  padding: 0.5em;
   background-color: black;
   color: white;
-  border-radius: 20px;
+  border-radius: 1.25em;
   transition: background-color 0.7s;
   &:hover {
     background-color: blue;
@@ -127,11 +125,11 @@ const AddButton = styled.button`
 
 const ErrorMessage = styled.div`
   color: red;
-  margin-bottom: 5px;
+  margin-bottom: 0.3125em;
 `;
 
 const SocialMedia = styled.div`
-  font-size: 24px;
+  font-size: 1em;
   display: flex;
   align-items: center;
   width: 100%;
@@ -139,7 +137,7 @@ const SocialMedia = styled.div`
 `;
 
 const FacebookIcon = styled(FaFacebookSquare)`
-  margin-right: 10px;
+  margin-right: 0.625em;
   color: white;
 `;
 
@@ -149,12 +147,12 @@ const FacebookButton = styled.button`
   align-items: center;
   border: none;
   font-size: 16px;
-  margin-right: 10px;
+  margin-right: 0.625em;
   color: white;
   background-color: #316ff6;
-  border-radius: 10px;
-  padding: 5px 5px;
-  width: 110px;
+  border-radius: 0.625em;
+  padding: 0.3125em 0.3125em;
+  width: 6.875em;
   transition: background-color 0.7s;
   &:hover {
     background-color: #5A7FC9;
@@ -162,7 +160,7 @@ const FacebookButton = styled.button`
 `;
 
 const TwitterIcon = styled(FaSquareXTwitter)`
-  margin-right: 10px;
+  margin-right: 0.625em;
   color: white;
 `;
 
@@ -172,12 +170,12 @@ const TwitterButton = styled.button`
   align-items: center;
   border: none;
   font-size: 16px;
-  margin-right: 10px;
+  margin-right: 0.625em;
   color: white;
   background-color: #14171A;
-  border-radius: 10px;
-  padding: 5px 5px;
-  width: 110px;
+  border-radius: 0.625em;
+  padding: 0.3125em 0.3125em;
+  width: 6.875em;
   transition: background-color 0.7s;
   &:hover {
     background-color: #605857;
@@ -185,7 +183,7 @@ const TwitterButton = styled.button`
 `;
 
 const PinterestIcon = styled(FaPinterestSquare)`
-  margin-right: 10px;
+  margin-right: 0.625em;
   color: white;
 `;
 
@@ -197,9 +195,9 @@ const PinterestButton = styled.button`
   font-size: 16px;
   color: white;
   background-color: #E60023;
-  border-radius: 10px;
-  padding: 5px 5px;
-  width: 110px;
+  border-radius: 0.625em;
+  padding: 0.3125em 0.3125em;
+  width: 6.875em;
   transition: background-color 0.7s;
   &:hover {
     background-color: #FF3347;
@@ -382,6 +380,7 @@ function InfoSection({
         <SelectSizeContent>
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
+          <label htmlFor="sizeSelect">Size:</label>
           <Select
             ref={sizeDropdownRef}
             value={selectedSize || ''}
@@ -400,6 +399,7 @@ function InfoSection({
 
         <SelectQuantityContent>
 
+          <label htmlFor="quantitySelect">Quantity:</label>
           <Select
             value={selectedQuantity}
             onChange={(e) => handleQuantitySelect(Number(e.target.value))}
