@@ -102,7 +102,6 @@ const Select = styled.select`
 const CartContainer = styled.div`
   position: relative;
   display: flex;
-  box-shadow: 0em 0.5em 1em 0em rgba(0,0,0,0.2);
   align-items: center;
   margin-bottom: 0.625em;
   justify-content: space-between;
