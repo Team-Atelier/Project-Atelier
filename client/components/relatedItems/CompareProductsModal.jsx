@@ -68,6 +68,10 @@ const Header = styled.thead`
   padding: 0.8rem 1.6rem;
 `;
 
+const TableBody = styled.tbody`
+
+`;
+
 export default function CompareProductsModal({ handleModalClose, thisProduct, comparisonProduct }) {
   const [features, setFeatures] = useState([]);
 
@@ -112,7 +116,7 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
               <th aria-label="empty" />
               <Feature>{comparisonProduct.name}</Feature>
             </Header>
-            <tbody>
+            <TableBody>
               <tr>
                 <td>{thisProduct.category}</td>
                 <Feature>Category</Feature>
@@ -125,7 +129,7 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
                   <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
                 </tr>
               )) : null }
-            </tbody>
+            </TableBody>
           </Table>
         </ModalContent>
       </Modal>

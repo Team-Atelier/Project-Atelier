@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 62vh;
+  height: 550px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -17,6 +17,7 @@ const CarouselContainer = styled.div`
 const CarouselWrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 100%
   position: relative;
   box-sizing: border-box;
 `;
@@ -34,7 +35,7 @@ const CarouselContent = styled.div`
   scrollbar-width: none;
   width: 100%;
   height: 100%;
-  justify-content: space-between;
+  justify-content: left;
   box-sizing: border-box;
 `;
 const Arrow = styled.button`
