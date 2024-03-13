@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/function-component-definition */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // Idea pass a prop with number and it will fill the rating based on that.
 // f006 :Solid
@@ -33,7 +33,10 @@ const Star = ({
   const handleMouseExit = () => {
     // fill(value, start, end)
     let nextRating = [false, false, false, false, false];
-    console.log(newReviewData);
+    if (newReviewData.rating === undefined) {
+      handleHover(nextRating);
+      return;
+    }
     nextRating = nextRating.fill(true, 0, newReviewData.rating);
     handleHover(nextRating);
   };
@@ -61,9 +64,13 @@ const Star = ({
   );
 };
 
-const AddReviewStarRating = ({ newReviewData, handleNewReviewChange }) => {
+const AddReviewStarRating = ({ newReviewData, handleNewReviewChange, numReviewsAdded }) => {
   const [hoverRating, setHoverRating] = useState([false, false, false, false]);
   const [ratingBlurb, setRatingBlurb] = useState('');
+  useEffect(()=>{
+    setHoverRating([false, false, false, false]);
+    setRatingBlurb('');
+  }, [numReviewsAdded]);
   const hover = (ratings) => {
     const nextRating = ratings.filter((item) => (item === true)).length;
     setRatingBlurb(nextRating);

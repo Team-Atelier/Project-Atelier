@@ -97,7 +97,7 @@ function App() {
       <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
       <div id="reviews-section">
-        <Reviews metadata={metadata} reloadReviews={reloadReviews} />
+        <Reviews metadata={metadata} reloadReviews={reloadReviews} numReviewsAdded={numReviewsAdded}/>
       </div>
     </>
   );

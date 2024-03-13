@@ -40,16 +40,18 @@ const Image = styled.img`
 const postReview = (reviewInfo) => axios.post('/api/reviews', reviewInfo);
 
 function AddReviews({
-  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
+  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews, numReviewsAdded,
 }) {
   const validReview = () => {
     const mandatoryFields = ['rating', 'summary', 'body', 'recommend', 'name', 'email'];
     // eslint-disable-next-line no-restricted-syntax
     const result = mandatoryFields.every((item) => {
       if (newReviewData[item] === undefined) {
+        alert(`A mandatory text field ${item} is not defined.`);
         return false;
       }
       if (newReviewData[item] === '') {
+        alert(`A mandatory text field ${item} is ''.`);
         return false;
       }
       return true;
@@ -59,16 +61,21 @@ function AddReviews({
     }
     // Other aspects have been resolved as those text boxes have character limits.
     if (newReviewData.body.length <= 50) {
+      alert('Review body has not met minimum length');
       return false;
     }
-    const emailRegEx = /^[a-z0-9.]{1,64}@[a-z0-9.]{1,64}$/i;
+    // eslint-disable-next-line no-useless-escape
+    const emailRegEx = /^([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$/i;
+
     if (emailRegEx.test(newReviewData.email) === false) {
+      alert('Failed email format validation');
       return false;
     }
 
     const validCharacteristics = Object.keys(metadata?.characteristics)?.length
     === Object.keys(newReviewData.characteristics).length;
     if (validCharacteristics === false) {
+      alert('Please ensure all characteristics are checked');
       return false;
     }
 
@@ -120,6 +127,7 @@ function AddReviews({
             <AddReviewStarRating
               newReviewData={newReviewData}
               handleNewReviewChange={handleNewReviewChange}
+              numReviewsAdded={numReviewsAdded}
             />
           </div>
         </label>
@@ -135,7 +143,7 @@ function AddReviews({
             type="radio"
             name="recommend"
             value={true}
-            checked={newReviewData.recommended}
+            checked={newReviewData.recommend === 'true'}
             onChange={(e) => {
               handleNewReviewChange(e);
             }}
@@ -143,7 +151,7 @@ function AddReviews({
           Yes
         </label>
         <label>
-          <input type="radio" name="recommend" value={false} checked={newReviewData.recommended} onChange={(e) => { handleNewReviewChange(e); }} />
+          <input type="radio" name="recommend" value={false} checked={newReviewData.recommend === 'false'} onChange={(e) => { handleNewReviewChange(e); }} />
           No
         </label>
       </div>
@@ -160,7 +168,6 @@ function AddReviews({
             style={{ width: '300px' }}
             onChange={(e) => { handleNewReviewChange(e); }}
           />
-
           <br />
           {newReviewData.summary ? `${(60 - (newReviewData.summary.length))} characters remaining` : ''}
         </label>
