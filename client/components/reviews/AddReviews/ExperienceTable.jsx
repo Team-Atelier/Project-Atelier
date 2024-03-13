@@ -11,7 +11,7 @@ const descriptions = {
 };
 
 function ExperienceTable({ newReviewData, handleNewReviewChange, metadata, numReviewsAdded }) {
-  const characteristics = metadata.characteristics || [];
+  const characteristics = metadata.characteristics || {};
   return (
     <table className="rating">
       <caption>
