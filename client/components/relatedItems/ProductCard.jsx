@@ -13,20 +13,20 @@ const Card = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  max-height: 550px;
   min-width: 20%;
   max-width: 20%;
   position: relative;
   cursor: pointer;
-  border-style: solid;
-  border-color: #ffffff;
-  border-width: thick;
+  border-right: thin solid #ccc;
+  justify-content: center;
+  border-left: 20px solid #ffffff;
 `;
 // To-do: Add a more description button name
 const ActionButton = styled.button`
   position: absolute;
   top: 3px;
-  right: 0px;
+  right: 20px;
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -41,8 +41,8 @@ const CardClick = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 100%;
-  height: 85%;
+  width: 95%;
+  height: 80%;
   object-fit: cover;
   overflow: hidden;
   display: flex;
@@ -55,6 +55,8 @@ const ProductImage = styled.img`
   width: 100%;
   max-height: 100%;
   overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 3px;
 `;
 
 const TextContainer = styled.div`
@@ -62,8 +64,9 @@ const TextContainer = styled.div`
   z-index: 1;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 95%;
   height: 15%;
+  margin-top: 10px;
   overflow: hidden;
   padding-top: 5px;
   p {
@@ -73,12 +76,7 @@ const TextContainer = styled.div`
     padding: 0;
     font-size: 14px;
   }
-  border-style: solid;
-  border-top: #00000;
-  border-left: #ffffff;
-  border-right: #ffffff;
-  border-bottom: #ffffff;
-  border-width: thin medium;
+  border-top: thin solid #ccc;
 `;
 
 // eslint-disable-next-line object-curly-newline

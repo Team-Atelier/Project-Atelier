@@ -12,7 +12,9 @@ const RelatedProducts = styled.div`
   margin-bottom: 10px;
 `;
 
-export default function RelatedProductsList({ relatedProducts, thisProduct, handleProductChange, scaleRatings, computeAverage }) {
+export default function RelatedProductsList({
+  relatedProducts, thisProduct, handleProductChange, scaleRatings, computeAverage,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [comparisonProduct, setComparisonProduct] = useState({});
 

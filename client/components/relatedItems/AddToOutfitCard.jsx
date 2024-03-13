@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const OutfitCard = styled.div`
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: 550px;
   min-width: 20%;
   max-width: 20%;
   position: relative;
@@ -17,11 +17,15 @@ const OutfitCard = styled.div`
   align-items: center;
   justify-content: center;
   line-height: 100%;
+  border: solid;
+  border-width: thin;
+  border-radius: 20px;
+  border-color: #ccc
 `;
 
 const OutfitCardContent = styled.div`
   position: absolute;
-  top: 15%;
+  top: 20%;
 `;
 
 export default function AddToOutfitCard({ thisProductID, addToOutfit }) {

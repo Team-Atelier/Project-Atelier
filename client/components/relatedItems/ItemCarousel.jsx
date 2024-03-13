@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 550px;
+  height: 650px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
