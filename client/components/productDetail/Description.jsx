@@ -8,24 +8,26 @@ import { FaCheck } from 'react-icons/fa';
 const { useState, useEffect } = React;
 
 const DescriptionContainer = styled.div`
-  width: 100%;
+  width: 80%;
   display: grid;
   grid-template-columns: 1fr 1px 1fr;
-  grid-column-gap: 20px;
+  grid-column-gap: 1.25em;
   margin: 0 auto;
-  padding: 20px
+  padding: 1.25em;
 `;
 
 const ProductDescriptionHeader = styled.h3`
-  font-size: 20px;
+  font-size: 1.25em;
 `;
 
 const DescriptionContent = styled.div`
   align-self: center;
+  padding-right: 1.875em;
 `;
 
 const ProductHighlightHeader = styled.h3`
-  font-size: 20px;
+  font-size: 1.25em;
+  padding-left: 4.375em;
 `;
 
 const Separator = styled.div`
@@ -37,17 +39,17 @@ const Separator = styled.div`
 
 const HighlightList = styled.ul`
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 4.375em;
 `;
 
 const HighlightItem = styled.li`
-  font-size: 16px;
+  font-size: 1em;
   display: flex;
   align-items: center;
 `;
 
 const DotIcon = styled(FaCheck)`
-  margin-right; 20px;
+  margin-right; 1.25em;
 `;
 
 // eslint-disable-next-line react/prop-types
