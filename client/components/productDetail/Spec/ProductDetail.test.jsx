@@ -58,7 +58,7 @@ describe('ProductDetail component', () => {
         { feature: 'Cut', value: 'Skinny' },
       ],
     };
-    mockAxios.onGet(`${apiURL}products/${productId}`, {
+    mockAxios.onGet(`/api/products/${productId}`, {
       headers: {
         Authorization: token,
       },
@@ -125,19 +125,19 @@ describe('ProductDetail component', () => {
       },
     };
 
-    mockAxios.onGet(`${apiURL}products/${productId}`, {
+    mockAxios.onGet(`/api/products/${productId}`, {
       headers: {
         Authorization: token,
       },
     }).reply(200, mockProductData);
 
-    mockAxios.onGet(`${apiURL}products/${productId}/styles`, {
+    mockAxios.onGet(`/api/products/${productId}/styles`, {
       headers: {
         Authorization: token,
       },
     }).reply(200, mockStylesData);
 
-    mockAxios.onGet(`${apiURL}reviews/meta?product_id=${productId}`, {
+    mockAxios.onGet(`/api/reviews/meta?product_id=${productId}`, {
       headers: {
         Authorization: token,
       },
@@ -180,7 +180,7 @@ describe('ProductDetail component', () => {
       expect(screen.getByText('Pants')).toBeInTheDocument();
       expect(screen.getByText('Style: Black')).toBeInTheDocument();
       expect(screen.getByRole('img')).toBeInTheDocument();
-      expect(screen.getByText('Read all reviews')).toBeInTheDocument();
+      expect(screen.getByText('Read all 296 reviews')).toBeInTheDocument();
       expect(mockOnStyleSelect).toHaveBeenCalled();
       expect(sizeDropdown.value).toBe('Medium');
       expect(quantityDropdown.value).toBe('2');
@@ -243,19 +243,19 @@ describe('ProductDetail component', () => {
       },
     };
 
-    mockAxios.onGet(`${apiURL}products/${productId}`, {
+    mockAxios.onGet(`/api/products/${productId}`, {
       headers: {
         Authorization: token,
       },
     }).reply(200, mockProductData);
 
-    mockAxios.onGet(`${apiURL}products/${productId}/styles`, {
+    mockAxios.onGet(`/api/products/${productId}/styles`, {
       headers: {
         Authorization: token,
       },
     }).reply(200, mockStylesData);
 
-    mockAxios.onGet(`${apiURL}reviews/meta?product_id=${productId}`, {
+    mockAxios.onGet(`/api/reviews/meta?product_id=${productId}`, {
       headers: {
         Authorization: token,
       },
@@ -274,8 +274,8 @@ describe('ProductDetail component', () => {
 
     // Assert that the API requests were made with the new productId
     expect(mockAxios.history.get.length).toBe(2);
-    expect(mockAxios.history.get[0].url).toBe(`${apiURL}products/${40346}/styles`);
-    expect(mockAxios.history.get[1].url).toBe(`${apiURL}products/${newId}/styles`);
+    expect(mockAxios.history.get[0].url).toBe(`/api/products/${40346}/styles`);
+    expect(mockAxios.history.get[1].url).toBe(`/api/products/${newId}/styles`);
   });
 
   it('renders photo info after successful API call', async () => {
@@ -302,7 +302,7 @@ describe('ProductDetail component', () => {
         },
       ],
     };
-    mockAxios.onGet(`${apiURL}products/${productId}/styles`, {
+    mockAxios.onGet(`/api/products/${productId}/styles`, {
       headers: {
         Authorization: token,
       },
