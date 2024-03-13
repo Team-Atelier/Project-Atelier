@@ -2,22 +2,28 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { TfiClose } from 'react-icons/tfi';
 
 const Modal = styled.div`
-  display: inline-block;
   position: fixed;
-  z-index: 3;
-  left: 35%;
-  top: 35%;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4)
-  border: 1px solid #888;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
 `;
 const ModalContent = styled.div`
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
+  left: 35%;
+  top: 35%;
+  overflow-y:  auto;
 `;
 const ModalHeader = styled.header`
   font-weight: 1000;
@@ -32,6 +38,8 @@ const Close = styled.button`
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
 `;
 const Table = styled.table`
   font-weight: 400;
@@ -44,6 +52,7 @@ const Table = styled.table`
   border-spacing: 2px;
   tr:nth-child(odd) {background-color: #f4f2ed;}
   text-align: center;
+
 `;
 const Feature = styled.th`
   min-width: 200px;
@@ -88,36 +97,37 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
   }, [thisProduct, comparisonProduct]);
 
   return (
-    <Modal id="modal">
-      <ModalContent>
-        <ModalHeader>
-          <Close type="button" onClick={handleModalClose}>
-            &times;
-          </Close>
-          <span>Compare</span>
-        </ModalHeader>
-        <Table>
-          <Header>
-            <Feature>{thisProduct.name}</Feature>
-            <th aria-label="empty" />
-            <Feature>{comparisonProduct.name}</Feature>
-          </Header>
-          <tbody>
-            <tr>
-              <td>{thisProduct.category}</td>
-              <Feature>Category</Feature>
-              <td>{comparisonProduct.category}</td>
-            </tr>
-            {features ? features.map((feature) => (
+
+      <Modal id="modal">
+        <ModalContent>
+          <ModalHeader>
+            <Close type="button" onClick={handleModalClose}>
+              <TfiClose size={20} />
+            </Close>
+            <span>Compare</span>
+          </ModalHeader>
+          <Table>
+            <Header>
+              <Feature>{thisProduct.name}</Feature>
+              <th aria-label="empty" />
+              <Feature>{comparisonProduct.name}</Feature>
+            </Header>
+            <tbody>
               <tr>
-                <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
-                <Feature>{feature[0]}</Feature>
-                <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
+                <td>{thisProduct.category}</td>
+                <Feature>Category</Feature>
+                <td>{comparisonProduct.category}</td>
               </tr>
-            )) : null }
-          </tbody>
-        </Table>
-      </ModalContent>
-    </Modal>
+              {features ? features.map((feature) => (
+                <tr>
+                  <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
+                  <Feature>{feature[0]}</Feature>
+                  <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
+                </tr>
+              )) : null }
+            </tbody>
+          </Table>
+        </ModalContent>
+      </Modal>
   );
 }
