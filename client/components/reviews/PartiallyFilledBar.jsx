@@ -20,12 +20,12 @@ const Box = styled.div`
 `;
 
 const Background = styled(Box)`
-  background: grey;
+  background: #696969;
   width: 100%;
 `;
 
 const Progress = styled(Box)`
-  background: black;
+  background: #3eb489;
   width: ${({ percent }) => percent}%;
 `;
 

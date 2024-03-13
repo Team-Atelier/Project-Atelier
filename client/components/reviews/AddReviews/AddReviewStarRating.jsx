@@ -3,20 +3,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/function-component-definition */
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-// Idea pass a prop with number and it will fill the rating based on that.
-// f006 :Solid
-const StarStyle = styled.span`
-.fa-star:after {
-  color: black;
-  position: relative;
-  content: "\f005"
-  }
-  `;
-
-const OutlinedStar = () => (
-  <span className="fa fa-star" />
-);
 
 const Star = ({
   solid, rating, handleClick, handleHover, newReviewData,
@@ -49,7 +35,6 @@ const Star = ({
         onClick={() => { clicked('rating'); }}
         onMouseEnter={() => { handleMouseEnter(); }}
         onMouseLeave={() => { handleMouseExit(); }}
-
       />
       )}
       {!solid && (
