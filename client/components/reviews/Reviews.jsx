@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import AddReviews from './AddReviews/AddReviews.jsx';
@@ -15,13 +15,25 @@ import ModalWindowTemplate from './ModalWindowTemplate.jsx';
 
 const FlexRow = styled.section`
   display: flex;
-  justify-content: space-between;
   height: auto;
+  width: 95vw;
+`;
+const BlankAreaLeft = styled.div`
+  width: 40%;
+  height: 5vh;
+`;
+const BlankAreaRight = styled.div`
+  width: 60%;
+  height: 5vh;
 `;
 const ReviewListContainer = styled.section`
   display: grid;
   min-height: 541px;
   width: 60%
+`;
+const AddReviewButton = styled.button`
+  position: relative;
+  left: 9% !important;
 `;
 
 /*
@@ -42,7 +54,7 @@ max-height: 80vh;
 width: 85vw;
 `;
 function ReviewModal({
-  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews, numReviewsAdded
+  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews, numReviewsAdded,
 }) {
   return (
     <ModalWindowTemplate id="reviewsScreen">
@@ -59,7 +71,7 @@ function ReviewModal({
     </ModalWindowTemplate>
   );
 }
-function Reviews({ metadata, reloadReviews, numReviewsAdded}) {
+function Reviews({ metadata, reloadReviews, numReviewsAdded }) {
   const [newReviewData, setNewReviewData] = useState({});
   // const [metadata, setMetadata] = useState();
   const [ratingFilter, setRatingFilter] = useState({
@@ -170,25 +182,32 @@ function Reviews({ metadata, reloadReviews, numReviewsAdded}) {
             ratingFilter={ratingFilter}
           />
         </ReviewListContainer>
+
       </FlexRow>
-      <ReviewModal
-        newReviewData={newReviewData}
-        metadata={metadata}
-        handleNewReviewChange={handleNewReviewChange}
-        resetImages={resetImages}
-        reloadReviews={reloadReviews}
-        numReviewsAdded={numReviewsAdded}
-      />
-      <button
-        type="button"
-        style={{ position: 'relative', left: '40%' }}
-        onClick={(e) => {
-          const modal = document.getElementById('reviewsScreen');
-          modal.style.display = 'flex';
-        }}
-      >
-        Add review
-      </button>
+      <FlexRow>
+        <ReviewModal
+          newReviewData={newReviewData}
+          metadata={metadata}
+          handleNewReviewChange={handleNewReviewChange}
+          resetImages={resetImages}
+          reloadReviews={reloadReviews}
+          numReviewsAdded={numReviewsAdded}
+        />
+        <BlankAreaLeft />
+        <BlankAreaRight>
+          <AddReviewButton
+            type="button"
+            style={{ position: 'relative', left: '40%' }}
+            onClick={(e) => {
+              const modal = document.getElementById('reviewsScreen');
+              modal.style.display = 'flex';
+            }}
+          >
+            Add review
+          </AddReviewButton>
+        </BlankAreaRight>
+      </FlexRow>
+
     </>
   );
 }
