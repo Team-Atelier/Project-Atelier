@@ -185,6 +185,9 @@ function Reviews({ metadata, reloadReviews, numReviewsAdded }) {
         />
         <BlankAreaLeft />
         <BlankAreaRight>
+          {
+  //* * Moved to reviews list section
+            /*
           <AddReviewButton
             type="button"
             style={{ position: 'relative', left: '40%' }}
@@ -195,6 +198,8 @@ function Reviews({ metadata, reloadReviews, numReviewsAdded }) {
           >
             Add review
           </AddReviewButton>
+          */
+          }
         </BlankAreaRight>
       </FlexRow>
 

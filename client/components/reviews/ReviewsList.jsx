@@ -167,16 +167,6 @@ function ReviewsList({ ratingFilter, metadata }) {
       {relevantReviews.length === 0 && (
       <div>
         <h2>Be the first to review this product!</h2>
-        <button
-          type="button"
-          style={{ position: 'relative', left: '40%' }}
-          onClick={(e) => {
-            const modal = document.getElementById('reviewsScreen');
-            modal.style.display = 'flex';
-          }}
-        >
-          Add your review today!
-        </button>
       </div>
       )}
       <ReviewBox>
@@ -190,6 +180,15 @@ function ReviewsList({ ratingFilter, metadata }) {
 
       <div>
         {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>}
+        <button
+          type="button"
+          onClick={(e) => {
+            const modal = document.getElementById('reviewsScreen');
+            modal.style.display = 'flex';
+          }}
+        >
+          Add review
+        </button>
       </div>
     </>
 
