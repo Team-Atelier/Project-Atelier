@@ -14,6 +14,7 @@ const RelatedItemsDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  margin-bottom: 10px; 
 `;
 
 export default function RelatedItems({
@@ -26,7 +27,7 @@ export default function RelatedItems({
   // FUNCTIONS FOR INITIAL RENDERING
 
   const getProductInfo = async (ProductIDs, typeOfList) => {
-    const results = await Promise.all(ProductIDs.map((id) => axios.get(`api/products/${id}`)));
+    const results = await Promise.all(ProductIDs.map((id) => axios.get(`/api/products/${id}`)));
     if (typeOfList === 'relatedProducts') {
       setRelatedProducts(results.map((product) => product.data));
     }
@@ -38,7 +39,7 @@ export default function RelatedItems({
   const getRelatedProducts = async (id) => {
     try {
       if (id) {
-        const results = await axios.get(`api/products/${id}/related`);
+        const results = await axios.get(`/api/products/${id}/related`);
         getProductInfo(results.data, 'relatedProducts');
       }
     } catch (error) {
