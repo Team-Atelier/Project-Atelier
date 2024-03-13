@@ -42,7 +42,7 @@ max-height: 80vh;
 width: 85vw;
 `;
 function ReviewModal({
-  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews,
+  newReviewData, metadata, handleNewReviewChange, resetImages, reloadReviews, numReviewsAdded
 }) {
   return (
     <ModalWindowTemplate id="reviewsScreen">
@@ -53,12 +53,13 @@ function ReviewModal({
           handleNewReviewChange={handleNewReviewChange}
           resetImages={resetImages}
           reloadReviews={reloadReviews}
+          numReviewsAdded={numReviewsAdded}
         />
       </ReviewFormStyle>
     </ModalWindowTemplate>
   );
 }
-function Reviews({ metadata, reloadReviews }) {
+function Reviews({ metadata, reloadReviews, numReviewsAdded}) {
   const [newReviewData, setNewReviewData] = useState({});
   // const [metadata, setMetadata] = useState();
   const [ratingFilter, setRatingFilter] = useState({
@@ -73,7 +74,7 @@ function Reviews({ metadata, reloadReviews }) {
     if ((Object.keys(newReviewData)).length > 0) {
       setNewReviewData({});
     }
-  }, [reloadReviews]);
+  }, [numReviewsAdded]);
 
   const handleRatingFilterClick = (star, reset = false) => {
     if (reset) {
@@ -176,6 +177,7 @@ function Reviews({ metadata, reloadReviews }) {
         handleNewReviewChange={handleNewReviewChange}
         resetImages={resetImages}
         reloadReviews={reloadReviews}
+        numReviewsAdded={numReviewsAdded}
       />
       <button
         type="button"

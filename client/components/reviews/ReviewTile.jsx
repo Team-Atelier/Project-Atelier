@@ -8,10 +8,10 @@ import StarRating from './StarRating.jsx';
 
 const Summary = styled.h2`
   margin: 0px;
-  font-family: Helvetica, Sans-Serif;
+  font-family: Mate;
   font-size: 1.5em;
   text-align: left;
-  color: #BF4F74;
+  color: #007aa5;
   word-wrap:break-word;
 `;
 
@@ -85,7 +85,6 @@ function ReviewTile({
           </Right>
         </FlexRow>
         <FlexRow><Summary>{review.summary}</Summary></FlexRow>
-        <br />
         <ReviewBody>
           {review.body.length <= 250 && !showFullReview
             ? `${review.body.substring(0, 250)}`

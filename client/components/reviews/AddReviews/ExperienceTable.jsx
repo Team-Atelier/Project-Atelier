@@ -10,8 +10,8 @@ const descriptions = {
   fit: ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
 };
 
-function ExperienceTable({ newReviewData, handleNewReviewChange, metadata }) {
-  const { characteristics } = metadata || {};
+function ExperienceTable({ newReviewData, handleNewReviewChange, metadata, numReviewsAdded }) {
+  const characteristics = metadata.characteristics || {};
   return (
     <table className="rating">
       <caption>
@@ -39,6 +39,7 @@ function ExperienceTable({ newReviewData, handleNewReviewChange, metadata }) {
                 descriptions={desc}
                 newReviewData={newReviewData}
                 handleNewReviewChange={handleNewReviewChange}
+                numReviewsAdded={numReviewsAdded}
               />
             );
           },

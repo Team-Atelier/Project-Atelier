@@ -13,6 +13,12 @@ const Title = styled.h1`
   font-style: italic;
   font-weight: bold;
 `;
+const ReviewsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: mate;
+`;
 
 function App() {
   const [metadata, setMetadata] = useState({});
@@ -96,9 +102,9 @@ function App() {
 
       <ProductDetail currentProductID={currentProductID} scrollToReviews={scrollToReviews} scaleRatings={scaleRatings} computeAverage={computeAverage} />
       <RelatedItems scaleRatings={scaleRatings} computeAverage={computeAverage} currentProductData={currentProductData} currentProductID={currentProductID} handleProductChange={handleProductChange} />
-      <div id="reviews-section">
-        <Reviews metadata={metadata} reloadReviews={reloadReviews} />
-      </div>
+      <ReviewsContainer id="reviews-section">
+        <Reviews metadata={metadata} reloadReviews={reloadReviews} numReviewsAdded={numReviewsAdded} />
+      </ReviewsContainer>
     </>
   );
 }

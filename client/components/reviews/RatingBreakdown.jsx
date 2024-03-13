@@ -27,8 +27,8 @@ function RatingRowElement({
   parentID, star, rate, handleRatingFilterClick, metadata,
   ratingFilter,
 }) {
-  const highlightColor = 'lightgreen';
-  const selectedColor = 'green';
+  const highlightColor = '#c9ffe5';
+  const selectedColor = '#aaf0d1';
 
   return (
     <RatingRow
@@ -92,6 +92,9 @@ function RatingBreakdown({ metadata, handleRatingFilterClick, ratingFilter }) {
 
         </h1>
 
+      </div>
+      <div>
+        {metadata?.rec + metadata?.noRec} reviews
       </div>
       <div>
         {Math.round(metadata?.percentRecommend)}
