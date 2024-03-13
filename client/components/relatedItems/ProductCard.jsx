@@ -77,6 +77,7 @@ const TextContainer = styled.div`
   border-top: #00000;
   border-left: #ffffff;
   border-right: #ffffff;
+  border-bottom: #ffffff;
   border-width: thin medium;
 `;
 
