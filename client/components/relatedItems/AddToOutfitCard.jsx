@@ -9,22 +9,34 @@ import styled from 'styled-components';
 const OutfitCard = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 550px;
   min-width: 20%;
-  min-height: 100%;
-  line-height: 100%;
+  max-width: 20%;
   position: relative;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  line-height: 100%;
+  border: solid;
+  border-width: thin;
+  border-radius: 20px;
+  border-color: #ccc
+`;
+
+const OutfitCardContent = styled.div`
+  position: absolute;
+  top: 20%;
 `;
 
 export default function AddToOutfitCard({ thisProductID, addToOutfit }) {
   return (
     <OutfitCard onClick={() => addToOutfit(thisProductID)} role="button" aria-label="Add to Outfit" tabIndex="0">
-      <h3>Add to Outfit</h3>
-      <IconContext.Provider value={{ size: '7em' }}>
-        <FiPlus />
-      </IconContext.Provider>
+      <OutfitCardContent>
+        <h3>Add to Outfit</h3>
+        <IconContext.Provider value={{ size: '7em' }}>
+          <FiPlus />
+        </IconContext.Provider>
+      </OutfitCardContent>
     </OutfitCard>
   );
 }

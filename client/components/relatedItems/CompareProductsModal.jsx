@@ -68,6 +68,10 @@ const Header = styled.thead`
   padding: 0.8rem 1.6rem;
 `;
 
+const TableBody = styled.tbody`
+
+`;
+
 export default function CompareProductsModal({ handleModalClose, thisProduct, comparisonProduct }) {
   const [features, setFeatures] = useState([]);
 
@@ -97,37 +101,36 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
   }, [thisProduct, comparisonProduct]);
 
   return (
-
-      <Modal id="modal">
-        <ModalContent>
-          <ModalHeader>
-            <Close type="button" onClick={handleModalClose}>
-              <TfiClose size={20} />
-            </Close>
-            <span>Compare</span>
-          </ModalHeader>
-          <Table>
-            <Header>
-              <Feature>{thisProduct.name}</Feature>
-              <th aria-label="empty" />
-              <Feature>{comparisonProduct.name}</Feature>
-            </Header>
-            <tbody>
+    <Modal id="modal">
+      <ModalContent>
+        <ModalHeader>
+          <Close type="button" onClick={handleModalClose}>
+            <TfiClose size={20} />
+          </Close>
+          <span>Compare</span>
+        </ModalHeader>
+        <Table>
+          <Header>
+            <Feature>{thisProduct.name}</Feature>
+            <th aria-label="empty" />
+            <Feature>{comparisonProduct.name}</Feature>
+          </Header>
+          <TableBody>
+            <tr>
+              <td>{thisProduct.category}</td>
+              <Feature>Category</Feature>
+              <td>{comparisonProduct.category}</td>
+            </tr>
+            {features ? features.map((feature) => (
               <tr>
-                <td>{thisProduct.category}</td>
-                <Feature>Category</Feature>
-                <td>{comparisonProduct.category}</td>
+                <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
+                <Feature>{feature[0]}</Feature>
+                <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
               </tr>
-              {features ? features.map((feature) => (
-                <tr>
-                  <td>{(feature[1][0] === 'check') ? <>&#10003;</> : feature[1][0]}</td>
-                  <Feature>{feature[0]}</Feature>
-                  <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
-                </tr>
-              )) : null }
-            </tbody>
-          </Table>
-        </ModalContent>
-      </Modal>
+            )) : null }
+          </TableBody>
+        </Table>
+      </ModalContent>
+    </Modal>
   );
 }

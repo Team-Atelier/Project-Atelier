@@ -3,11 +3,18 @@
 /* eslint-disable import/extensions */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import ItemCarousel from './ItemCarousel.jsx';
 import ProductCard from './ProductCard.jsx';
 import CompareProductsModal from './CompareProductsModal.jsx';
 
-export default function RelatedProductsList({ relatedProducts, thisProduct, handleProductChange, scaleRatings, computeAverage }) {
+const RelatedProducts = styled.div`
+  margin-bottom: 10px;
+`;
+
+export default function RelatedProductsList({
+  relatedProducts, thisProduct, handleProductChange, scaleRatings, computeAverage,
+}) {
   const [showModal, setShowModal] = useState(false);
   const [comparisonProduct, setComparisonProduct] = useState({});
 
@@ -20,7 +27,7 @@ export default function RelatedProductsList({ relatedProducts, thisProduct, hand
     setShowModal(!showModal);
   };
   return (
-    <>
+    <RelatedProducts>
       <h2>
         You might like...
       </h2>
@@ -28,6 +35,6 @@ export default function RelatedProductsList({ relatedProducts, thisProduct, hand
       <ItemCarousel>
         {relatedProducts ? relatedProducts.map((product) => <ProductCard comparisonProduct={product} category={product.category} name={product.name} price={product.default_price} key={product.id} id={product.id} relatedProduct={true} handleModalOpen={handleModalOpen} handleProductChange={handleProductChange} scaleRatings={scaleRatings} computeAverage={computeAverage} />) : null}
       </ItemCarousel>
-    </>
+    </RelatedProducts>
   );
 }
