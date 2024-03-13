@@ -14,7 +14,6 @@ import AddToOutfitCard from '../AddToOutfitCard.jsx';
 import ProductCard from '../ProductCard.jsx';
 import CompareProductsModal from '../CompareProductsModal.jsx';
 
-const url = process.env.API_URL;
 jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {});
 
 describe('RelatedItems Components', () => {
@@ -57,7 +56,7 @@ describe('AddToOutfitCard Click Event', () => {
 
 describe('ProductCard Component', () => {
   const mock = new MockAdapter(axios);
-  mock.onGet(`${url}products/123/styles`).reply(200, {
+  mock.onGet('/api/products/123/styles').reply(200, {
     results: [
       {
         'default?': true,
@@ -68,7 +67,7 @@ describe('ProductCard Component', () => {
     ],
   });
 
-  mock.onGet(`${url}reviews/meta?product_id=123`).reply(200, {
+  mock.onGet('/api/reviews/meta?product_id=123').reply(200, {
     ratings: {
       1: 10,
       2: 20,

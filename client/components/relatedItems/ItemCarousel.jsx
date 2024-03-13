@@ -30,7 +30,8 @@ const CarouselContent = styled.div`
   transition: all 150ms linear;
   scrollbar-width: none;
   width: 100%;
-  height: 100%
+  height: 100%;
+  justify-content: space-between;
 `;
 const Arrow = styled.button`
   position: absolute;

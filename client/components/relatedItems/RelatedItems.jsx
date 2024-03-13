@@ -14,6 +14,7 @@ const RelatedItemsDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  margin-bottom: 10px; 
 `;
 
 export default function RelatedItems({
