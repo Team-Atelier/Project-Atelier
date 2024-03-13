@@ -11,12 +11,14 @@ const CarouselContainer = styled.div`
   height: 62vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 `;
 
 const CarouselWrapper = styled.div`
   display: flex;
   width: 100%;
   position: relative;
+  box-sizing: border-box;
 `;
 
 const CarouselContentWrapper = styled.div`
@@ -24,6 +26,7 @@ const CarouselContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  box-sizing: border-box;
 `;
 const CarouselContent = styled.div`
   display: flex;
@@ -32,6 +35,7 @@ const CarouselContent = styled.div`
   width: 100%;
   height: 100%;
   justify-content: space-between;
+  box-sizing: border-box;
 `;
 const Arrow = styled.button`
   position: absolute;

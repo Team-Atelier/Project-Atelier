@@ -10,6 +10,7 @@ import { TfiClose } from 'react-icons/tfi';
 import StarRating from '../reviews/StarRating.jsx';
 
 const Card = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   height: 100%;
