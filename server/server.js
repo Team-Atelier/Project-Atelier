@@ -8,12 +8,13 @@ const morgan = require('morgan');
 
 const app = express();
 
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 const apiURL = process.env.API_URL;
 const token = process.env.GITHUB_TOKEN;
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 app.all('/api/*', async (req, res) => {
   try {
@@ -39,8 +40,6 @@ app.all('/api/*', async (req, res) => {
   }
 });
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
-
-app.listen(PORT, () => {
-  console.log(`Server listening at: http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server listening at Port:${port}`);
 });
