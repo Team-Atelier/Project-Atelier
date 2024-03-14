@@ -26,10 +26,7 @@ const ReviewListContainer = styled.section`
   min-height: 541px;
   width: 60%
 `;
-const AddReviewButton = styled.button`
-  position: relative;
-  left: 9% !important;
-`;
+
 
 /*
 const getMetadata = async () => {
