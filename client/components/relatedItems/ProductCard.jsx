@@ -120,7 +120,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
         </ImageContainer>
         <TextContainer>
           <p style={{ fontSize: 16 }}>{name}</p>
-          <p style={{ fontVariant: 'small-caps'}}>{category}</p>
+          <p style={{ fontVariant: 'small-caps' }}>{category}</p>
           {salePrice ? (
             <>
               <p style={{ color: 'red' }}>
