@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx';
@@ -60,14 +60,14 @@ function ReviewsList({ ratingFilter, metadata }) {
       });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (metadata?.ratings) {
       setVisibleReviews(2);
       refresh(metadata?.ratings);
     }
   }, [metadata?.ratings]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setVisibleReviews(2);
   }, [ratingFilter]);
 
@@ -119,7 +119,7 @@ function ReviewsList({ ratingFilter, metadata }) {
     }, [])
       .toSpliced(visibleReviews, relevantReviews.length)
     );
-    useEffect(() => {
+    useLayoutEffect(() => {
       setCurrentLength(results.length);
     });
     return results;
@@ -189,6 +189,7 @@ function ReviewsList({ ratingFilter, metadata }) {
         >
           Add review
         </button>
+
       </div>
     </>
 
