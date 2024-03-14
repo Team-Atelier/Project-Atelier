@@ -65,13 +65,58 @@ const Right = styled.section`
 display: inline-block;
 `;
 
+const StyledButton = styled.button`
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  height: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+
+&:hover, focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+&:hover {
+  transform: translateY(-1px);
+}
+
+&:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+`;
+
 function ReviewTile({
-  review, handleModalImgChange, handleAPIClick, markedAsHelpful, ref,
+  review, handleModalImgChange, handleAPIClick, markedAsHelpful, ref, id,
 }) {
   const [showFullReview, setShowFullReview] = useState(false);
   const date = new Date(review.date);
   return (
-    <article className="reviewTile">
+    <article id={id} className="reviewTile">
       <MainBox>
         <FlexRow>
           <div className="left"><StarRating rating={review.rating} /></div>
@@ -91,7 +136,7 @@ function ReviewTile({
             : (!showFullReview && `${review.body.substring(0, 250)}...`)}
           {showFullReview && review.body}
           {review.body.length > 250 && (
-          <button
+          <StyledButton
             type="button"
             onClick={(e) => {
               setShowFullReview(!showFullReview);
@@ -99,7 +144,7 @@ function ReviewTile({
             }}
           >
             Show full review
-          </button>
+          </StyledButton>
           )}
         </ReviewBody>
         {review.recommend && (
@@ -141,7 +186,7 @@ function ReviewTile({
           <StaticRow>
             <div>Was this review helpful? </div>
             {' '}
-            <button
+            <StyledButton
               type="button"
               value="helpful"
               disabled={markedAsHelpful?.[review.review_id]}
@@ -150,25 +195,28 @@ function ReviewTile({
                   .then((res) => {
                     const helpfulAlreadyClicked = res;
                     e.target.disabled = helpfulAlreadyClicked;
-                    ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    //  ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const lastLoc = document.getElementById(review.review_id);
+                    lastLoc.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    alert('successful');
                   });
               }}
             >
               Yes
-            </button>
+            </StyledButton>
             (
             {review.helpfulness}
             )
           </StaticRow>
           <Right>
             <div>
-              <button
+              <StyledButton
                 type="button"
                 value="report"
                 onClick={(e) => { handleAPIClick(e, review.review_id); }}
               >
                 Report
-              </button>
+              </StyledButton>
             </div>
           </Right>
         </FlexRow>

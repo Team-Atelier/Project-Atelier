@@ -21,6 +21,96 @@ height: 600px;
 object-fit: cover;
 padding: 0px
 `;
+/*
+const StyledButton = styled.button`
+  background-color: #FFFFFF;
+  border: 1px solid #222222;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #222222;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  padding: 13px 23px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  transition: box-shadow .2s,-ms-transform .1s,-webkit-transform .1s,transform .1s;
+  user-select: none;
+  -webkit-user-select: none;
+  width: auto;
+
+&:focus-visible {
+  box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+  transition: box-shadow .2s;
+}
+
+&:active {
+  background-color: #F7F7F7;
+  border-color: #000000;
+  transform: scale(.96);
+}
+
+&:disabled {
+  border-color: #DDDDDD;
+  color: #DDDDDD;
+  cursor: not-allowed;
+  opacity: 1;
+}
+`;
+*/
+
+const StyledButton = styled.button`
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+
+&:hover, focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+&:hover {
+  transform: translateY(-1px);
+}
+
+&:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+`;
 
 function ImageModal({ src }) {
   return (
@@ -104,6 +194,7 @@ function ReviewsList({ ratingFilter, metadata }) {
           [reviewID]: true,
         };
         setMarkedAsHelpful(nextMarkedAsHelpful);
+        setTimeout(alert('Successful!'), 0);
         return nextMarkedAsHelpful;
       }
     } catch (err) {
@@ -199,8 +290,8 @@ function ReviewsList({ ratingFilter, metadata }) {
       </ReviewBox>
 
       <div>
-        {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>}
-        <button
+        {(!twoReviewsOrLess()) && <StyledButton type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); }}>More reviews</StyledButton>}
+        <StyledButton
           type="button"
           onClick={(e) => {
             const modal = document.getElementById('reviewsScreen');
@@ -208,7 +299,7 @@ function ReviewsList({ ratingFilter, metadata }) {
           }}
         >
           Add review
-        </button>
+        </StyledButton>
 
       </div>
     </>
