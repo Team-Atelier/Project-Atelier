@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, {
+  useState, useEffect, useLayoutEffect, useRef, createRef,
+} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx';
@@ -38,6 +40,22 @@ function ReviewsList({ ratingFilter, metadata }) {
   const [visibleReviews, setVisibleReviews] = useState(2);
   const [modalImg, setModalImg] = useState();
   const [markedAsHelpful, setMarkedAsHelpful] = useState({});
+  const reviewsEnd = useRef(null);
+
+  const scrollToBottom = () => {
+    reviewsEnd.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  useEffect(() => {
+    if (visibleReviews !== 2) {
+      scrollToBottom();
+    }
+  }, [visibleReviews]);
+
+  useEffect(() => {
+    if (Object.keys(markedAsHelpful) > 0) {
+      scrollToBottom();
+    }
+  }, [markedAsHelpful]);
 
   const getReviews = (count = 1000, sort = 'relevant') => axios.get('/api/reviews', {
     params: {
@@ -107,6 +125,7 @@ function ReviewsList({ ratingFilter, metadata }) {
         const nextReview = (
           <ReviewTile
             key={review.review_id}
+            id={review.review_id}
             review={review}
             handleModalImgChange={handleModalImgChange}
             handleAPIClick={handleAPIClick}
@@ -176,6 +195,7 @@ function ReviewsList({ ratingFilter, metadata }) {
         && <FormatReviews reviewsArray={helpfulReviews} markedAsHelpful={markedAsHelpful} />}
         {relevantReviews.length !== 0 && currentSort === 'newest'
         && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
+        <div ref={reviewsEnd} />
       </ReviewBox>
 
       <div>
