@@ -85,8 +85,9 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [salePrice, setSalePrice] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [rating, setRating] = useState([]);
+  const [thisDefaultStyle, setThisDefaultStyle] = useState([])
 
-  console.log(productPhoto);
+
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -95,6 +96,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
         .then((results) => {
           const styles = results.data.results;
           const defaultStyle = styles.filter((product) => product['default?'] === true)[0] || styles[0];
+          setThisDefaultStyle(defaultStyle);
           setProductPhoto(defaultStyle.photos[0].url);
           setSalePrice(defaultStyle.sale_price);
           setOriginalPrice(defaultStyle.original_price);
@@ -111,11 +113,26 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
       });
   }, [id]);
 
+  function handleSecondPhoto() {
+    if (productPhoto !== null) {
+      setProductPhoto(thisDefaultStyle.photos[1].url);
+    }
+  }
+
+  function handleOriginalPhoto() {
+    if (thisDefaultStyle.photos[0].url !== null) {
+      setProductPhoto(thisDefaultStyle.photos[0].url);
+    }
+  }
+
   return (
     <Card className="product-card">
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill size={20} /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose size={20} /></ActionButton> }
       <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
-        <ImageContainer>
+        <ImageContainer
+          onMouseOver={() => handleSecondPhoto()}
+          onMouseOut={() => handleOriginalPhoto()}
+        >
           <ProductImage src={(productPhoto === null) ? 'https://snipboard.io/bUWB2H.jpg' : productPhoto} alt="" />
         </ImageContainer>
         <TextContainer>
