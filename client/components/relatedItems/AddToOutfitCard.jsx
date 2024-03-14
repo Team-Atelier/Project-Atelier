@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const OutfitCard = styled.div`
   display: flex;
   flex-direction: column;
-  height: 550px;
+  height: 600px;
   min-width: 20%;
   max-width: 20%;
   position: relative;

@@ -44,7 +44,6 @@ const ImageContainer = styled.div`
   width: 95%;
   height: 80%;
   object-fit: cover;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,11 +60,11 @@ const ProductImage = styled.img`
 
 const TextContainer = styled.div`
   background-color: white;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   bottom: 0;
   width: 95%;
-  height: 15%;
+  height: 20%;
   margin-top: 10px;
   overflow: hidden;
   padding-top: 5px;
