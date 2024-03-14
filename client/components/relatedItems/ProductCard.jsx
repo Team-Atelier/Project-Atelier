@@ -42,9 +42,8 @@ const CardClick = styled.div`
 
 const ImageContainer = styled.div`
   width: 95%;
-  height: 80%;
+  height: 77%;
   object-fit: cover;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,11 +60,11 @@ const ProductImage = styled.img`
 
 const TextContainer = styled.div`
   background-color: white;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   bottom: 0;
   width: 95%;
-  height: 15%;
+  height: 20%;
   margin-top: 10px;
   overflow: hidden;
   padding-top: 5px;
@@ -86,6 +85,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   const [salePrice, setSalePrice] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [rating, setRating] = useState([]);
+
+  console.log(productPhoto);
 
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
@@ -115,10 +116,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill size={20} /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose size={20} /></ActionButton> }
       <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
         <ImageContainer>
-          <ProductImage
-            src={productPhoto}
-            alt=""
-          />
+          <ProductImage src={(productPhoto === null) ? 'https://snipboard.io/bUWB2H.jpg' : productPhoto} alt="" />
         </ImageContainer>
         <TextContainer>
           <p>{name}</p>

@@ -23,7 +23,7 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   left: 35%;
   top: 35%;
-  overflow-y:  auto;
+  overflow-y: auto;
 `;
 const ModalHeader = styled.header`
   font-weight: 1000;
@@ -31,6 +31,7 @@ const ModalHeader = styled.header`
   font-size: 1.6rem;
   line-height: 2.2rem;
   font-align: left;
+  margin-top: 10px;
 `;
 const Close = styled.button`
   color: #aaa;
@@ -52,7 +53,6 @@ const Table = styled.table`
   border-spacing: 2px;
   tr:nth-child(odd) {background-color: #f4f2ed;}
   text-align: center;
-
 `;
 const Feature = styled.th`
   min-width: 200px;
@@ -68,7 +68,7 @@ const Header = styled.thead`
   padding: 0.8rem 1.6rem;
 `;
 
-const TableBody = styled.tbody`
+const Body = styled.tbody`
 
 `;
 
@@ -115,7 +115,7 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
             <th aria-label="empty" />
             <Feature>{comparisonProduct.name}</Feature>
           </Header>
-          <TableBody>
+          <Body>
             <tr>
               <td>{thisProduct.category}</td>
               <Feature>Category</Feature>
@@ -128,7 +128,7 @@ export default function CompareProductsModal({ handleModalClose, thisProduct, co
                 <td>{(feature[1][1] === 'check') ? <>&#10003;</> : feature[1][1]}</td>
               </tr>
             )) : null }
-          </TableBody>
+          </Body>
         </Table>
       </ModalContent>
     </Modal>
