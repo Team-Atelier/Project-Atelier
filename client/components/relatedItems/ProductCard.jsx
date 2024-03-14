@@ -119,8 +119,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
           <ProductImage src={(productPhoto === null) ? 'https://snipboard.io/bUWB2H.jpg' : productPhoto} alt="" />
         </ImageContainer>
         <TextContainer>
-          <p>{name}</p>
-          <p>{category}</p>
+          <p style={{ fontSize: 16 }}>{name}</p>
+          <p style={{ fontVariant: 'small-caps'}}>{category}</p>
           {salePrice ? (
             <>
               <p style={{ color: 'red' }}>
