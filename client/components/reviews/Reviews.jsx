@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import ReviewsList from './ReviewsList.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
@@ -185,6 +185,9 @@ function Reviews({ metadata, reloadReviews, numReviewsAdded }) {
         />
         <BlankAreaLeft />
         <BlankAreaRight>
+          {
+  //* * Moved to reviews list section
+            /*
           <AddReviewButton
             type="button"
             style={{ position: 'relative', left: '40%' }}
@@ -195,6 +198,8 @@ function Reviews({ metadata, reloadReviews, numReviewsAdded }) {
           >
             Add review
           </AddReviewButton>
+          */
+          }
         </BlankAreaRight>
       </FlexRow>
 

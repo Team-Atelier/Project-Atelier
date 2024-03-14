@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 /* eslint-disable no-console */
-import React, { useState, useEffect } from 'react';
+import React, {
+  useState, useEffect, useLayoutEffect, useRef, createRef,
+} from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import ReviewTile from './ReviewTile.jsx';
@@ -38,6 +40,22 @@ function ReviewsList({ ratingFilter, metadata }) {
   const [visibleReviews, setVisibleReviews] = useState(2);
   const [modalImg, setModalImg] = useState();
   const [markedAsHelpful, setMarkedAsHelpful] = useState({});
+  const reviewsEnd = useRef(null);
+
+  const scrollToBottom = () => {
+    reviewsEnd.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  useEffect(() => {
+    if (visibleReviews !== 2) {
+      scrollToBottom();
+    }
+  }, [visibleReviews]);
+
+  useEffect(() => {
+    if (Object.keys(markedAsHelpful) > 0) {
+      scrollToBottom();
+    }
+  }, [markedAsHelpful]);
 
   const getReviews = (count = 1000, sort = 'relevant') => axios.get('/api/reviews', {
     params: {
@@ -60,14 +78,14 @@ function ReviewsList({ ratingFilter, metadata }) {
       });
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (metadata?.ratings) {
       setVisibleReviews(2);
       refresh(metadata?.ratings);
     }
   }, [metadata?.ratings]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setVisibleReviews(2);
   }, [ratingFilter]);
 
@@ -107,6 +125,7 @@ function ReviewsList({ ratingFilter, metadata }) {
         const nextReview = (
           <ReviewTile
             key={review.review_id}
+            id={review.review_id}
             review={review}
             handleModalImgChange={handleModalImgChange}
             handleAPIClick={handleAPIClick}
@@ -119,7 +138,7 @@ function ReviewsList({ ratingFilter, metadata }) {
     }, [])
       .toSpliced(visibleReviews, relevantReviews.length)
     );
-    useEffect(() => {
+    useLayoutEffect(() => {
       setCurrentLength(results.length);
     });
     return results;
@@ -167,16 +186,6 @@ function ReviewsList({ ratingFilter, metadata }) {
       {relevantReviews.length === 0 && (
       <div>
         <h2>Be the first to review this product!</h2>
-        <button
-          type="button"
-          style={{ position: 'relative', left: '40%' }}
-          onClick={(e) => {
-            const modal = document.getElementById('reviewsScreen');
-            modal.style.display = 'flex';
-          }}
-        >
-          Add your review today!
-        </button>
       </div>
       )}
       <ReviewBox>
@@ -186,10 +195,21 @@ function ReviewsList({ ratingFilter, metadata }) {
         && <FormatReviews reviewsArray={helpfulReviews} markedAsHelpful={markedAsHelpful} />}
         {relevantReviews.length !== 0 && currentSort === 'newest'
         && <FormatReviews reviewsArray={newestReviews} markedAsHelpful={markedAsHelpful} />}
+        <div ref={reviewsEnd} />
       </ReviewBox>
 
       <div>
         {(!twoReviewsOrLess()) && <button type="button" value="morereviews" onClick={(e) => { loadMoreReviews(e); }}>More reviews</button>}
+        <button
+          type="button"
+          onClick={(e) => {
+            const modal = document.getElementById('reviewsScreen');
+            modal.style.display = 'flex';
+          }}
+        >
+          Add review
+        </button>
+
       </div>
     </>
 

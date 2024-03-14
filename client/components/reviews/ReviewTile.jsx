@@ -66,7 +66,7 @@ display: inline-block;
 `;
 
 function ReviewTile({
-  review, handleModalImgChange, handleAPIClick, markedAsHelpful,
+  review, handleModalImgChange, handleAPIClick, markedAsHelpful, ref,
 }) {
   const [showFullReview, setShowFullReview] = useState(false);
   const date = new Date(review.date);
@@ -150,6 +150,7 @@ function ReviewTile({
                   .then((res) => {
                     const helpfulAlreadyClicked = res;
                     e.target.disabled = helpfulAlreadyClicked;
+                    ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
                   });
               }}
             >
