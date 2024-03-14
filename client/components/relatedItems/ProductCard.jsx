@@ -42,7 +42,7 @@ const CardClick = styled.div`
 
 const ImageContainer = styled.div`
   width: 95%;
-  height: 80%;
+  height: 77%;
   object-fit: cover;
   display: flex;
   align-items: center;
