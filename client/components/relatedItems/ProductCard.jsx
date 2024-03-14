@@ -86,6 +86,8 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
   // eslint-disable-next-line no-unused-vars
   const [rating, setRating] = useState([]);
 
+  console.log(productPhoto);
+
   // FUNCTION FOR RENDERING PHOTOS
   useEffect(() => {
     if (id !== undefined) {
@@ -114,10 +116,7 @@ export default function ProductCard({ category, name, id, relatedProduct, handle
       {relatedProduct ? <ActionButton onClick={() => handleModalOpen(comparisonProduct)}><BsStarFill size={20} /></ActionButton> : <ActionButton onClick={() => removeFromOutfit(id)}><TfiClose size={20} /></ActionButton> }
       <CardClick onClick={() => handleProductChange(id)} onKeyPress={() => handleProductChange(id)} role="button" tabIndex={0} data-testid="productCardClickableDiv">
         <ImageContainer>
-          <ProductImage
-            src={productPhoto}
-            alt=""
-          />
+          <ProductImage src={(productPhoto === null) ? 'https://snipboard.io/bUWB2H.jpg' : productPhoto} alt="" />
         </ImageContainer>
         <TextContainer>
           <p>{name}</p>
