@@ -108,6 +108,15 @@ const StyledButton = styled.button`
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
 }
+&:disabled {
+  background-color: #e3e3e3;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
+  color: rgba(0, 0, 0, 0.65);
+  transform: none;
+  cursor: not-allowed;
+}
+}
 `;
 
 function ReviewTile({
