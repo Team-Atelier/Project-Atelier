@@ -1,6 +1,8 @@
 <a id='readme-top'> </a>
 
+<div align="center">
 # Project-Atelier
+</div>
 
 <details>
  <summary>Table of Contents</summary>
