@@ -1,6 +1,6 @@
 <a id='readme-top'> </a>
 
-<h3 align="center"> Project Atelier </h3>
+<h1 align="center"> Project Atelier </h1>
 
 
 <details>
