@@ -79,12 +79,17 @@ npm run server-dev
 
 ## Roadmap 
 
+- [x] Develop an e-commerce website containing a product overview, related items, and ratings and reviews section
+- [x] Implement a photo gallery, product information section, style selector section, and add to cart functionality
+- [x] Implement
+- [x] Implement
+- [ ] Leverage Redux as a state management system
 
  <p align="right">(<a href="#readme-top">back to top</a>)</p>
  
 ## Usage
 
-Pixel Pouch is run on the designated port. It can also be accessed utilizing localhost:PORT directly in the browser.
+Project Atelier is run on the designated port. It can also be accessed utilizing localhost:PORT directly in the browser.
 
  <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
