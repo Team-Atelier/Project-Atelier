@@ -19,10 +19,10 @@
 
 ## Project Overview
 
-Project Atelier serves as a sophisticated, client-oriented retail web portal designed to enhance the online shopping experience. At the heart of Atelier is an array of features tailored to provide users with comprehensive product insights and interactive elements, fostering an engaging and informative shopping journey. Key features include:
- - Product Detail Page: A central hub for product exploration, featuring a dynamic image gallery, detailed product information, a versatile style selector, and an option to add products to the shopping cart, ensuring a seamless decision-making process for the user.
- - Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products.
- - Related Items and Comparison: Enhancing product discovery, this module presents users with two curated sets of related products: one showcasing items similar to the currently viewed product for further exploration, and another allowing users to create and manage a custom list of favorites for easy comparison and revisit.
+Project Atelier is a sophisticated, client-oriented eCommerce portal designed to enhance the online shopping experience. At the heart of Atelier are features tailored towards comprehensive product insights and interactions. Fostering an engaging and shopping experience are:
+- The Product Detail Page: A central hub that ensures a seamless decision-making process for the user, featuring a dynamic image gallery, detailed product information, a style selector, and an option to add products to the shopping cart
+- Related Items and User Outfit: Enhancing further product discovery, this module presents users with two curated sets of products: one showcasing items similar to the currently viewed product, and another allowing users to create and manage a list of favorites for easy comparison and revisit
+- The Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products
 
 ### Built With
 
