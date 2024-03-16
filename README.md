@@ -56,21 +56,24 @@ Project Atelier is a sophisticated, client-oriented eCommerce portal designed to
 
 ### Installation 
 
-1. Clone the repo.
-
-2. Install dependencies using: 
+1. Clone the repo
+```sh
+git clone https://github.com/Chic-Fil-Async/Project-Atelier
 ```
+
+2. Install dependencies using
+```sh
 npm install 
 ```
-3. Open two separate terminal tabs:
-
- - On the first terminal tab, run the command:
+3. Enter your port and Github token in `.env` file
+```sh
+ API_URL = (your supabase database URL)
+ GITHUB_TOKEN = (your supabase token)
+```
+4. Open two separate terminal tabs and run in your dev environment: 
 ```
 npm run server-dev
-```
-
- - On the other terminal tab, run the command:
-    
+``` 
 ```
  npm run client-dev
 ```
