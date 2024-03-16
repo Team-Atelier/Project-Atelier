@@ -20,6 +20,17 @@
 
 ## Project Overview
 
+<div align="center">
+  <h3>Product Overview</h3>
+  <img src="./public/assets/ProductOverview.gif" alt="Product Overview Landing Page" width="600px" />
+<br />
+    <h3>Related Items</h3>
+  <img src="./public/assets/RelatedItems.gif" alt="Related Items Component" width="600px" />
+<br />
+    <h3>Ratings and Reviews</h3>
+  <img src="./public/assets/Reviews.gif" alt="Reviews and Ratings" width="600px" />
+</div>
+
 Project Atelier is a sophisticated, client-oriented eCommerce portal designed to enhance the online shopping experience. At the heart of Atelier are features tailored towards comprehensive product insights and interactions. Fostering an engaging and shopping experience are:
 - The Product Detail Page: A central hub that ensures a seamless decision-making process for the user, featuring a dynamic image gallery, detailed product information, a style selector, and an option to add products to the shopping cart
 - Related Items and User Outfit: Enhancing further product discovery, this module presents users with two curated sets of products: one showcasing items similar to the currently viewed product, and another allowing users to create and manage a list of favorites for easy comparison and revisit
