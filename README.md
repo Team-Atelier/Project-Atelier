@@ -81,8 +81,8 @@ npm run server-dev
 
 - [x] Develop an e-commerce website containing a product overview, related items, and ratings and reviews section
 - [x] Implement a photo gallery, product information section, style selector section, and add to cart functionality
-- [x] Implement
-- [x] Implement
+- [x] Implement 
+- [x] Implement a review section with filterable reviews, the ability to add photos, and the ability to add reviews with unique characteristics per item.
 - [ ] Leverage Redux as a state management system
 
  <p align="right">(<a href="#readme-top">back to top</a>)</p>
