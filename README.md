@@ -54,6 +54,12 @@ Project Atelier is a sophisticated, client-oriented eCommerce portal designed to
 
 ### Prerequisites 
 
+![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
+
+```sh
+npm install npm@latest -g
+```
+
 ### Installation 
 
 1. Clone the repo
