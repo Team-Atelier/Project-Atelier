@@ -75,7 +75,7 @@ npm install
 npm run server-dev
 ``` 
 ```
- npm run client-dev
+npm run client-dev
 ```
 
  <p align="right">(<a href="#readme-top">back to top</a>)</p>
