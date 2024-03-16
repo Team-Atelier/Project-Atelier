@@ -62,6 +62,24 @@ npm run server-dev
 
 ## Team Members
 
-Chris Cheng, Maysie Ocera, William Tucker
+## Contact
+
+<h3 align='center'>Chris Cheng</h3>
+<h4 align='center'>
+  <a href="linkedin.com/in/chengtchris">Linkedin</a> |
+  <a href="https://github.com/chengtchris1">GitHub</a>
+</h4>
+
+<h3 align='center'>Maysie Ocera</h3>
+<h4 align='center'>
+  <a href="www.linkedin.com/in/maysieo">Linkedin</a> |
+  <a href="https://github.com/maysieo">GitHub</a>
+</h4>
+
+<h3 align='center'>William Tucker</h3>
+<h4 align='center'>
+  <a href="linkedin.com/in/william-tucker-9b628462">Linkedin</a> |
+  <a href="ttps://github.com/wtucker29">GitHub</a>
+</h4>
 
  
