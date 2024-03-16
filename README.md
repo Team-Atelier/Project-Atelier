@@ -23,9 +23,7 @@
 
 Project Atelier is a sophisticated, client-oriented eCommerce portal designed to enhance the online shopping experience. At the heart of Atelier are features tailored towards comprehensive product insights and interactions. Fostering an engaging and shopping experience are:
 - The Product Detail Page: A central hub that ensures a seamless decision-making process for the user, featuring a dynamic image gallery, detailed product information, a style selector, and an option to add products to the shopping cart
-  <br />
 - Related Items and User Outfit: Enhancing further product discovery, this module presents users with two curated sets of products: one showcasing items similar to the currently viewed product, and another allowing users to create and manage a list of favorites for easy comparison and revisit
-  <br />
 - The Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products
 
 ### Built With
@@ -34,6 +32,9 @@ Project Atelier is a sophisticated, client-oriented eCommerce portal designed to
 ![Express](https://img.shields.io/badge/Express-%23000000.svg?style=for-the-badge&logo=Express)
 
 ## Getting Started
+<p>
+    Instructions to setup Project Atelier on your local machine below.
+</p>
 
 ### Prerequisites 
 
