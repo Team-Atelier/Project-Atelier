@@ -24,6 +24,11 @@ Project Atelier serves as a sophisticated, client-oriented retail web portal des
  - Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products.
  - Related Items and Comparison: Enhancing product discovery, this module presents users with two curated sets of related products: one showcasing items similar to the currently viewed product for further exploration, and another allowing users to create and manage a custom list of favorites for easy comparison and revisit.
 
+### Built With
+
+![React](https://img.shields.io/badge/React-%23000000.svg?style=for-the-badge&logo=react&logoColor)
+![Express](https://img.shields.io/badge/Express-%23000000.svg?style=for-the-badge&logo=Express)
+
 ## Getting Started
 
 ### Prerequisites 
