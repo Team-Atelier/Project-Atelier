@@ -33,8 +33,6 @@
 
 <br />
 
-******
-
 <p>
 Project Atelier is a sophisticated, client-oriented eCommerce portal designed to enhance the online shopping experience. At the heart of Atelier are features tailored towards comprehensive product insights and interactions. Fostering an engaging and shopping experience are:
 </p>
