@@ -2,10 +2,9 @@
 
 # Project-Atelier
 ---
-## Table of Contents 
 
 <details>
- <summary>Table of Content</summary>
+ <summary>Table of Contents</summary>
 
 1. [Project Overview](https://github.com/Chic-Fil-Async/Project-Atelier?tab=readme-ov-file#project-overview)
 2. [Getting Started](https://github.com/Chic-Fil-Async/Project-Atelier?tab=readme-ov-file#getting-started)
