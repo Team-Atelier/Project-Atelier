@@ -71,10 +71,9 @@ git clone https://github.com/Chic-Fil-Async/Project-Atelier
 ```sh
 npm install 
 ```
-3. Enter your port and Github token in `.env` file
+3. Enter your Github token in `.env` file
 ```sh
- API_URL = (your supabase database URL)
- GITHUB_TOKEN = (your supabase token)
+ GITHUB_TOKEN = (your Github token)
 ```
 4. Open two separate terminal tabs and run in your dev environment: 
 ```
