@@ -77,11 +77,18 @@ npm run server-dev
  npm run client-dev
 ```
 
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Roadmap 
 
 
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
+ 
 ## Usage
 
+Pixel Pouch is run on the designated port. It can also be accessed utilizing localhost:PORT directly in the browser.
+
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Team Members
 
