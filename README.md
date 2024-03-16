@@ -1,7 +1,6 @@
 <a id='readme-top'> </a>
 
 # Project-Atelier
----
 
 <details>
  <summary>Table of Contents</summary>
