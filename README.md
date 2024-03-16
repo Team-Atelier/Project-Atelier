@@ -1,8 +1,7 @@
 <a id='readme-top'> </a>
 
-<div align="center">
-# Project-Atelier
-</div>
+<h3 align="center"> Project Atelier </h3>
+
 
 <details>
  <summary>Table of Contents</summary>
