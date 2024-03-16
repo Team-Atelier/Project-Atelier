@@ -32,13 +32,14 @@
 </div>
 
 <br />
+---
 <p>
 Project Atelier is a sophisticated, client-oriented eCommerce portal designed to enhance the online shopping experience. At the heart of Atelier are features tailored towards comprehensive product insights and interactions. Fostering an engaging and shopping experience are:
 </p>
 <ul>
-<li>The Product Detail Page: A central hub that ensures a seamless decision-making process for the user, featuring a dynamic image gallery, detailed product information, a style selector, and an option to add products to the shopping cart</li>
-<li>Related Items and User Outfit: Enhancing further product discovery, this module presents users with two curated sets of products: one showcasing items similar to the currently viewed product, and another allowing users to create and manage a list of favorites for easy comparison and revisit</li>
-<li>The Ratings and Reviews Module: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products</li>
+<li><b>The Product Detail Page</b>: A central hub that ensures a seamless decision-making process for the user, featuring a dynamic image gallery, detailed product information, a style selector, and an option to add products to the shopping cart</li>
+<li><b>Related Items and User Outfit</b>: Enhancing further product discovery, this module presents users with two curated sets of products: one showcasing items similar to the currently viewed product, and another allowing users to create and manage a list of favorites for easy comparison and revisit</li>
+<li><b>The Ratings and Reviews Module</b>: This module empowers users to browse through existing reviews and submit their own, providing valuable insights and feedback on products</li>
 </ul>
 
 ### Built With
