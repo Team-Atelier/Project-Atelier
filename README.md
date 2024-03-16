@@ -79,7 +79,7 @@ npm run server-dev
 <h3 align='center'>William Tucker</h3>
 <h4 align='center'>
   <a href="linkedin.com/in/william-tucker-9b628462">Linkedin</a> |
-  <a href="ttps://github.com/wtucker29">GitHub</a>
+  <a href="https://github.com/wtucker29">GitHub</a>
 </h4>
 
  
