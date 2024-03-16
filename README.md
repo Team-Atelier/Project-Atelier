@@ -62,8 +62,6 @@ npm run server-dev
 
 ## Team Members
 
-## Contact
-
 <h3 align='center'>Chris Cheng</h3>
 <h4 align='center'>
   <a href="linkedin.com/in/chengtchris">Linkedin</a> |
